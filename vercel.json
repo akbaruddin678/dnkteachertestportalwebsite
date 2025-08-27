@@ -1,9 +1,5 @@
 {
-  "routes": [
-    {
-      
-      "status": 404,
-      "dest": "/"
-    }
+  "redirects": [
+    { "source": "/(.*)", "destination": "/", "permanent": false }
   ]
 }
