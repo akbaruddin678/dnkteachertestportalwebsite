@@ -10,7 +10,7 @@ const Category = () => {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const response = await axios.get("/api/v1/coordinator/dashboard", {
+        const response = await axios.get("/coordinator/dashboard", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

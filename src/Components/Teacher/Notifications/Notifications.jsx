@@ -6,8 +6,8 @@ import "./Notifications.css";
 
 const API_BASE =
   import.meta?.env?.VITE_API_BASE?.replace(/\/$/, "") ||
-  ""; // Adjust as needed
-const NOTIF_URL = `${API_BASE}/api/v1/notifications`;
+  "https://vigilant-moser.210-56-25-68.plesk.page/api/v1"; // Adjust as needed
+const NOTIF_URL = `${API_BASE}/notifications`;
 
 /** axios with Bearer token */
 const api = axios.create();

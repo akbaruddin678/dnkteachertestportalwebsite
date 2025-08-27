@@ -12,7 +12,9 @@ const LS_TDB_COURSES = "tdb_courses_for_teacher";
 const ATT_LS_KEY = "attendance_records_v2";
 
 /** ===== API base ===== */
-const API_BASE = import.meta.env?.VITE_API_BASE || "";
+const API_BASE =
+  import.meta.env?.VITE_API_BASE ||
+  "https://vigilant-moser.210-56-25-68.plesk.page/api/v1";
 
 /** UI statuses */
 const UI_STATUSES = ["Present", "Absent", "Half Day", "Leave", "Other"];
@@ -127,7 +129,7 @@ const Attendance = () => {
     setErr("");
     try {
       // Try optional server-side filter ?date=YYYY-MM-DD (safe if backend ignores it)
-      const url = `${API_BASE}/api/v1/attendance/course/${courseId}?date=${date}`;
+      const url = `${API_BASE}/attendance/course/${courseId}?date=${date}`;
       const res = await fetch(url, {
         headers: {
           "Content-Type": "application/json",
@@ -186,7 +188,7 @@ const Attendance = () => {
         return;
       }
 
-      const res = await fetch(`${API_BASE}/api/v1/attendance/bulk`, {
+      const res = await fetch(`${API_BASE}/attendance/bulk`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

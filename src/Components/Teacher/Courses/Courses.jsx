@@ -16,7 +16,9 @@ import {
   MdClose,
 } from "react-icons/md";
 
-const API_BASE = import.meta.env.VITE_API_BASE || "";
+const API_BASE =
+  import.meta.env.VITE_API_BASE ||
+  "https://vigilant-moser.210-56-25-68.plesk.page/api/v1";
 const token = () => localStorage.getItem("token");
 
 const TYPE_OPTIONS = [
@@ -202,14 +204,14 @@ const CoursesOffered = () => {
 
       let dashCourses = [];
       try {
-        const dash = await fetchJSON(`${API_BASE}/api/v1/teacher/dashboard`);
+        const dash = await fetchJSON(`${API_BASE}/teacher/dashboard`);
         dashCourses = dash?.data?.courses || [];
       } catch {}
 
       let adminCourses = [];
       if (!dashCourses.length) {
         try {
-          const admin = await fetchJSON(`${API_BASE}/api/v1/admin/courses`);
+          const admin = await fetchJSON(`${API_BASE}/admin/courses`);
           adminCourses = admin?.data || [];
         } catch {}
       }
@@ -283,14 +285,12 @@ const CoursesOffered = () => {
 
   /* ---------------- Assessments ---------------- */
   const loadCourseBatches = async (courseId) => {
-    const data = await fetchJSON(
-      `${API_BASE}/api/v1/assessments/course/${courseId}`
-    );
+    const data = await fetchJSON(`${API_BASE}/assessments/course/${courseId}`);
     setBatchesByCourse((p) => ({ ...p, [courseId]: data?.data || [] }));
   };
 
   const loadBatch = async (batchId) => {
-    const data = await fetchJSON(`${API_BASE}/api/v1/assessments/${batchId}`);
+    const data = await fetchJSON(`${API_BASE}/assessments/${batchId}`);
     const batch = data?.data;
     // add createdByRole if present in summaries
     const sums = batchesByCourse[batch.courseId] || [];
@@ -335,7 +335,7 @@ const CoursesOffered = () => {
         totalMarks: Number(form.totalMarks),
         entries,
       };
-      const res = await fetchJSON(`${API_BASE}/api/v1/assessments`, {
+      const res = await fetchJSON(`${API_BASE}/assessments`, {
         method: "POST",
         body: JSON.stringify(payload),
       });
@@ -353,7 +353,7 @@ const CoursesOffered = () => {
       date: form.date,
       totalMarks: Number(form.totalMarks),
     };
-    await fetchJSON(`${API_BASE}/api/v1/assessments/${form.batchId}`, {
+    await fetchJSON(`${API_BASE}/assessments/${form.batchId}`, {
       method: "PATCH",
       body: JSON.stringify(payload),
     });
@@ -372,7 +372,7 @@ const CoursesOffered = () => {
         remarks: v.remarks || "",
       }));
       const res = await fetchJSON(
-        `${API_BASE}/api/v1/assessments/${selectedBatch.batchId}/marks`,
+        `${API_BASE}/assessments/${selectedBatch.batchId}/marks`,
         {
           method: "PUT",
           body: JSON.stringify({ entries }),
@@ -391,7 +391,7 @@ const CoursesOffered = () => {
   const deleteBatch = async (batchId) => {
     if (!confirm("Delete this assessment? This removes all student rows."))
       return;
-    await fetchJSON(`${API_BASE}/api/v1/assessments/${batchId}`, {
+    await fetchJSON(`${API_BASE}/assessments/${batchId}`, {
       method: "DELETE",
     });
     await loadCourseBatches(currentCourseId);
@@ -402,7 +402,7 @@ const CoursesOffered = () => {
     if (!selectedBatch) return;
     if (!confirm("Remove this student from the assessment?")) return;
     await fetchJSON(
-      `${API_BASE}/api/v1/assessments/${selectedBatch.batchId}/student/${studentId}`,
+      `${API_BASE}/assessments/${selectedBatch.batchId}/student/${studentId}`,
       { method: "DELETE" }
     );
     await loadBatch(selectedBatch.batchId);
@@ -410,15 +410,12 @@ const CoursesOffered = () => {
 
   const addStudentToBatch = async () => {
     if (!selectedBatch || !addStudentId) return;
-    await fetchJSON(
-      `${API_BASE}/api/v1/assessments/${selectedBatch.batchId}/marks`,
-      {
-        method: "PUT",
-        body: JSON.stringify({
-          entries: [{ studentId: addStudentId, marks: 0, remarks: "" }],
-        }),
-      }
-    );
+    await fetchJSON(`${API_BASE}/assessments/${selectedBatch.batchId}/marks`, {
+      method: "PUT",
+      body: JSON.stringify({
+        entries: [{ studentId: addStudentId, marks: 0, remarks: "" }],
+      }),
+    });
     setAddStudentId("");
     await loadBatch(selectedBatch.batchId);
   };

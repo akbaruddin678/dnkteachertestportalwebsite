@@ -5,10 +5,10 @@ import "./Registrations.css";
 
 /* ------------------------ Axios setup ------------------------ */
 // Prefer env base when calling from a different origin, else same-origin
-const API_BASE = "";
+const API_BASE = "https://vigilant-moser.210-56-25-68.plesk.page/api/v1";
 // Coordinator scope base
 const api = axios.create({
-  baseURL: `${API_BASE}/api/v1/coordinator`,
+  baseURL: `${API_BASE}/coordinator`,
   withCredentials: false,
 });
 

@@ -3,7 +3,9 @@
 import { useEffect, useMemo, useState } from "react";
 import "./Reports.css";
 
-const API_BASE = import.meta.env?.VITE_API_BASE || "";
+const API_BASE =
+  import.meta.env?.VITE_API_BASE ||
+  "https://vigilant-moser.210-56-25-68.plesk.page/api/v1";
 const token = () => localStorage.getItem("token");
 
 const fetchJSON = async (url) => {
@@ -223,7 +225,7 @@ const Reports = () => {
       setLoading(true);
       setErr("");
       try {
-        const dash = await fetchJSON(`${API_BASE}/api/v1/teacher/dashboard`);
+        const dash = await fetchJSON(`${API_BASE}/teacher/dashboard`);
         const d = dash?.data || {};
         const myCourses = Array.isArray(d.courses) ? d.courses : [];
         setTeacher(d.teacher || null);
@@ -267,7 +269,7 @@ const Reports = () => {
           const courseId = normId(c);
           const roster = studentsByCourse.get(String(courseId)) || [];
           const resp = await fetchJSON(
-            `${API_BASE}/api/v1/attendance/course/${courseId}?date=${dateStr}`
+            `${API_BASE}/attendance/course/${courseId}?date=${dateStr}`
           );
           const { present, absent } = normalizeAttendancePayload(resp, roster);
           const total = roster.length || present.length + absent.length;
@@ -348,9 +350,7 @@ const Reports = () => {
   const loadLectures = async () => {
     setLecLoading(true);
     try {
-      const lp = await fetchJSON(
-        `${API_BASE}/api/v1/lesson-plans?page=1&limit=100`
-      );
+      const lp = await fetchJSON(`${API_BASE}/lesson-plans?page=1&limit=100`);
       const list = Array.isArray(lp?.data?.docs)
         ? lp.data.docs
         : Array.isArray(lp?.data)
@@ -408,7 +408,7 @@ const Reports = () => {
         courses.map(async (c) => {
           const courseId = normId(c);
           const resp = await fetchJSON(
-            `${API_BASE}/api/v1/assessments/course/${courseId}`
+            `${API_BASE}/assessments/course/${courseId}`
           );
           const arr = Array.isArray(resp?.data) ? resp.data : [];
           return arr.map((a) => ({
@@ -468,7 +468,7 @@ const Reports = () => {
   };
 
   const openBatch = async (batchId) => {
-    const resp = await fetchJSON(`${API_BASE}/api/v1/assessments/${batchId}`);
+    const resp = await fetchJSON(`${API_BASE}/assessments/${batchId}`);
     setSelectedBatch(normalizeAssessmentBatch(resp?.data));
   };
 
@@ -500,7 +500,7 @@ const Reports = () => {
   return (
     <div className="reports">
       <div className="page-header">
-       <h1 className="reports-title">Reports</h1>
+        <h1 className="reports-title">Reports</h1>
       </div>
 
       {/* Tabs */}

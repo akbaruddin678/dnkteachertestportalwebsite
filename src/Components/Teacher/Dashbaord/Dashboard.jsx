@@ -4,7 +4,9 @@ import "./Dashboard.css";
 /** =========================
  * Config & utilities
  * ========================= */
-const API_BASE = import.meta.env?.VITE_API_BASE || "";
+const API_BASE =
+  import.meta.env?.VITE_API_BASE ||
+  "https://vigilant-moser.210-56-25-68.plesk.page/api/v1";
 
 const LS = {
   TEACHER: "tdb_teacher",
@@ -77,79 +79,76 @@ const TeacherCampusDashboard = () => {
   const token = useMemo(() => localStorage.getItem("token"), []);
 
   /** Load from API (and persist) */
-const loadDashboard = async (campusId = "") => {
-  if (!token) {
-    setErr("Missing token. Please sign in.");
-    setLoading(false);
-    return;
-  }
-  setLoading(true);
-  setErr("");
-
-  try {
-    const q = campusId ? `?campusId=${campusId}` : "";
-    const resp = await fetchJSON(
-      `${API_BASE}/api/v1/teacher/dashboard${q}`,
-      token
-    );
-    const d = resp?.data || {};
-
-    // teacher + campuses
-    if (d.teacher) {
-      setTeacher(d.teacher);
-      saveLS(LS.TEACHER, d.teacher);
+  const loadDashboard = async (campusId = "") => {
+    if (!token) {
+      setErr("Missing token. Please sign in.");
+      setLoading(false);
+      return;
     }
-    if (Array.isArray(d.campuses)) {
-      setCampuses(d.campuses);
-      saveLS(LS.CAMPUSES, d.campuses);
-    }
+    setLoading(true);
+    setErr("");
 
-    // current campus & students
-    if (d.campus?._id) {
-      setCampus(d.campus);
-      setSelectedCampusId(d.campus._id);
-      saveLS(LS.CURRENT_CAMPUS_ID, d.campus._id);
-      saveLS(LS.CAMPUS_INFO(d.campus._id), d.campus);
-    }
+    try {
+      const q = campusId ? `?campusId=${campusId}` : "";
+      const resp = await fetchJSON(`${API_BASE}/teacher/dashboard${q}`, token);
+      const d = resp?.data || {};
 
-    if (Array.isArray(d.students)) {
-      setStudents(d.students);
-      if (d.campus?._id) {
-        // campus-scoped cache
-        saveLS(LS.CAMPUS_STUDENTS(d.campus._id), d.students);
+      // teacher + campuses
+      if (d.teacher) {
+        setTeacher(d.teacher);
+        saveLS(LS.TEACHER, d.teacher);
       }
-      // generic cache so other pages (Courses) can find students
-      saveLS("tdb_students", d.students);
-    }
+      if (Array.isArray(d.campuses)) {
+        setCampuses(d.campuses);
+        saveLS(LS.CAMPUSES, d.campuses);
+      }
 
-    // courses (teacher’s courses)
-    if (Array.isArray(d.courses)) {
-      setCourses(d.courses);
-      saveLS(LS.COURSES, d.courses);
+      // current campus & students
+      if (d.campus?._id) {
+        setCampus(d.campus);
+        setSelectedCampusId(d.campus._id);
+        saveLS(LS.CURRENT_CAMPUS_ID, d.campus._id);
+        saveLS(LS.CAMPUS_INFO(d.campus._id), d.campus);
+      }
 
-      // derive a compact teacher list for compatibility with other pages
-      const teachers = Array.from(
-        new Map(
-          d.courses
-            .filter((c) => c?.teacher)
-            .map((c) => {
-              const t =
-                typeof c.teacher === "string"
-                  ? { _id: c.teacher, name: "—" }
-                  : c.teacher;
-              const id = t._id || t.id;
-              return [id, { _id: id, name: t.name || t.fullName || "—" }];
-            })
-        ).values()
-      );
-      saveLS("tdb_teachers", teachers);
+      if (Array.isArray(d.students)) {
+        setStudents(d.students);
+        if (d.campus?._id) {
+          // campus-scoped cache
+          saveLS(LS.CAMPUS_STUDENTS(d.campus._id), d.students);
+        }
+        // generic cache so other pages (Courses) can find students
+        saveLS("tdb_students", d.students);
+      }
+
+      // courses (teacher’s courses)
+      if (Array.isArray(d.courses)) {
+        setCourses(d.courses);
+        saveLS(LS.COURSES, d.courses);
+
+        // derive a compact teacher list for compatibility with other pages
+        const teachers = Array.from(
+          new Map(
+            d.courses
+              .filter((c) => c?.teacher)
+              .map((c) => {
+                const t =
+                  typeof c.teacher === "string"
+                    ? { _id: c.teacher, name: "—" }
+                    : c.teacher;
+                const id = t._id || t.id;
+                return [id, { _id: id, name: t.name || t.fullName || "—" }];
+              })
+          ).values()
+        );
+        saveLS("tdb_teachers", teachers);
+      }
+    } catch (e) {
+      setErr(e.message || "Failed to load dashboard");
+    } finally {
+      setLoading(false);
     }
-  } catch (e) {
-    setErr(e.message || "Failed to load dashboard");
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   /** Initial load (cache first UI, then fetch) */
   useEffect(() => {

@@ -4,8 +4,10 @@ import { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import "./Notifications.css";
 
-const API_BASE = import.meta?.env?.VITE_API_BASE?.replace(/\/$/, "") || "";
-const NOTIF_URL = `${API_BASE}/api/v1/notifications`;
+const API_BASE =
+  import.meta?.env?.VITE_API_BASE?.replace(/\/$/, "") ||
+  "https://vigilant-moser.210-56-25-68.plesk.page/api/v1";
+const NOTIF_URL = `${API_BASE}/notifications`;
 
 /** axios with Bearer token */
 const api = axios.create();
