@@ -1,0 +1,59 @@
+.help-docs-container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.help-docs-container h1 {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.help-docs-container p {
+  margin-bottom: 2rem;
+  color: #555;
+}
+
+.help-sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.help-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.help-icon {
+  font-size: 2rem;
+  color: #0066cc;
+  margin-bottom: 0.75rem;
+}
+
+.help-card h3 {
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+
+.help-card p {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.help-card a {
+  display: inline-block;
+  color: #0066cc;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.help-card a:hover {
+  text-decoration: underline;
+}

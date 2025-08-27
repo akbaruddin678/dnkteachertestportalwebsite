@@ -1,0 +1,149 @@
+/* UploadLessonsPlans.css – Enhanced Styling for Lesson Plan Module */
+
+.lesson-plans {
+  padding: 30px;
+  max-width: 1100px;
+  margin: auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.lesson-plans h2 {
+  font-size: 28px;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.lesson-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.lesson-form input,
+.lesson-form select,
+.lesson-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: border 0.2s ease;
+  font-family: inherit;
+}
+
+.lesson-form textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.lesson-form input:focus,
+.lesson-form select:focus,
+.lesson-form textarea:focus {
+  border-color: #1976d2;
+  outline: none;
+}
+
+.lesson-form button[type="submit"] {
+  grid-column: span 2;
+  padding: 12px 18px;
+  background-color: #1976d2;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.lesson-form button[type="submit"]:hover {
+  background-color: #1565c0;
+}
+
+.week-section {
+  margin-top: 40px;
+}
+
+.week-section h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #444;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 8px;
+}
+
+.week-section table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background-color: #fafafa;
+}
+
+.week-section th,
+.week-section td {
+  border: 1px solid #e0e0e0;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.week-section th {
+  background-color: #f0f4f8;
+  color: #333;
+  font-weight: 600;
+}
+
+.week-section td {
+  color: #444;
+}
+
+@media (max-width: 768px) {
+  .lesson-form {
+    grid-template-columns: 1fr;
+  }
+  .lesson-form button[type="submit"] {
+    grid-column: span 1;
+  }
+}
+
+
+/* Add this to UploadLessonsPlans.css */
+.table-container {
+  overflow-x: auto;  /* Enables horizontal scrolling */
+  -webkit-overflow-scrolling: touch;  /* Smooth scrolling for mobile devices */
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;  /* Ensures the table takes the full width of the container */
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+@media (max-width: 768px) {
+  /* Make the table columns more responsive on smaller screens */
+  table {
+    width: 100%;
+  }
+
+  th, td {
+    font-size: 12px;  /* Smaller font for better readability */
+    padding: 6px;
+  }
+}
+
+

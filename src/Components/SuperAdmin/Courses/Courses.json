@@ -1,0 +1,159 @@
+[
+  {
+    "name": "Islamabad",
+    "campuses": [
+      {
+        "name": "Islamabad Campus 1",
+        "programs": [
+          {
+            "name": "Nclex",
+            "courses": [
+              {
+                "name": "Computer Science Basics",
+                "description": "Introduction to programming and computer principles.",
+                "teacher": "Ms. Foster",
+                "students": 30,
+                "schedule": "Mon, Wed, Fri 10:00 AM – 12:00 PM"
+              },
+              {
+                "name": "Mathematics 101",
+                "description": "Basic mathematical concepts.",
+                "teacher": "Mr. Thompson",
+                "students": 25,
+                "schedule": "Mon, Wed, Fri 1:00 PM – 3:00 PM"
+              }
+            ]
+          },
+          {
+            "name": "Matric Tech",
+            "courses": [
+              {
+                "name": "Science Fundamentals",
+                "description": "Physics, chemistry, and biology fundamentals.",
+                "teacher": "Dr. Evans",
+                "students": 42,
+                "schedule": "Mon, Wed, Fri 9:00 AM – 11:00 AM"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Islamabad Campus 2",
+        "programs": [
+          {
+            "name": "Medical Tech",
+            "courses": [
+              {
+                "name": "Science Fundamentals",
+                "description": "Physics, chemistry, and biology fundamentals.",
+                "teacher": "Dr. Evans",
+                "students": 40,
+                "schedule": "Mon, Wed, Fri 10:00 AM – 12:00 PM"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Islamabad Campus 3",
+        "programs": [
+          {
+            "name": "Medical Tech",
+            "courses": [
+              {
+                "name": "Science Fundamentals",
+                "description": "Physics, chemistry, and biology fundamentals.",
+                "teacher": "Dr. Evans",
+                "students": 40,
+                "schedule": "Mon, Wed, Fri 10:00 AM – 12:00 PM"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Lahore",
+    "campuses": [
+      {
+        "name": "Lahore Allied Campus",
+        "programs": [
+          {
+            "name": "Nclex",
+            "courses": [
+              {
+                "name": "Computer Science Basics",
+                "description": "Introduction to programming and computer principles.",
+                "teacher": "Ms. Foster",
+                "students": 32,
+                "schedule": "Mon, Wed, Fri 10:00 AM – 12:00 PM"
+              },
+              {
+                "name": "Mathematics 101",
+                "description": "Basic mathematical concepts.",
+                "teacher": "Mr. Thompson",
+                "students": 28,
+                "schedule": "Mon, Wed, Fri 1:00 PM – 3:00 PM"
+              }
+            ]
+          },
+          {
+            "name": "Matric Tech",
+            "courses": [
+              {
+                "name": "Science Fundamentals",
+                "description": "Physics, chemistry, and biology fundamentals.",
+                "teacher": "Dr. Evans",
+                "students": 30,
+                "schedule": "Mon, Wed, Fri 9:00 AM – 11:00 AM"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Karachi",
+    "campuses": [
+      {
+        "name": "Karachi Tech Campus",
+        "programs": [
+          {
+            "name": "Nclex",
+            "courses": [
+              {
+                "name": "Mathematics 101",
+                "description": "Introduction to basic mathematical concepts.",
+                "teacher": "Mr. Thompson",
+                "students": 25,
+                "schedule": "Mon, Wed, Fri 9:00 AM – 10:30 AM"
+              },
+              {
+                "name": "Computer Science Basics",
+                "description": "Introduction to programming and computer principles.",
+                "teacher": "Ms. Foster",
+                "students": 28,
+                "schedule": "Mon, Wed, Fri 10:30 AM – 12:30 PM"
+              }
+            ]
+          },
+          {
+            "name": "Medical Tech",
+            "courses": [
+              {
+                "name": "Science Fundamentals",
+                "description": "Physics, chemistry, and biology fundamentals.",
+                "teacher": "Dr. Evans",
+                "students": 35,
+                "schedule": "Mon, Wed, Fri 10:00 AM – 12:00 PM"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

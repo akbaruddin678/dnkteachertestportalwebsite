@@ -1,0 +1,26 @@
+[
+  {
+    "id": "LP001",
+    "teacher": "Ms. Foster",
+    "course": "Computer Science Basics",
+    "program": "Nclex",
+    "week": "Week 1",
+    "title": "Introduction to Programming",
+    "objectives": "Students will learn about variables and basic syntax",
+    "file": "intro_programming_week1.pdf",
+    "uploadDate": "2025-08-05",
+    "notes": "PDF includes examples and exercises"
+  },
+  {
+    "id": "LP002",
+    "teacher": "Mr. Thompson",
+    "course": "Mathematics 101",
+    "program": "Nclex",
+    "week": "Week 1",
+    "title": "Algebra Basics",
+    "objectives": "Understanding variables, expressions, and equations",
+    "file": "algebra_basics.pdf",
+    "uploadDate": "2025-08-05",
+    "notes": ""
+  }
+]

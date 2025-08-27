@@ -1,0 +1,167 @@
+/* Base Sidebar Styles */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #ffffff;
+  border-right: 1px solid #e9ecef;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+  transform: translateX(0);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sidebar Header */
+.sidebar-header {
+  padding: 20px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.sidebar-header h2 {
+  color: #333;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Sidebar Nav */
+.sidebar-nav {
+  flex-grow: 1;
+  padding: 1rem 0;
+  overflow-y: auto;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  padding: 1rem 0 !important;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* Nav Items */
+.nav-item {
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #666;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.nav-item:hover {
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+.nav-item.active {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  border-right: 3px solid #1976d2;
+}
+
+.nav-icon {
+  font-size: 16px;
+}
+
+.nav-label {
+  font-weight: 500;
+}
+
+/* Dropdown Items */
+.dropdown-arrow {
+  margin-left: auto;
+  font-size: 10px;
+  transition: transform 0.2s ease;
+}
+
+.dropdown-arrow.open {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  background-color: #f8f9fa;
+  border-left: 3px solid #e9ecef;
+  margin-left: 20px;
+}
+
+.dropdown-item {
+  width: 100%;
+  padding: 10px 20px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #666;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #e9ecef;
+  color: #333;
+}
+
+.dropdown-item.active {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border-right: 3px solid #17a2b8;
+}
+
+/* Responsive: Mobile Sidebar */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    z-index: 2000;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  main {
+    margin-left: 0 !important;
+  }
+
+  .sidebar-toggle {
+    display: block;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 2100;
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    font-size: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+}
+
+/* Hide sidebar toggle on desktop */
+.sidebar-toggle {
+  display: none;
+}
+
+/* Overlay for Mobile */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  /* z-index: 1500; */
+}

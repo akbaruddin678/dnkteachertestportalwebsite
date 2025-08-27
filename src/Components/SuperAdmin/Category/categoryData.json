@@ -1,0 +1,5429 @@
+{
+  "cities": [
+    {
+      "name": "Lahore",
+      "campuses": [
+        {
+          "name": "Lahore Campus 1",
+          "programs": [
+            {
+              "name": "Inter-Tech",
+              "subjects": [
+                {
+                  "name": "Physics",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "LAH-PHY-001",
+                      "marks": 90
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "LAH-PHY-002",
+                      "marks": 71
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "LAH-PHY-003",
+                      "marks": 79
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "LAH-PHY-004",
+                      "marks": 75
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "LAH-PHY-005",
+                      "marks": 67
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Emily Davis",
+                    "subject": "Physics"
+                  }
+                },
+                {
+                  "name": "Mathematics",
+                  "students": [
+                    {
+                      "name": "Student 1 MAT",
+                      "rollNo": "LAH-MAT-001",
+                      "marks": 97
+                    },
+                    {
+                      "name": "Student 2 MAT",
+                      "rollNo": "LAH-MAT-002",
+                      "marks": 74
+                    },
+                    {
+                      "name": "Student 3 MAT",
+                      "rollNo": "LAH-MAT-003",
+                      "marks": 62
+                    },
+                    {
+                      "name": "Student 4 MAT",
+                      "rollNo": "LAH-MAT-004",
+                      "marks": 67
+                    },
+                    {
+                      "name": "Student 5 MAT",
+                      "rollNo": "LAH-MAT-005",
+                      "marks": 72
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Jessica Lee",
+                    "subject": "Mathematics"
+                  }
+                },
+                {
+                  "name": "English",
+                  "students": [
+                    {
+                      "name": "Student 1 ENG",
+                      "rollNo": "LAH-ENG-001",
+                      "marks": 83
+                    },
+                    {
+                      "name": "Student 2 ENG",
+                      "rollNo": "LAH-ENG-002",
+                      "marks": 89
+                    },
+                    {
+                      "name": "Student 3 ENG",
+                      "rollNo": "LAH-ENG-003",
+                      "marks": 77
+                    },
+                    {
+                      "name": "Student 4 ENG",
+                      "rollNo": "LAH-ENG-004",
+                      "marks": 60
+                    },
+                    {
+                      "name": "Student 5 ENG",
+                      "rollNo": "LAH-ENG-005",
+                      "marks": 67
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Mark Clark",
+                    "subject": "English"
+                  }
+                },
+                {
+                  "name": "Urdu",
+                  "students": [
+                    {
+                      "name": "Student 1 URD",
+                      "rollNo": "LAH-URD-001",
+                      "marks": 100
+                    },
+                    {
+                      "name": "Student 2 URD",
+                      "rollNo": "LAH-URD-002",
+                      "marks": 74
+                    },
+                    {
+                      "name": "Student 3 URD",
+                      "rollNo": "LAH-URD-003",
+                      "marks": 71
+                    },
+                    {
+                      "name": "Student 4 URD",
+                      "rollNo": "LAH-URD-004",
+                      "marks": 63
+                    },
+                    {
+                      "name": "Student 5 URD",
+                      "rollNo": "LAH-URD-005",
+                      "marks": 70
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Paul Walker",
+                    "subject": "Urdu"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Medical-Tech",
+              "subjects": [
+                {
+                  "name": "Biology",
+                  "students": [
+                    {
+                      "name": "Student 1 BIO",
+                      "rollNo": "LAH-BIO-001",
+                      "marks": 69
+                    },
+                    {
+                      "name": "Student 2 BIO",
+                      "rollNo": "LAH-BIO-002",
+                      "marks": 64
+                    },
+                    {
+                      "name": "Student 3 BIO",
+                      "rollNo": "LAH-BIO-003",
+                      "marks": 99
+                    },
+                    {
+                      "name": "Student 4 BIO",
+                      "rollNo": "LAH-BIO-004",
+                      "marks": 98
+                    },
+                    {
+                      "name": "Student 5 BIO",
+                      "rollNo": "LAH-BIO-005",
+                      "marks": 71
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "James Taylor",
+                    "subject": "Biology"
+                  }
+                },
+                {
+                  "name": "Anatomy",
+                  "students": [
+                    {
+                      "name": "Student 1 ANA",
+                      "rollNo": "LAH-ANA-001",
+                      "marks": 98
+                    },
+                    {
+                      "name": "Student 2 ANA",
+                      "rollNo": "LAH-ANA-002",
+                      "marks": 72
+                    },
+                    {
+                      "name": "Student 3 ANA",
+                      "rollNo": "LAH-ANA-003",
+                      "marks": 78
+                    },
+                    {
+                      "name": "Student 4 ANA",
+                      "rollNo": "LAH-ANA-004",
+                      "marks": 87
+                    },
+                    {
+                      "name": "Student 5 ANA",
+                      "rollNo": "LAH-ANA-005",
+                      "marks": 79
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Jessica Lee",
+                    "subject": "Anatomy"
+                  }
+                },
+                {
+                  "name": "Physiology",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "LAH-PHY-001",
+                      "marks": 75
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "LAH-PHY-002",
+                      "marks": 73
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "LAH-PHY-003",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "LAH-PHY-004",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "LAH-PHY-005",
+                      "marks": 60
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Sarah Brown",
+                    "subject": "Physiology"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Matric-Tech",
+              "subjects": [
+                {
+                  "name": "Computer Science",
+                  "students": [
+                    {
+                      "name": "Student 1 COM",
+                      "rollNo": "LAH-COM-001",
+                      "marks": 98
+                    },
+                    {
+                      "name": "Student 2 COM",
+                      "rollNo": "LAH-COM-002",
+                      "marks": 72
+                    },
+                    {
+                      "name": "Student 3 COM",
+                      "rollNo": "LAH-COM-003",
+                      "marks": 97
+                    },
+                    {
+                      "name": "Student 4 COM",
+                      "rollNo": "LAH-COM-004",
+                      "marks": 82
+                    },
+                    {
+                      "name": "Student 5 COM",
+                      "rollNo": "LAH-COM-005",
+                      "marks": 77
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Linda Harris",
+                    "subject": "Computer Science"
+                  }
+                },
+                {
+                  "name": "Chemistry",
+                  "students": [
+                    {
+                      "name": "Student 1 CHE",
+                      "rollNo": "LAH-CHE-001",
+                      "marks": 87
+                    },
+                    {
+                      "name": "Student 2 CHE",
+                      "rollNo": "LAH-CHE-002",
+                      "marks": 67
+                    },
+                    {
+                      "name": "Student 3 CHE",
+                      "rollNo": "LAH-CHE-003",
+                      "marks": 74
+                    },
+                    {
+                      "name": "Student 4 CHE",
+                      "rollNo": "LAH-CHE-004",
+                      "marks": 96
+                    },
+                    {
+                      "name": "Student 5 CHE",
+                      "rollNo": "LAH-CHE-005",
+                      "marks": 72
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Linda Harris",
+                    "subject": "Chemistry"
+                  }
+                },
+                {
+                  "name": "Pak Studies",
+                  "students": [
+                    {
+                      "name": "Student 1 PAK",
+                      "rollNo": "LAH-PAK-001",
+                      "marks": 73
+                    },
+                    {
+                      "name": "Student 2 PAK",
+                      "rollNo": "LAH-PAK-002",
+                      "marks": 71
+                    },
+                    {
+                      "name": "Student 3 PAK",
+                      "rollNo": "LAH-PAK-003",
+                      "marks": 66
+                    },
+                    {
+                      "name": "Student 4 PAK",
+                      "rollNo": "LAH-PAK-004",
+                      "marks": 98
+                    },
+                    {
+                      "name": "Student 5 PAK",
+                      "rollNo": "LAH-PAK-005",
+                      "marks": 67
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Emily Davis",
+                    "subject": "Pak Studies"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Lahore Campus 2",
+          "programs": [
+            {
+              "name": "Inter-Tech",
+              "subjects": [
+                {
+                  "name": "Physics",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "LAH-PHY-001",
+                      "marks": 97
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "LAH-PHY-002",
+                      "marks": 71
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "LAH-PHY-003",
+                      "marks": 91
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "LAH-PHY-004",
+                      "marks": 80
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "LAH-PHY-005",
+                      "marks": 94
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Mark Clark",
+                    "subject": "Physics"
+                  }
+                },
+                {
+                  "name": "Mathematics",
+                  "students": [
+                    {
+                      "name": "Student 1 MAT",
+                      "rollNo": "LAH-MAT-001",
+                      "marks": 94
+                    },
+                    {
+                      "name": "Student 2 MAT",
+                      "rollNo": "LAH-MAT-002",
+                      "marks": 78
+                    },
+                    {
+                      "name": "Student 3 MAT",
+                      "rollNo": "LAH-MAT-003",
+                      "marks": 97
+                    },
+                    {
+                      "name": "Student 4 MAT",
+                      "rollNo": "LAH-MAT-004",
+                      "marks": 77
+                    },
+                    {
+                      "name": "Student 5 MAT",
+                      "rollNo": "LAH-MAT-005",
+                      "marks": 73
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "John Smith",
+                    "subject": "Mathematics"
+                  }
+                },
+                {
+                  "name": "English",
+                  "students": [
+                    {
+                      "name": "Student 1 ENG",
+                      "rollNo": "LAH-ENG-001",
+                      "marks": 66
+                    },
+                    {
+                      "name": "Student 2 ENG",
+                      "rollNo": "LAH-ENG-002",
+                      "marks": 87
+                    },
+                    {
+                      "name": "Student 3 ENG",
+                      "rollNo": "LAH-ENG-003",
+                      "marks": 79
+                    },
+                    {
+                      "name": "Student 4 ENG",
+                      "rollNo": "LAH-ENG-004",
+                      "marks": 92
+                    },
+                    {
+                      "name": "Student 5 ENG",
+                      "rollNo": "LAH-ENG-005",
+                      "marks": 87
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "David Wilson",
+                    "subject": "English"
+                  }
+                },
+                {
+                  "name": "Urdu",
+                  "students": [
+                    {
+                      "name": "Student 1 URD",
+                      "rollNo": "LAH-URD-001",
+                      "marks": 93
+                    },
+                    {
+                      "name": "Student 2 URD",
+                      "rollNo": "LAH-URD-002",
+                      "marks": 82
+                    },
+                    {
+                      "name": "Student 3 URD",
+                      "rollNo": "LAH-URD-003",
+                      "marks": 74
+                    },
+                    {
+                      "name": "Student 4 URD",
+                      "rollNo": "LAH-URD-004",
+                      "marks": 89
+                    },
+                    {
+                      "name": "Student 5 URD",
+                      "rollNo": "LAH-URD-005",
+                      "marks": 71
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Jessica Lee",
+                    "subject": "Urdu"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Medical-Tech",
+              "subjects": [
+                {
+                  "name": "Biology",
+                  "students": [
+                    {
+                      "name": "Student 1 BIO",
+                      "rollNo": "LAH-BIO-001",
+                      "marks": 73
+                    },
+                    {
+                      "name": "Student 2 BIO",
+                      "rollNo": "LAH-BIO-002",
+                      "marks": 65
+                    },
+                    {
+                      "name": "Student 3 BIO",
+                      "rollNo": "LAH-BIO-003",
+                      "marks": 82
+                    },
+                    {
+                      "name": "Student 4 BIO",
+                      "rollNo": "LAH-BIO-004",
+                      "marks": 71
+                    },
+                    {
+                      "name": "Student 5 BIO",
+                      "rollNo": "LAH-BIO-005",
+                      "marks": 95
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "John Smith",
+                    "subject": "Biology"
+                  }
+                },
+                {
+                  "name": "Anatomy",
+                  "students": [
+                    {
+                      "name": "Student 1 ANA",
+                      "rollNo": "LAH-ANA-001",
+                      "marks": 64
+                    },
+                    {
+                      "name": "Student 2 ANA",
+                      "rollNo": "LAH-ANA-002",
+                      "marks": 84
+                    },
+                    {
+                      "name": "Student 3 ANA",
+                      "rollNo": "LAH-ANA-003",
+                      "marks": 82
+                    },
+                    {
+                      "name": "Student 4 ANA",
+                      "rollNo": "LAH-ANA-004",
+                      "marks": 92
+                    },
+                    {
+                      "name": "Student 5 ANA",
+                      "rollNo": "LAH-ANA-005",
+                      "marks": 65
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Jessica Lee",
+                    "subject": "Anatomy"
+                  }
+                },
+                {
+                  "name": "Physiology",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "LAH-PHY-001",
+                      "marks": 77
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "LAH-PHY-002",
+                      "marks": 72
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "LAH-PHY-003",
+                      "marks": 74
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "LAH-PHY-004",
+                      "marks": 74
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "LAH-PHY-005",
+                      "marks": 95
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Sarah Brown",
+                    "subject": "Physiology"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Matric-Tech",
+              "subjects": [
+                {
+                  "name": "Computer Science",
+                  "students": [
+                    {
+                      "name": "Student 1 COM",
+                      "rollNo": "LAH-COM-001",
+                      "marks": 78
+                    },
+                    {
+                      "name": "Student 2 COM",
+                      "rollNo": "LAH-COM-002",
+                      "marks": 89
+                    },
+                    {
+                      "name": "Student 3 COM",
+                      "rollNo": "LAH-COM-003",
+                      "marks": 67
+                    },
+                    {
+                      "name": "Student 4 COM",
+                      "rollNo": "LAH-COM-004",
+                      "marks": 69
+                    },
+                    {
+                      "name": "Student 5 COM",
+                      "rollNo": "LAH-COM-005",
+                      "marks": 83
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "David Wilson",
+                    "subject": "Computer Science"
+                  }
+                },
+                {
+                  "name": "Chemistry",
+                  "students": [
+                    {
+                      "name": "Student 1 CHE",
+                      "rollNo": "LAH-CHE-001",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 2 CHE",
+                      "rollNo": "LAH-CHE-002",
+                      "marks": 76
+                    },
+                    {
+                      "name": "Student 3 CHE",
+                      "rollNo": "LAH-CHE-003",
+                      "marks": 93
+                    },
+                    {
+                      "name": "Student 4 CHE",
+                      "rollNo": "LAH-CHE-004",
+                      "marks": 65
+                    },
+                    {
+                      "name": "Student 5 CHE",
+                      "rollNo": "LAH-CHE-005",
+                      "marks": 61
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "David Wilson",
+                    "subject": "Chemistry"
+                  }
+                },
+                {
+                  "name": "Pak Studies",
+                  "students": [
+                    {
+                      "name": "Student 1 PAK",
+                      "rollNo": "LAH-PAK-001",
+                      "marks": 61
+                    },
+                    {
+                      "name": "Student 2 PAK",
+                      "rollNo": "LAH-PAK-002",
+                      "marks": 78
+                    },
+                    {
+                      "name": "Student 3 PAK",
+                      "rollNo": "LAH-PAK-003",
+                      "marks": 88
+                    },
+                    {
+                      "name": "Student 4 PAK",
+                      "rollNo": "LAH-PAK-004",
+                      "marks": 80
+                    },
+                    {
+                      "name": "Student 5 PAK",
+                      "rollNo": "LAH-PAK-005",
+                      "marks": 86
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Mark Clark",
+                    "subject": "Pak Studies"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Lahore Campus 3",
+          "programs": [
+            {
+              "name": "Inter-Tech",
+              "subjects": [
+                {
+                  "name": "Physics",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "LAH-PHY-001",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "LAH-PHY-002",
+                      "marks": 97
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "LAH-PHY-003",
+                      "marks": 64
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "LAH-PHY-004",
+                      "marks": 92
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "LAH-PHY-005",
+                      "marks": 86
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Sarah Brown",
+                    "subject": "Physics"
+                  }
+                },
+                {
+                  "name": "Mathematics",
+                  "students": [
+                    {
+                      "name": "Student 1 MAT",
+                      "rollNo": "LAH-MAT-001",
+                      "marks": 92
+                    },
+                    {
+                      "name": "Student 2 MAT",
+                      "rollNo": "LAH-MAT-002",
+                      "marks": 65
+                    },
+                    {
+                      "name": "Student 3 MAT",
+                      "rollNo": "LAH-MAT-003",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 4 MAT",
+                      "rollNo": "LAH-MAT-004",
+                      "marks": 75
+                    },
+                    {
+                      "name": "Student 5 MAT",
+                      "rollNo": "LAH-MAT-005",
+                      "marks": 72
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Jessica Lee",
+                    "subject": "Mathematics"
+                  }
+                },
+                {
+                  "name": "English",
+                  "students": [
+                    {
+                      "name": "Student 1 ENG",
+                      "rollNo": "LAH-ENG-001",
+                      "marks": 93
+                    },
+                    {
+                      "name": "Student 2 ENG",
+                      "rollNo": "LAH-ENG-002",
+                      "marks": 76
+                    },
+                    {
+                      "name": "Student 3 ENG",
+                      "rollNo": "LAH-ENG-003",
+                      "marks": 74
+                    },
+                    {
+                      "name": "Student 4 ENG",
+                      "rollNo": "LAH-ENG-004",
+                      "marks": 62
+                    },
+                    {
+                      "name": "Student 5 ENG",
+                      "rollNo": "LAH-ENG-005",
+                      "marks": 67
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Mark Clark",
+                    "subject": "English"
+                  }
+                },
+                {
+                  "name": "Urdu",
+                  "students": [
+                    {
+                      "name": "Student 1 URD",
+                      "rollNo": "LAH-URD-001",
+                      "marks": 60
+                    },
+                    {
+                      "name": "Student 2 URD",
+                      "rollNo": "LAH-URD-002",
+                      "marks": 65
+                    },
+                    {
+                      "name": "Student 3 URD",
+                      "rollNo": "LAH-URD-003",
+                      "marks": 80
+                    },
+                    {
+                      "name": "Student 4 URD",
+                      "rollNo": "LAH-URD-004",
+                      "marks": 82
+                    },
+                    {
+                      "name": "Student 5 URD",
+                      "rollNo": "LAH-URD-005",
+                      "marks": 95
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Paul Walker",
+                    "subject": "Urdu"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Medical-Tech",
+              "subjects": [
+                {
+                  "name": "Biology",
+                  "students": [
+                    {
+                      "name": "Student 1 BIO",
+                      "rollNo": "LAH-BIO-001",
+                      "marks": 95
+                    },
+                    {
+                      "name": "Student 2 BIO",
+                      "rollNo": "LAH-BIO-002",
+                      "marks": 89
+                    },
+                    {
+                      "name": "Student 3 BIO",
+                      "rollNo": "LAH-BIO-003",
+                      "marks": 93
+                    },
+                    {
+                      "name": "Student 4 BIO",
+                      "rollNo": "LAH-BIO-004",
+                      "marks": 98
+                    },
+                    {
+                      "name": "Student 5 BIO",
+                      "rollNo": "LAH-BIO-005",
+                      "marks": 89
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "James Taylor",
+                    "subject": "Biology"
+                  }
+                },
+                {
+                  "name": "Anatomy",
+                  "students": [
+                    {
+                      "name": "Student 1 ANA",
+                      "rollNo": "LAH-ANA-001",
+                      "marks": 73
+                    },
+                    {
+                      "name": "Student 2 ANA",
+                      "rollNo": "LAH-ANA-002",
+                      "marks": 95
+                    },
+                    {
+                      "name": "Student 3 ANA",
+                      "rollNo": "LAH-ANA-003",
+                      "marks": 89
+                    },
+                    {
+                      "name": "Student 4 ANA",
+                      "rollNo": "LAH-ANA-004",
+                      "marks": 76
+                    },
+                    {
+                      "name": "Student 5 ANA",
+                      "rollNo": "LAH-ANA-005",
+                      "marks": 94
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Sarah Brown",
+                    "subject": "Anatomy"
+                  }
+                },
+                {
+                  "name": "Physiology",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "LAH-PHY-001",
+                      "marks": 98
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "LAH-PHY-002",
+                      "marks": 97
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "LAH-PHY-003",
+                      "marks": 92
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "LAH-PHY-004",
+                      "marks": 77
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "LAH-PHY-005",
+                      "marks": 82
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Paul Walker",
+                    "subject": "Physiology"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Matric-Tech",
+              "subjects": [
+                {
+                  "name": "Computer Science",
+                  "students": [
+                    {
+                      "name": "Student 1 COM",
+                      "rollNo": "LAH-COM-001",
+                      "marks": 96
+                    },
+                    {
+                      "name": "Student 2 COM",
+                      "rollNo": "LAH-COM-002",
+                      "marks": 61
+                    },
+                    {
+                      "name": "Student 3 COM",
+                      "rollNo": "LAH-COM-003",
+                      "marks": 68
+                    },
+                    {
+                      "name": "Student 4 COM",
+                      "rollNo": "LAH-COM-004",
+                      "marks": 64
+                    },
+                    {
+                      "name": "Student 5 COM",
+                      "rollNo": "LAH-COM-005",
+                      "marks": 97
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "David Wilson",
+                    "subject": "Computer Science"
+                  }
+                },
+                {
+                  "name": "Chemistry",
+                  "students": [
+                    {
+                      "name": "Student 1 CHE",
+                      "rollNo": "LAH-CHE-001",
+                      "marks": 91
+                    },
+                    {
+                      "name": "Student 2 CHE",
+                      "rollNo": "LAH-CHE-002",
+                      "marks": 65
+                    },
+                    {
+                      "name": "Student 3 CHE",
+                      "rollNo": "LAH-CHE-003",
+                      "marks": 79
+                    },
+                    {
+                      "name": "Student 4 CHE",
+                      "rollNo": "LAH-CHE-004",
+                      "marks": 93
+                    },
+                    {
+                      "name": "Student 5 CHE",
+                      "rollNo": "LAH-CHE-005",
+                      "marks": 73
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "John Smith",
+                    "subject": "Chemistry"
+                  }
+                },
+                {
+                  "name": "Pak Studies",
+                  "students": [
+                    {
+                      "name": "Student 1 PAK",
+                      "rollNo": "LAH-PAK-001",
+                      "marks": 80
+                    },
+                    {
+                      "name": "Student 2 PAK",
+                      "rollNo": "LAH-PAK-002",
+                      "marks": 67
+                    },
+                    {
+                      "name": "Student 3 PAK",
+                      "rollNo": "LAH-PAK-003",
+                      "marks": 81
+                    },
+                    {
+                      "name": "Student 4 PAK",
+                      "rollNo": "LAH-PAK-004",
+                      "marks": 62
+                    },
+                    {
+                      "name": "Student 5 PAK",
+                      "rollNo": "LAH-PAK-005",
+                      "marks": 83
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Mark Clark",
+                    "subject": "Pak Studies"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Karachi",
+      "campuses": [
+        {
+          "name": "Karachi Campus 1",
+          "programs": [
+            {
+              "name": "Inter-Tech",
+              "subjects": [
+                {
+                  "name": "Physics",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "KAR-PHY-001",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "KAR-PHY-002",
+                      "marks": 75
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "KAR-PHY-003",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "KAR-PHY-004",
+                      "marks": 94
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "KAR-PHY-005",
+                      "marks": 85
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Emily Davis",
+                    "subject": "Physics"
+                  }
+                },
+                {
+                  "name": "Mathematics",
+                  "students": [
+                    {
+                      "name": "Student 1 MAT",
+                      "rollNo": "KAR-MAT-001",
+                      "marks": 80
+                    },
+                    {
+                      "name": "Student 2 MAT",
+                      "rollNo": "KAR-MAT-002",
+                      "marks": 76
+                    },
+                    {
+                      "name": "Student 3 MAT",
+                      "rollNo": "KAR-MAT-003",
+                      "marks": 74
+                    },
+                    {
+                      "name": "Student 4 MAT",
+                      "rollNo": "KAR-MAT-004",
+                      "marks": 88
+                    },
+                    {
+                      "name": "Student 5 MAT",
+                      "rollNo": "KAR-MAT-005",
+                      "marks": 81
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Michael Johnson",
+                    "subject": "Mathematics"
+                  }
+                },
+                {
+                  "name": "English",
+                  "students": [
+                    {
+                      "name": "Student 1 ENG",
+                      "rollNo": "KAR-ENG-001",
+                      "marks": 74
+                    },
+                    {
+                      "name": "Student 2 ENG",
+                      "rollNo": "KAR-ENG-002",
+                      "marks": 67
+                    },
+                    {
+                      "name": "Student 3 ENG",
+                      "rollNo": "KAR-ENG-003",
+                      "marks": 84
+                    },
+                    {
+                      "name": "Student 4 ENG",
+                      "rollNo": "KAR-ENG-004",
+                      "marks": 86
+                    },
+                    {
+                      "name": "Student 5 ENG",
+                      "rollNo": "KAR-ENG-005",
+                      "marks": 76
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "David Wilson",
+                    "subject": "English"
+                  }
+                },
+                {
+                  "name": "Urdu",
+                  "students": [
+                    {
+                      "name": "Student 1 URD",
+                      "rollNo": "KAR-URD-001",
+                      "marks": 64
+                    },
+                    {
+                      "name": "Student 2 URD",
+                      "rollNo": "KAR-URD-002",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 3 URD",
+                      "rollNo": "KAR-URD-003",
+                      "marks": 69
+                    },
+                    {
+                      "name": "Student 4 URD",
+                      "rollNo": "KAR-URD-004",
+                      "marks": 64
+                    },
+                    {
+                      "name": "Student 5 URD",
+                      "rollNo": "KAR-URD-005",
+                      "marks": 92
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Paul Walker",
+                    "subject": "Urdu"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Medical-Tech",
+              "subjects": [
+                {
+                  "name": "Biology",
+                  "students": [
+                    {
+                      "name": "Student 1 BIO",
+                      "rollNo": "KAR-BIO-001",
+                      "marks": 74
+                    },
+                    {
+                      "name": "Student 2 BIO",
+                      "rollNo": "KAR-BIO-002",
+                      "marks": 80
+                    },
+                    {
+                      "name": "Student 3 BIO",
+                      "rollNo": "KAR-BIO-003",
+                      "marks": 84
+                    },
+                    {
+                      "name": "Student 4 BIO",
+                      "rollNo": "KAR-BIO-004",
+                      "marks": 64
+                    },
+                    {
+                      "name": "Student 5 BIO",
+                      "rollNo": "KAR-BIO-005",
+                      "marks": 93
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Linda Harris",
+                    "subject": "Biology"
+                  }
+                },
+                {
+                  "name": "Anatomy",
+                  "students": [
+                    {
+                      "name": "Student 1 ANA",
+                      "rollNo": "KAR-ANA-001",
+                      "marks": 65
+                    },
+                    {
+                      "name": "Student 2 ANA",
+                      "rollNo": "KAR-ANA-002",
+                      "marks": 97
+                    },
+                    {
+                      "name": "Student 3 ANA",
+                      "rollNo": "KAR-ANA-003",
+                      "marks": 82
+                    },
+                    {
+                      "name": "Student 4 ANA",
+                      "rollNo": "KAR-ANA-004",
+                      "marks": 87
+                    },
+                    {
+                      "name": "Student 5 ANA",
+                      "rollNo": "KAR-ANA-005",
+                      "marks": 70
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "James Taylor",
+                    "subject": "Anatomy"
+                  }
+                },
+                {
+                  "name": "Physiology",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "KAR-PHY-001",
+                      "marks": 93
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "KAR-PHY-002",
+                      "marks": 68
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "KAR-PHY-003",
+                      "marks": 81
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "KAR-PHY-004",
+                      "marks": 79
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "KAR-PHY-005",
+                      "marks": 60
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "James Taylor",
+                    "subject": "Physiology"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Matric-Tech",
+              "subjects": [
+                {
+                  "name": "Computer Science",
+                  "students": [
+                    {
+                      "name": "Student 1 COM",
+                      "rollNo": "KAR-COM-001",
+                      "marks": 72
+                    },
+                    {
+                      "name": "Student 2 COM",
+                      "rollNo": "KAR-COM-002",
+                      "marks": 64
+                    },
+                    {
+                      "name": "Student 3 COM",
+                      "rollNo": "KAR-COM-003",
+                      "marks": 84
+                    },
+                    {
+                      "name": "Student 4 COM",
+                      "rollNo": "KAR-COM-004",
+                      "marks": 94
+                    },
+                    {
+                      "name": "Student 5 COM",
+                      "rollNo": "KAR-COM-005",
+                      "marks": 73
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Sarah Brown",
+                    "subject": "Computer Science"
+                  }
+                },
+                {
+                  "name": "Chemistry",
+                  "students": [
+                    {
+                      "name": "Student 1 CHE",
+                      "rollNo": "KAR-CHE-001",
+                      "marks": 73
+                    },
+                    {
+                      "name": "Student 2 CHE",
+                      "rollNo": "KAR-CHE-002",
+                      "marks": 90
+                    },
+                    {
+                      "name": "Student 3 CHE",
+                      "rollNo": "KAR-CHE-003",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 4 CHE",
+                      "rollNo": "KAR-CHE-004",
+                      "marks": 75
+                    },
+                    {
+                      "name": "Student 5 CHE",
+                      "rollNo": "KAR-CHE-005",
+                      "marks": 64
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Linda Harris",
+                    "subject": "Chemistry"
+                  }
+                },
+                {
+                  "name": "Pak Studies",
+                  "students": [
+                    {
+                      "name": "Student 1 PAK",
+                      "rollNo": "KAR-PAK-001",
+                      "marks": 94
+                    },
+                    {
+                      "name": "Student 2 PAK",
+                      "rollNo": "KAR-PAK-002",
+                      "marks": 88
+                    },
+                    {
+                      "name": "Student 3 PAK",
+                      "rollNo": "KAR-PAK-003",
+                      "marks": 77
+                    },
+                    {
+                      "name": "Student 4 PAK",
+                      "rollNo": "KAR-PAK-004",
+                      "marks": 84
+                    },
+                    {
+                      "name": "Student 5 PAK",
+                      "rollNo": "KAR-PAK-005",
+                      "marks": 69
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Emily Davis",
+                    "subject": "Pak Studies"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Karachi Campus 2",
+          "programs": [
+            {
+              "name": "Inter-Tech",
+              "subjects": [
+                {
+                  "name": "Physics",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "KAR-PHY-001",
+                      "marks": 71
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "KAR-PHY-002",
+                      "marks": 84
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "KAR-PHY-003",
+                      "marks": 67
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "KAR-PHY-004",
+                      "marks": 62
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "KAR-PHY-005",
+                      "marks": 74
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Linda Harris",
+                    "subject": "Physics"
+                  }
+                },
+                {
+                  "name": "Mathematics",
+                  "students": [
+                    {
+                      "name": "Student 1 MAT",
+                      "rollNo": "KAR-MAT-001",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 2 MAT",
+                      "rollNo": "KAR-MAT-002",
+                      "marks": 67
+                    },
+                    {
+                      "name": "Student 3 MAT",
+                      "rollNo": "KAR-MAT-003",
+                      "marks": 98
+                    },
+                    {
+                      "name": "Student 4 MAT",
+                      "rollNo": "KAR-MAT-004",
+                      "marks": 95
+                    },
+                    {
+                      "name": "Student 5 MAT",
+                      "rollNo": "KAR-MAT-005",
+                      "marks": 89
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Sarah Brown",
+                    "subject": "Mathematics"
+                  }
+                },
+                {
+                  "name": "English",
+                  "students": [
+                    {
+                      "name": "Student 1 ENG",
+                      "rollNo": "KAR-ENG-001",
+                      "marks": 89
+                    },
+                    {
+                      "name": "Student 2 ENG",
+                      "rollNo": "KAR-ENG-002",
+                      "marks": 97
+                    },
+                    {
+                      "name": "Student 3 ENG",
+                      "rollNo": "KAR-ENG-003",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 4 ENG",
+                      "rollNo": "KAR-ENG-004",
+                      "marks": 60
+                    },
+                    {
+                      "name": "Student 5 ENG",
+                      "rollNo": "KAR-ENG-005",
+                      "marks": 84
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Sarah Brown",
+                    "subject": "English"
+                  }
+                },
+                {
+                  "name": "Urdu",
+                  "students": [
+                    {
+                      "name": "Student 1 URD",
+                      "rollNo": "KAR-URD-001",
+                      "marks": 64
+                    },
+                    {
+                      "name": "Student 2 URD",
+                      "rollNo": "KAR-URD-002",
+                      "marks": 98
+                    },
+                    {
+                      "name": "Student 3 URD",
+                      "rollNo": "KAR-URD-003",
+                      "marks": 77
+                    },
+                    {
+                      "name": "Student 4 URD",
+                      "rollNo": "KAR-URD-004",
+                      "marks": 89
+                    },
+                    {
+                      "name": "Student 5 URD",
+                      "rollNo": "KAR-URD-005",
+                      "marks": 83
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "John Smith",
+                    "subject": "Urdu"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Medical-Tech",
+              "subjects": [
+                {
+                  "name": "Biology",
+                  "students": [
+                    {
+                      "name": "Student 1 BIO",
+                      "rollNo": "KAR-BIO-001",
+                      "marks": 98
+                    },
+                    {
+                      "name": "Student 2 BIO",
+                      "rollNo": "KAR-BIO-002",
+                      "marks": 77
+                    },
+                    {
+                      "name": "Student 3 BIO",
+                      "rollNo": "KAR-BIO-003",
+                      "marks": 87
+                    },
+                    {
+                      "name": "Student 4 BIO",
+                      "rollNo": "KAR-BIO-004",
+                      "marks": 66
+                    },
+                    {
+                      "name": "Student 5 BIO",
+                      "rollNo": "KAR-BIO-005",
+                      "marks": 80
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Emily Davis",
+                    "subject": "Biology"
+                  }
+                },
+                {
+                  "name": "Anatomy",
+                  "students": [
+                    {
+                      "name": "Student 1 ANA",
+                      "rollNo": "KAR-ANA-001",
+                      "marks": 79
+                    },
+                    {
+                      "name": "Student 2 ANA",
+                      "rollNo": "KAR-ANA-002",
+                      "marks": 72
+                    },
+                    {
+                      "name": "Student 3 ANA",
+                      "rollNo": "KAR-ANA-003",
+                      "marks": 99
+                    },
+                    {
+                      "name": "Student 4 ANA",
+                      "rollNo": "KAR-ANA-004",
+                      "marks": 98
+                    },
+                    {
+                      "name": "Student 5 ANA",
+                      "rollNo": "KAR-ANA-005",
+                      "marks": 88
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Paul Walker",
+                    "subject": "Anatomy"
+                  }
+                },
+                {
+                  "name": "Physiology",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "KAR-PHY-001",
+                      "marks": 79
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "KAR-PHY-002",
+                      "marks": 62
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "KAR-PHY-003",
+                      "marks": 60
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "KAR-PHY-004",
+                      "marks": 74
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "KAR-PHY-005",
+                      "marks": 78
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Sarah Brown",
+                    "subject": "Physiology"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Matric-Tech",
+              "subjects": [
+                {
+                  "name": "Computer Science",
+                  "students": [
+                    {
+                      "name": "Student 1 COM",
+                      "rollNo": "KAR-COM-001",
+                      "marks": 65
+                    },
+                    {
+                      "name": "Student 2 COM",
+                      "rollNo": "KAR-COM-002",
+                      "marks": 99
+                    },
+                    {
+                      "name": "Student 3 COM",
+                      "rollNo": "KAR-COM-003",
+                      "marks": 62
+                    },
+                    {
+                      "name": "Student 4 COM",
+                      "rollNo": "KAR-COM-004",
+                      "marks": 60
+                    },
+                    {
+                      "name": "Student 5 COM",
+                      "rollNo": "KAR-COM-005",
+                      "marks": 67
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "James Taylor",
+                    "subject": "Computer Science"
+                  }
+                },
+                {
+                  "name": "Chemistry",
+                  "students": [
+                    {
+                      "name": "Student 1 CHE",
+                      "rollNo": "KAR-CHE-001",
+                      "marks": 92
+                    },
+                    {
+                      "name": "Student 2 CHE",
+                      "rollNo": "KAR-CHE-002",
+                      "marks": 79
+                    },
+                    {
+                      "name": "Student 3 CHE",
+                      "rollNo": "KAR-CHE-003",
+                      "marks": 100
+                    },
+                    {
+                      "name": "Student 4 CHE",
+                      "rollNo": "KAR-CHE-004",
+                      "marks": 75
+                    },
+                    {
+                      "name": "Student 5 CHE",
+                      "rollNo": "KAR-CHE-005",
+                      "marks": 94
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Linda Harris",
+                    "subject": "Chemistry"
+                  }
+                },
+                {
+                  "name": "Pak Studies",
+                  "students": [
+                    {
+                      "name": "Student 1 PAK",
+                      "rollNo": "KAR-PAK-001",
+                      "marks": 72
+                    },
+                    {
+                      "name": "Student 2 PAK",
+                      "rollNo": "KAR-PAK-002",
+                      "marks": 65
+                    },
+                    {
+                      "name": "Student 3 PAK",
+                      "rollNo": "KAR-PAK-003",
+                      "marks": 89
+                    },
+                    {
+                      "name": "Student 4 PAK",
+                      "rollNo": "KAR-PAK-004",
+                      "marks": 77
+                    },
+                    {
+                      "name": "Student 5 PAK",
+                      "rollNo": "KAR-PAK-005",
+                      "marks": 62
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Mark Clark",
+                    "subject": "Pak Studies"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Karachi Campus 3",
+          "programs": [
+            {
+              "name": "Inter-Tech",
+              "subjects": [
+                {
+                  "name": "Physics",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "KAR-PHY-001",
+                      "marks": 69
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "KAR-PHY-002",
+                      "marks": 97
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "KAR-PHY-003",
+                      "marks": 80
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "KAR-PHY-004",
+                      "marks": 67
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "KAR-PHY-005",
+                      "marks": 86
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Paul Walker",
+                    "subject": "Physics"
+                  }
+                },
+                {
+                  "name": "Mathematics",
+                  "students": [
+                    {
+                      "name": "Student 1 MAT",
+                      "rollNo": "KAR-MAT-001",
+                      "marks": 66
+                    },
+                    {
+                      "name": "Student 2 MAT",
+                      "rollNo": "KAR-MAT-002",
+                      "marks": 60
+                    },
+                    {
+                      "name": "Student 3 MAT",
+                      "rollNo": "KAR-MAT-003",
+                      "marks": 89
+                    },
+                    {
+                      "name": "Student 4 MAT",
+                      "rollNo": "KAR-MAT-004",
+                      "marks": 89
+                    },
+                    {
+                      "name": "Student 5 MAT",
+                      "rollNo": "KAR-MAT-005",
+                      "marks": 87
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Sarah Brown",
+                    "subject": "Mathematics"
+                  }
+                },
+                {
+                  "name": "English",
+                  "students": [
+                    {
+                      "name": "Student 1 ENG",
+                      "rollNo": "KAR-ENG-001",
+                      "marks": 88
+                    },
+                    {
+                      "name": "Student 2 ENG",
+                      "rollNo": "KAR-ENG-002",
+                      "marks": 99
+                    },
+                    {
+                      "name": "Student 3 ENG",
+                      "rollNo": "KAR-ENG-003",
+                      "marks": 83
+                    },
+                    {
+                      "name": "Student 4 ENG",
+                      "rollNo": "KAR-ENG-004",
+                      "marks": 66
+                    },
+                    {
+                      "name": "Student 5 ENG",
+                      "rollNo": "KAR-ENG-005",
+                      "marks": 96
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Mark Clark",
+                    "subject": "English"
+                  }
+                },
+                {
+                  "name": "Urdu",
+                  "students": [
+                    {
+                      "name": "Student 1 URD",
+                      "rollNo": "KAR-URD-001",
+                      "marks": 91
+                    },
+                    {
+                      "name": "Student 2 URD",
+                      "rollNo": "KAR-URD-002",
+                      "marks": 98
+                    },
+                    {
+                      "name": "Student 3 URD",
+                      "rollNo": "KAR-URD-003",
+                      "marks": 88
+                    },
+                    {
+                      "name": "Student 4 URD",
+                      "rollNo": "KAR-URD-004",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 5 URD",
+                      "rollNo": "KAR-URD-005",
+                      "marks": 76
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Linda Harris",
+                    "subject": "Urdu"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Medical-Tech",
+              "subjects": [
+                {
+                  "name": "Biology",
+                  "students": [
+                    {
+                      "name": "Student 1 BIO",
+                      "rollNo": "KAR-BIO-001",
+                      "marks": 65
+                    },
+                    {
+                      "name": "Student 2 BIO",
+                      "rollNo": "KAR-BIO-002",
+                      "marks": 86
+                    },
+                    {
+                      "name": "Student 3 BIO",
+                      "rollNo": "KAR-BIO-003",
+                      "marks": 63
+                    },
+                    {
+                      "name": "Student 4 BIO",
+                      "rollNo": "KAR-BIO-004",
+                      "marks": 66
+                    },
+                    {
+                      "name": "Student 5 BIO",
+                      "rollNo": "KAR-BIO-005",
+                      "marks": 65
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Paul Walker",
+                    "subject": "Biology"
+                  }
+                },
+                {
+                  "name": "Anatomy",
+                  "students": [
+                    {
+                      "name": "Student 1 ANA",
+                      "rollNo": "KAR-ANA-001",
+                      "marks": 95
+                    },
+                    {
+                      "name": "Student 2 ANA",
+                      "rollNo": "KAR-ANA-002",
+                      "marks": 76
+                    },
+                    {
+                      "name": "Student 3 ANA",
+                      "rollNo": "KAR-ANA-003",
+                      "marks": 78
+                    },
+                    {
+                      "name": "Student 4 ANA",
+                      "rollNo": "KAR-ANA-004",
+                      "marks": 87
+                    },
+                    {
+                      "name": "Student 5 ANA",
+                      "rollNo": "KAR-ANA-005",
+                      "marks": 63
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "John Smith",
+                    "subject": "Anatomy"
+                  }
+                },
+                {
+                  "name": "Physiology",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "KAR-PHY-001",
+                      "marks": 95
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "KAR-PHY-002",
+                      "marks": 87
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "KAR-PHY-003",
+                      "marks": 79
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "KAR-PHY-004",
+                      "marks": 76
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "KAR-PHY-005",
+                      "marks": 63
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Sarah Brown",
+                    "subject": "Physiology"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Matric-Tech",
+              "subjects": [
+                {
+                  "name": "Computer Science",
+                  "students": [
+                    {
+                      "name": "Student 1 COM",
+                      "rollNo": "KAR-COM-001",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 2 COM",
+                      "rollNo": "KAR-COM-002",
+                      "marks": 79
+                    },
+                    {
+                      "name": "Student 3 COM",
+                      "rollNo": "KAR-COM-003",
+                      "marks": 98
+                    },
+                    {
+                      "name": "Student 4 COM",
+                      "rollNo": "KAR-COM-004",
+                      "marks": 80
+                    },
+                    {
+                      "name": "Student 5 COM",
+                      "rollNo": "KAR-COM-005",
+                      "marks": 62
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Sarah Brown",
+                    "subject": "Computer Science"
+                  }
+                },
+                {
+                  "name": "Chemistry",
+                  "students": [
+                    {
+                      "name": "Student 1 CHE",
+                      "rollNo": "KAR-CHE-001",
+                      "marks": 63
+                    },
+                    {
+                      "name": "Student 2 CHE",
+                      "rollNo": "KAR-CHE-002",
+                      "marks": 87
+                    },
+                    {
+                      "name": "Student 3 CHE",
+                      "rollNo": "KAR-CHE-003",
+                      "marks": 73
+                    },
+                    {
+                      "name": "Student 4 CHE",
+                      "rollNo": "KAR-CHE-004",
+                      "marks": 60
+                    },
+                    {
+                      "name": "Student 5 CHE",
+                      "rollNo": "KAR-CHE-005",
+                      "marks": 66
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Sarah Brown",
+                    "subject": "Chemistry"
+                  }
+                },
+                {
+                  "name": "Pak Studies",
+                  "students": [
+                    {
+                      "name": "Student 1 PAK",
+                      "rollNo": "KAR-PAK-001",
+                      "marks": 74
+                    },
+                    {
+                      "name": "Student 2 PAK",
+                      "rollNo": "KAR-PAK-002",
+                      "marks": 98
+                    },
+                    {
+                      "name": "Student 3 PAK",
+                      "rollNo": "KAR-PAK-003",
+                      "marks": 73
+                    },
+                    {
+                      "name": "Student 4 PAK",
+                      "rollNo": "KAR-PAK-004",
+                      "marks": 87
+                    },
+                    {
+                      "name": "Student 5 PAK",
+                      "rollNo": "KAR-PAK-005",
+                      "marks": 75
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Jessica Lee",
+                    "subject": "Pak Studies"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Islamabad",
+      "campuses": [
+        {
+          "name": "Islamabad Campus 1",
+          "programs": [
+            {
+              "name": "Inter-Tech",
+              "subjects": [
+                {
+                  "name": "Physics",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "ISL-PHY-001",
+                      "marks": 88
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "ISL-PHY-002",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "ISL-PHY-003",
+                      "marks": 61
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "ISL-PHY-004",
+                      "marks": 87
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "ISL-PHY-005",
+                      "marks": 74
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Emily Davis",
+                    "subject": "Physics"
+                  }
+                },
+                {
+                  "name": "Mathematics",
+                  "students": [
+                    {
+                      "name": "Student 1 MAT",
+                      "rollNo": "ISL-MAT-001",
+                      "marks": 66
+                    },
+                    {
+                      "name": "Student 2 MAT",
+                      "rollNo": "ISL-MAT-002",
+                      "marks": 75
+                    },
+                    {
+                      "name": "Student 3 MAT",
+                      "rollNo": "ISL-MAT-003",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 4 MAT",
+                      "rollNo": "ISL-MAT-004",
+                      "marks": 99
+                    },
+                    {
+                      "name": "Student 5 MAT",
+                      "rollNo": "ISL-MAT-005",
+                      "marks": 61
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "John Smith",
+                    "subject": "Mathematics"
+                  }
+                },
+                {
+                  "name": "English",
+                  "students": [
+                    {
+                      "name": "Student 1 ENG",
+                      "rollNo": "ISL-ENG-001",
+                      "marks": 78
+                    },
+                    {
+                      "name": "Student 2 ENG",
+                      "rollNo": "ISL-ENG-002",
+                      "marks": 80
+                    },
+                    {
+                      "name": "Student 3 ENG",
+                      "rollNo": "ISL-ENG-003",
+                      "marks": 90
+                    },
+                    {
+                      "name": "Student 4 ENG",
+                      "rollNo": "ISL-ENG-004",
+                      "marks": 80
+                    },
+                    {
+                      "name": "Student 5 ENG",
+                      "rollNo": "ISL-ENG-005",
+                      "marks": 61
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "John Smith",
+                    "subject": "English"
+                  }
+                },
+                {
+                  "name": "Urdu",
+                  "students": [
+                    {
+                      "name": "Student 1 URD",
+                      "rollNo": "ISL-URD-001",
+                      "marks": 84
+                    },
+                    {
+                      "name": "Student 2 URD",
+                      "rollNo": "ISL-URD-002",
+                      "marks": 63
+                    },
+                    {
+                      "name": "Student 3 URD",
+                      "rollNo": "ISL-URD-003",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 4 URD",
+                      "rollNo": "ISL-URD-004",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 5 URD",
+                      "rollNo": "ISL-URD-005",
+                      "marks": 68
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Michael Johnson",
+                    "subject": "Urdu"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Medical-Tech",
+              "subjects": [
+                {
+                  "name": "Biology",
+                  "students": [
+                    {
+                      "name": "Student 1 BIO",
+                      "rollNo": "ISL-BIO-001",
+                      "marks": 91
+                    },
+                    {
+                      "name": "Student 2 BIO",
+                      "rollNo": "ISL-BIO-002",
+                      "marks": 88
+                    },
+                    {
+                      "name": "Student 3 BIO",
+                      "rollNo": "ISL-BIO-003",
+                      "marks": 100
+                    },
+                    {
+                      "name": "Student 4 BIO",
+                      "rollNo": "ISL-BIO-004",
+                      "marks": 67
+                    },
+                    {
+                      "name": "Student 5 BIO",
+                      "rollNo": "ISL-BIO-005",
+                      "marks": 84
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "John Smith",
+                    "subject": "Biology"
+                  }
+                },
+                {
+                  "name": "Anatomy",
+                  "students": [
+                    {
+                      "name": "Student 1 ANA",
+                      "rollNo": "ISL-ANA-001",
+                      "marks": 89
+                    },
+                    {
+                      "name": "Student 2 ANA",
+                      "rollNo": "ISL-ANA-002",
+                      "marks": 79
+                    },
+                    {
+                      "name": "Student 3 ANA",
+                      "rollNo": "ISL-ANA-003",
+                      "marks": 95
+                    },
+                    {
+                      "name": "Student 4 ANA",
+                      "rollNo": "ISL-ANA-004",
+                      "marks": 71
+                    },
+                    {
+                      "name": "Student 5 ANA",
+                      "rollNo": "ISL-ANA-005",
+                      "marks": 71
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Emily Davis",
+                    "subject": "Anatomy"
+                  }
+                },
+                {
+                  "name": "Physiology",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "ISL-PHY-001",
+                      "marks": 61
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "ISL-PHY-002",
+                      "marks": 68
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "ISL-PHY-003",
+                      "marks": 73
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "ISL-PHY-004",
+                      "marks": 92
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "ISL-PHY-005",
+                      "marks": 90
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Sarah Brown",
+                    "subject": "Physiology"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Matric-Tech",
+              "subjects": [
+                {
+                  "name": "Computer Science",
+                  "students": [
+                    {
+                      "name": "Student 1 COM",
+                      "rollNo": "ISL-COM-001",
+                      "marks": 86
+                    },
+                    {
+                      "name": "Student 2 COM",
+                      "rollNo": "ISL-COM-002",
+                      "marks": 68
+                    },
+                    {
+                      "name": "Student 3 COM",
+                      "rollNo": "ISL-COM-003",
+                      "marks": 94
+                    },
+                    {
+                      "name": "Student 4 COM",
+                      "rollNo": "ISL-COM-004",
+                      "marks": 77
+                    },
+                    {
+                      "name": "Student 5 COM",
+                      "rollNo": "ISL-COM-005",
+                      "marks": 80
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Linda Harris",
+                    "subject": "Computer Science"
+                  }
+                },
+                {
+                  "name": "Chemistry",
+                  "students": [
+                    {
+                      "name": "Student 1 CHE",
+                      "rollNo": "ISL-CHE-001",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 2 CHE",
+                      "rollNo": "ISL-CHE-002",
+                      "marks": 65
+                    },
+                    {
+                      "name": "Student 3 CHE",
+                      "rollNo": "ISL-CHE-003",
+                      "marks": 81
+                    },
+                    {
+                      "name": "Student 4 CHE",
+                      "rollNo": "ISL-CHE-004",
+                      "marks": 65
+                    },
+                    {
+                      "name": "Student 5 CHE",
+                      "rollNo": "ISL-CHE-005",
+                      "marks": 89
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Paul Walker",
+                    "subject": "Chemistry"
+                  }
+                },
+                {
+                  "name": "Pak Studies",
+                  "students": [
+                    {
+                      "name": "Student 1 PAK",
+                      "rollNo": "ISL-PAK-001",
+                      "marks": 78
+                    },
+                    {
+                      "name": "Student 2 PAK",
+                      "rollNo": "ISL-PAK-002",
+                      "marks": 69
+                    },
+                    {
+                      "name": "Student 3 PAK",
+                      "rollNo": "ISL-PAK-003",
+                      "marks": 65
+                    },
+                    {
+                      "name": "Student 4 PAK",
+                      "rollNo": "ISL-PAK-004",
+                      "marks": 60
+                    },
+                    {
+                      "name": "Student 5 PAK",
+                      "rollNo": "ISL-PAK-005",
+                      "marks": 72
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Linda Harris",
+                    "subject": "Pak Studies"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Islamabad Campus 2",
+          "programs": [
+            {
+              "name": "Inter-Tech",
+              "subjects": [
+                {
+                  "name": "Physics",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "ISL-PHY-001",
+                      "marks": 77
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "ISL-PHY-002",
+                      "marks": 83
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "ISL-PHY-003",
+                      "marks": 84
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "ISL-PHY-004",
+                      "marks": 61
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "ISL-PHY-005",
+                      "marks": 69
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "John Smith",
+                    "subject": "Physics"
+                  }
+                },
+                {
+                  "name": "Mathematics",
+                  "students": [
+                    {
+                      "name": "Student 1 MAT",
+                      "rollNo": "ISL-MAT-001",
+                      "marks": 93
+                    },
+                    {
+                      "name": "Student 2 MAT",
+                      "rollNo": "ISL-MAT-002",
+                      "marks": 91
+                    },
+                    {
+                      "name": "Student 3 MAT",
+                      "rollNo": "ISL-MAT-003",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 4 MAT",
+                      "rollNo": "ISL-MAT-004",
+                      "marks": 65
+                    },
+                    {
+                      "name": "Student 5 MAT",
+                      "rollNo": "ISL-MAT-005",
+                      "marks": 78
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Sarah Brown",
+                    "subject": "Mathematics"
+                  }
+                },
+                {
+                  "name": "English",
+                  "students": [
+                    {
+                      "name": "Student 1 ENG",
+                      "rollNo": "ISL-ENG-001",
+                      "marks": 86
+                    },
+                    {
+                      "name": "Student 2 ENG",
+                      "rollNo": "ISL-ENG-002",
+                      "marks": 74
+                    },
+                    {
+                      "name": "Student 3 ENG",
+                      "rollNo": "ISL-ENG-003",
+                      "marks": 89
+                    },
+                    {
+                      "name": "Student 4 ENG",
+                      "rollNo": "ISL-ENG-004",
+                      "marks": 64
+                    },
+                    {
+                      "name": "Student 5 ENG",
+                      "rollNo": "ISL-ENG-005",
+                      "marks": 72
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Sarah Brown",
+                    "subject": "English"
+                  }
+                },
+                {
+                  "name": "Urdu",
+                  "students": [
+                    {
+                      "name": "Student 1 URD",
+                      "rollNo": "ISL-URD-001",
+                      "marks": 98
+                    },
+                    {
+                      "name": "Student 2 URD",
+                      "rollNo": "ISL-URD-002",
+                      "marks": 74
+                    },
+                    {
+                      "name": "Student 3 URD",
+                      "rollNo": "ISL-URD-003",
+                      "marks": 74
+                    },
+                    {
+                      "name": "Student 4 URD",
+                      "rollNo": "ISL-URD-004",
+                      "marks": 91
+                    },
+                    {
+                      "name": "Student 5 URD",
+                      "rollNo": "ISL-URD-005",
+                      "marks": 98
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Emily Davis",
+                    "subject": "Urdu"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Medical-Tech",
+              "subjects": [
+                {
+                  "name": "Biology",
+                  "students": [
+                    {
+                      "name": "Student 1 BIO",
+                      "rollNo": "ISL-BIO-001",
+                      "marks": 98
+                    },
+                    {
+                      "name": "Student 2 BIO",
+                      "rollNo": "ISL-BIO-002",
+                      "marks": 89
+                    },
+                    {
+                      "name": "Student 3 BIO",
+                      "rollNo": "ISL-BIO-003",
+                      "marks": 95
+                    },
+                    {
+                      "name": "Student 4 BIO",
+                      "rollNo": "ISL-BIO-004",
+                      "marks": 73
+                    },
+                    {
+                      "name": "Student 5 BIO",
+                      "rollNo": "ISL-BIO-005",
+                      "marks": 64
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Paul Walker",
+                    "subject": "Biology"
+                  }
+                },
+                {
+                  "name": "Anatomy",
+                  "students": [
+                    {
+                      "name": "Student 1 ANA",
+                      "rollNo": "ISL-ANA-001",
+                      "marks": 94
+                    },
+                    {
+                      "name": "Student 2 ANA",
+                      "rollNo": "ISL-ANA-002",
+                      "marks": 71
+                    },
+                    {
+                      "name": "Student 3 ANA",
+                      "rollNo": "ISL-ANA-003",
+                      "marks": 94
+                    },
+                    {
+                      "name": "Student 4 ANA",
+                      "rollNo": "ISL-ANA-004",
+                      "marks": 77
+                    },
+                    {
+                      "name": "Student 5 ANA",
+                      "rollNo": "ISL-ANA-005",
+                      "marks": 89
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Michael Johnson",
+                    "subject": "Anatomy"
+                  }
+                },
+                {
+                  "name": "Physiology",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "ISL-PHY-001",
+                      "marks": 66
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "ISL-PHY-002",
+                      "marks": 71
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "ISL-PHY-003",
+                      "marks": 97
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "ISL-PHY-004",
+                      "marks": 93
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "ISL-PHY-005",
+                      "marks": 73
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Linda Harris",
+                    "subject": "Physiology"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Matric-Tech",
+              "subjects": [
+                {
+                  "name": "Computer Science",
+                  "students": [
+                    {
+                      "name": "Student 1 COM",
+                      "rollNo": "ISL-COM-001",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 2 COM",
+                      "rollNo": "ISL-COM-002",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 3 COM",
+                      "rollNo": "ISL-COM-003",
+                      "marks": 68
+                    },
+                    {
+                      "name": "Student 4 COM",
+                      "rollNo": "ISL-COM-004",
+                      "marks": 73
+                    },
+                    {
+                      "name": "Student 5 COM",
+                      "rollNo": "ISL-COM-005",
+                      "marks": 99
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Emily Davis",
+                    "subject": "Computer Science"
+                  }
+                },
+                {
+                  "name": "Chemistry",
+                  "students": [
+                    {
+                      "name": "Student 1 CHE",
+                      "rollNo": "ISL-CHE-001",
+                      "marks": 92
+                    },
+                    {
+                      "name": "Student 2 CHE",
+                      "rollNo": "ISL-CHE-002",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 3 CHE",
+                      "rollNo": "ISL-CHE-003",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 4 CHE",
+                      "rollNo": "ISL-CHE-004",
+                      "marks": 65
+                    },
+                    {
+                      "name": "Student 5 CHE",
+                      "rollNo": "ISL-CHE-005",
+                      "marks": 76
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "David Wilson",
+                    "subject": "Chemistry"
+                  }
+                },
+                {
+                  "name": "Pak Studies",
+                  "students": [
+                    {
+                      "name": "Student 1 PAK",
+                      "rollNo": "ISL-PAK-001",
+                      "marks": 63
+                    },
+                    {
+                      "name": "Student 2 PAK",
+                      "rollNo": "ISL-PAK-002",
+                      "marks": 60
+                    },
+                    {
+                      "name": "Student 3 PAK",
+                      "rollNo": "ISL-PAK-003",
+                      "marks": 84
+                    },
+                    {
+                      "name": "Student 4 PAK",
+                      "rollNo": "ISL-PAK-004",
+                      "marks": 60
+                    },
+                    {
+                      "name": "Student 5 PAK",
+                      "rollNo": "ISL-PAK-005",
+                      "marks": 73
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Linda Harris",
+                    "subject": "Pak Studies"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Islamabad Campus 3",
+          "programs": [
+            {
+              "name": "Inter-Tech",
+              "subjects": [
+                {
+                  "name": "Physics",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "ISL-PHY-001",
+                      "marks": 98
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "ISL-PHY-002",
+                      "marks": 82
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "ISL-PHY-003",
+                      "marks": 62
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "ISL-PHY-004",
+                      "marks": 86
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "ISL-PHY-005",
+                      "marks": 76
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Linda Harris",
+                    "subject": "Physics"
+                  }
+                },
+                {
+                  "name": "Mathematics",
+                  "students": [
+                    {
+                      "name": "Student 1 MAT",
+                      "rollNo": "ISL-MAT-001",
+                      "marks": 96
+                    },
+                    {
+                      "name": "Student 2 MAT",
+                      "rollNo": "ISL-MAT-002",
+                      "marks": 88
+                    },
+                    {
+                      "name": "Student 3 MAT",
+                      "rollNo": "ISL-MAT-003",
+                      "marks": 97
+                    },
+                    {
+                      "name": "Student 4 MAT",
+                      "rollNo": "ISL-MAT-004",
+                      "marks": 96
+                    },
+                    {
+                      "name": "Student 5 MAT",
+                      "rollNo": "ISL-MAT-005",
+                      "marks": 90
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Michael Johnson",
+                    "subject": "Mathematics"
+                  }
+                },
+                {
+                  "name": "English",
+                  "students": [
+                    {
+                      "name": "Student 1 ENG",
+                      "rollNo": "ISL-ENG-001",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 2 ENG",
+                      "rollNo": "ISL-ENG-002",
+                      "marks": 77
+                    },
+                    {
+                      "name": "Student 3 ENG",
+                      "rollNo": "ISL-ENG-003",
+                      "marks": 78
+                    },
+                    {
+                      "name": "Student 4 ENG",
+                      "rollNo": "ISL-ENG-004",
+                      "marks": 71
+                    },
+                    {
+                      "name": "Student 5 ENG",
+                      "rollNo": "ISL-ENG-005",
+                      "marks": 60
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Mark Clark",
+                    "subject": "English"
+                  }
+                },
+                {
+                  "name": "Urdu",
+                  "students": [
+                    {
+                      "name": "Student 1 URD",
+                      "rollNo": "ISL-URD-001",
+                      "marks": 75
+                    },
+                    {
+                      "name": "Student 2 URD",
+                      "rollNo": "ISL-URD-002",
+                      "marks": 90
+                    },
+                    {
+                      "name": "Student 3 URD",
+                      "rollNo": "ISL-URD-003",
+                      "marks": 97
+                    },
+                    {
+                      "name": "Student 4 URD",
+                      "rollNo": "ISL-URD-004",
+                      "marks": 69
+                    },
+                    {
+                      "name": "Student 5 URD",
+                      "rollNo": "ISL-URD-005",
+                      "marks": 70
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Emily Davis",
+                    "subject": "Urdu"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Medical-Tech",
+              "subjects": [
+                {
+                  "name": "Biology",
+                  "students": [
+                    {
+                      "name": "Student 1 BIO",
+                      "rollNo": "ISL-BIO-001",
+                      "marks": 71
+                    },
+                    {
+                      "name": "Student 2 BIO",
+                      "rollNo": "ISL-BIO-002",
+                      "marks": 88
+                    },
+                    {
+                      "name": "Student 3 BIO",
+                      "rollNo": "ISL-BIO-003",
+                      "marks": 71
+                    },
+                    {
+                      "name": "Student 4 BIO",
+                      "rollNo": "ISL-BIO-004",
+                      "marks": 68
+                    },
+                    {
+                      "name": "Student 5 BIO",
+                      "rollNo": "ISL-BIO-005",
+                      "marks": 74
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Mark Clark",
+                    "subject": "Biology"
+                  }
+                },
+                {
+                  "name": "Anatomy",
+                  "students": [
+                    {
+                      "name": "Student 1 ANA",
+                      "rollNo": "ISL-ANA-001",
+                      "marks": 82
+                    },
+                    {
+                      "name": "Student 2 ANA",
+                      "rollNo": "ISL-ANA-002",
+                      "marks": 71
+                    },
+                    {
+                      "name": "Student 3 ANA",
+                      "rollNo": "ISL-ANA-003",
+                      "marks": 83
+                    },
+                    {
+                      "name": "Student 4 ANA",
+                      "rollNo": "ISL-ANA-004",
+                      "marks": 82
+                    },
+                    {
+                      "name": "Student 5 ANA",
+                      "rollNo": "ISL-ANA-005",
+                      "marks": 73
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Sarah Brown",
+                    "subject": "Anatomy"
+                  }
+                },
+                {
+                  "name": "Physiology",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "ISL-PHY-001",
+                      "marks": 73
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "ISL-PHY-002",
+                      "marks": 69
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "ISL-PHY-003",
+                      "marks": 63
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "ISL-PHY-004",
+                      "marks": 72
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "ISL-PHY-005",
+                      "marks": 71
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Sarah Brown",
+                    "subject": "Physiology"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Matric-Tech",
+              "subjects": [
+                {
+                  "name": "Computer Science",
+                  "students": [
+                    {
+                      "name": "Student 1 COM",
+                      "rollNo": "ISL-COM-001",
+                      "marks": 67
+                    },
+                    {
+                      "name": "Student 2 COM",
+                      "rollNo": "ISL-COM-002",
+                      "marks": 64
+                    },
+                    {
+                      "name": "Student 3 COM",
+                      "rollNo": "ISL-COM-003",
+                      "marks": 90
+                    },
+                    {
+                      "name": "Student 4 COM",
+                      "rollNo": "ISL-COM-004",
+                      "marks": 80
+                    },
+                    {
+                      "name": "Student 5 COM",
+                      "rollNo": "ISL-COM-005",
+                      "marks": 75
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "James Taylor",
+                    "subject": "Computer Science"
+                  }
+                },
+                {
+                  "name": "Chemistry",
+                  "students": [
+                    {
+                      "name": "Student 1 CHE",
+                      "rollNo": "ISL-CHE-001",
+                      "marks": 82
+                    },
+                    {
+                      "name": "Student 2 CHE",
+                      "rollNo": "ISL-CHE-002",
+                      "marks": 65
+                    },
+                    {
+                      "name": "Student 3 CHE",
+                      "rollNo": "ISL-CHE-003",
+                      "marks": 94
+                    },
+                    {
+                      "name": "Student 4 CHE",
+                      "rollNo": "ISL-CHE-004",
+                      "marks": 83
+                    },
+                    {
+                      "name": "Student 5 CHE",
+                      "rollNo": "ISL-CHE-005",
+                      "marks": 60
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Emily Davis",
+                    "subject": "Chemistry"
+                  }
+                },
+                {
+                  "name": "Pak Studies",
+                  "students": [
+                    {
+                      "name": "Student 1 PAK",
+                      "rollNo": "ISL-PAK-001",
+                      "marks": 98
+                    },
+                    {
+                      "name": "Student 2 PAK",
+                      "rollNo": "ISL-PAK-002",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 3 PAK",
+                      "rollNo": "ISL-PAK-003",
+                      "marks": 73
+                    },
+                    {
+                      "name": "Student 4 PAK",
+                      "rollNo": "ISL-PAK-004",
+                      "marks": 65
+                    },
+                    {
+                      "name": "Student 5 PAK",
+                      "rollNo": "ISL-PAK-005",
+                      "marks": 88
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Emily Davis",
+                    "subject": "Pak Studies"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Peshawar",
+      "campuses": [
+        {
+          "name": "Peshawar Campus 1",
+          "programs": [
+            {
+              "name": "Inter-Tech",
+              "subjects": [
+                {
+                  "name": "Physics",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "PES-PHY-001",
+                      "marks": 75
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "PES-PHY-002",
+                      "marks": 72
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "PES-PHY-003",
+                      "marks": 98
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "PES-PHY-004",
+                      "marks": 67
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "PES-PHY-005",
+                      "marks": 81
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Mark Clark",
+                    "subject": "Physics"
+                  }
+                },
+                {
+                  "name": "Mathematics",
+                  "students": [
+                    {
+                      "name": "Student 1 MAT",
+                      "rollNo": "PES-MAT-001",
+                      "marks": 82
+                    },
+                    {
+                      "name": "Student 2 MAT",
+                      "rollNo": "PES-MAT-002",
+                      "marks": 99
+                    },
+                    {
+                      "name": "Student 3 MAT",
+                      "rollNo": "PES-MAT-003",
+                      "marks": 69
+                    },
+                    {
+                      "name": "Student 4 MAT",
+                      "rollNo": "PES-MAT-004",
+                      "marks": 71
+                    },
+                    {
+                      "name": "Student 5 MAT",
+                      "rollNo": "PES-MAT-005",
+                      "marks": 96
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "David Wilson",
+                    "subject": "Mathematics"
+                  }
+                },
+                {
+                  "name": "English",
+                  "students": [
+                    {
+                      "name": "Student 1 ENG",
+                      "rollNo": "PES-ENG-001",
+                      "marks": 82
+                    },
+                    {
+                      "name": "Student 2 ENG",
+                      "rollNo": "PES-ENG-002",
+                      "marks": 68
+                    },
+                    {
+                      "name": "Student 3 ENG",
+                      "rollNo": "PES-ENG-003",
+                      "marks": 82
+                    },
+                    {
+                      "name": "Student 4 ENG",
+                      "rollNo": "PES-ENG-004",
+                      "marks": 75
+                    },
+                    {
+                      "name": "Student 5 ENG",
+                      "rollNo": "PES-ENG-005",
+                      "marks": 73
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Paul Walker",
+                    "subject": "English"
+                  }
+                },
+                {
+                  "name": "Urdu",
+                  "students": [
+                    {
+                      "name": "Student 1 URD",
+                      "rollNo": "PES-URD-001",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 2 URD",
+                      "rollNo": "PES-URD-002",
+                      "marks": 93
+                    },
+                    {
+                      "name": "Student 3 URD",
+                      "rollNo": "PES-URD-003",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 4 URD",
+                      "rollNo": "PES-URD-004",
+                      "marks": 88
+                    },
+                    {
+                      "name": "Student 5 URD",
+                      "rollNo": "PES-URD-005",
+                      "marks": 85
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "James Taylor",
+                    "subject": "Urdu"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Medical-Tech",
+              "subjects": [
+                {
+                  "name": "Biology",
+                  "students": [
+                    {
+                      "name": "Student 1 BIO",
+                      "rollNo": "PES-BIO-001",
+                      "marks": 89
+                    },
+                    {
+                      "name": "Student 2 BIO",
+                      "rollNo": "PES-BIO-002",
+                      "marks": 95
+                    },
+                    {
+                      "name": "Student 3 BIO",
+                      "rollNo": "PES-BIO-003",
+                      "marks": 82
+                    },
+                    {
+                      "name": "Student 4 BIO",
+                      "rollNo": "PES-BIO-004",
+                      "marks": 62
+                    },
+                    {
+                      "name": "Student 5 BIO",
+                      "rollNo": "PES-BIO-005",
+                      "marks": 80
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Michael Johnson",
+                    "subject": "Biology"
+                  }
+                },
+                {
+                  "name": "Anatomy",
+                  "students": [
+                    {
+                      "name": "Student 1 ANA",
+                      "rollNo": "PES-ANA-001",
+                      "marks": 91
+                    },
+                    {
+                      "name": "Student 2 ANA",
+                      "rollNo": "PES-ANA-002",
+                      "marks": 60
+                    },
+                    {
+                      "name": "Student 3 ANA",
+                      "rollNo": "PES-ANA-003",
+                      "marks": 81
+                    },
+                    {
+                      "name": "Student 4 ANA",
+                      "rollNo": "PES-ANA-004",
+                      "marks": 97
+                    },
+                    {
+                      "name": "Student 5 ANA",
+                      "rollNo": "PES-ANA-005",
+                      "marks": 80
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Michael Johnson",
+                    "subject": "Anatomy"
+                  }
+                },
+                {
+                  "name": "Physiology",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "PES-PHY-001",
+                      "marks": 94
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "PES-PHY-002",
+                      "marks": 60
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "PES-PHY-003",
+                      "marks": 90
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "PES-PHY-004",
+                      "marks": 60
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "PES-PHY-005",
+                      "marks": 82
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Linda Harris",
+                    "subject": "Physiology"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Matric-Tech",
+              "subjects": [
+                {
+                  "name": "Computer Science",
+                  "students": [
+                    {
+                      "name": "Student 1 COM",
+                      "rollNo": "PES-COM-001",
+                      "marks": 81
+                    },
+                    {
+                      "name": "Student 2 COM",
+                      "rollNo": "PES-COM-002",
+                      "marks": 92
+                    },
+                    {
+                      "name": "Student 3 COM",
+                      "rollNo": "PES-COM-003",
+                      "marks": 63
+                    },
+                    {
+                      "name": "Student 4 COM",
+                      "rollNo": "PES-COM-004",
+                      "marks": 96
+                    },
+                    {
+                      "name": "Student 5 COM",
+                      "rollNo": "PES-COM-005",
+                      "marks": 79
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Emily Davis",
+                    "subject": "Computer Science"
+                  }
+                },
+                {
+                  "name": "Chemistry",
+                  "students": [
+                    {
+                      "name": "Student 1 CHE",
+                      "rollNo": "PES-CHE-001",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 2 CHE",
+                      "rollNo": "PES-CHE-002",
+                      "marks": 79
+                    },
+                    {
+                      "name": "Student 3 CHE",
+                      "rollNo": "PES-CHE-003",
+                      "marks": 67
+                    },
+                    {
+                      "name": "Student 4 CHE",
+                      "rollNo": "PES-CHE-004",
+                      "marks": 99
+                    },
+                    {
+                      "name": "Student 5 CHE",
+                      "rollNo": "PES-CHE-005",
+                      "marks": 68
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Jessica Lee",
+                    "subject": "Chemistry"
+                  }
+                },
+                {
+                  "name": "Pak Studies",
+                  "students": [
+                    {
+                      "name": "Student 1 PAK",
+                      "rollNo": "PES-PAK-001",
+                      "marks": 62
+                    },
+                    {
+                      "name": "Student 2 PAK",
+                      "rollNo": "PES-PAK-002",
+                      "marks": 62
+                    },
+                    {
+                      "name": "Student 3 PAK",
+                      "rollNo": "PES-PAK-003",
+                      "marks": 69
+                    },
+                    {
+                      "name": "Student 4 PAK",
+                      "rollNo": "PES-PAK-004",
+                      "marks": 73
+                    },
+                    {
+                      "name": "Student 5 PAK",
+                      "rollNo": "PES-PAK-005",
+                      "marks": 96
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Sarah Brown",
+                    "subject": "Pak Studies"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Peshawar Campus 2",
+          "programs": [
+            {
+              "name": "Inter-Tech",
+              "subjects": [
+                {
+                  "name": "Physics",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "PES-PHY-001",
+                      "marks": 68
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "PES-PHY-002",
+                      "marks": 91
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "PES-PHY-003",
+                      "marks": 90
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "PES-PHY-004",
+                      "marks": 88
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "PES-PHY-005",
+                      "marks": 94
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "John Smith",
+                    "subject": "Physics"
+                  }
+                },
+                {
+                  "name": "Mathematics",
+                  "students": [
+                    {
+                      "name": "Student 1 MAT",
+                      "rollNo": "PES-MAT-001",
+                      "marks": 78
+                    },
+                    {
+                      "name": "Student 2 MAT",
+                      "rollNo": "PES-MAT-002",
+                      "marks": 63
+                    },
+                    {
+                      "name": "Student 3 MAT",
+                      "rollNo": "PES-MAT-003",
+                      "marks": 95
+                    },
+                    {
+                      "name": "Student 4 MAT",
+                      "rollNo": "PES-MAT-004",
+                      "marks": 63
+                    },
+                    {
+                      "name": "Student 5 MAT",
+                      "rollNo": "PES-MAT-005",
+                      "marks": 67
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Emily Davis",
+                    "subject": "Mathematics"
+                  }
+                },
+                {
+                  "name": "English",
+                  "students": [
+                    {
+                      "name": "Student 1 ENG",
+                      "rollNo": "PES-ENG-001",
+                      "marks": 78
+                    },
+                    {
+                      "name": "Student 2 ENG",
+                      "rollNo": "PES-ENG-002",
+                      "marks": 64
+                    },
+                    {
+                      "name": "Student 3 ENG",
+                      "rollNo": "PES-ENG-003",
+                      "marks": 94
+                    },
+                    {
+                      "name": "Student 4 ENG",
+                      "rollNo": "PES-ENG-004",
+                      "marks": 78
+                    },
+                    {
+                      "name": "Student 5 ENG",
+                      "rollNo": "PES-ENG-005",
+                      "marks": 77
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "David Wilson",
+                    "subject": "English"
+                  }
+                },
+                {
+                  "name": "Urdu",
+                  "students": [
+                    {
+                      "name": "Student 1 URD",
+                      "rollNo": "PES-URD-001",
+                      "marks": 63
+                    },
+                    {
+                      "name": "Student 2 URD",
+                      "rollNo": "PES-URD-002",
+                      "marks": 98
+                    },
+                    {
+                      "name": "Student 3 URD",
+                      "rollNo": "PES-URD-003",
+                      "marks": 71
+                    },
+                    {
+                      "name": "Student 4 URD",
+                      "rollNo": "PES-URD-004",
+                      "marks": 77
+                    },
+                    {
+                      "name": "Student 5 URD",
+                      "rollNo": "PES-URD-005",
+                      "marks": 94
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "David Wilson",
+                    "subject": "Urdu"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Medical-Tech",
+              "subjects": [
+                {
+                  "name": "Biology",
+                  "students": [
+                    {
+                      "name": "Student 1 BIO",
+                      "rollNo": "PES-BIO-001",
+                      "marks": 79
+                    },
+                    {
+                      "name": "Student 2 BIO",
+                      "rollNo": "PES-BIO-002",
+                      "marks": 65
+                    },
+                    {
+                      "name": "Student 3 BIO",
+                      "rollNo": "PES-BIO-003",
+                      "marks": 65
+                    },
+                    {
+                      "name": "Student 4 BIO",
+                      "rollNo": "PES-BIO-004",
+                      "marks": 99
+                    },
+                    {
+                      "name": "Student 5 BIO",
+                      "rollNo": "PES-BIO-005",
+                      "marks": 91
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "John Smith",
+                    "subject": "Biology"
+                  }
+                },
+                {
+                  "name": "Anatomy",
+                  "students": [
+                    {
+                      "name": "Student 1 ANA",
+                      "rollNo": "PES-ANA-001",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 2 ANA",
+                      "rollNo": "PES-ANA-002",
+                      "marks": 86
+                    },
+                    {
+                      "name": "Student 3 ANA",
+                      "rollNo": "PES-ANA-003",
+                      "marks": 75
+                    },
+                    {
+                      "name": "Student 4 ANA",
+                      "rollNo": "PES-ANA-004",
+                      "marks": 84
+                    },
+                    {
+                      "name": "Student 5 ANA",
+                      "rollNo": "PES-ANA-005",
+                      "marks": 87
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "David Wilson",
+                    "subject": "Anatomy"
+                  }
+                },
+                {
+                  "name": "Physiology",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "PES-PHY-001",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "PES-PHY-002",
+                      "marks": 92
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "PES-PHY-003",
+                      "marks": 64
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "PES-PHY-004",
+                      "marks": 86
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "PES-PHY-005",
+                      "marks": 61
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "David Wilson",
+                    "subject": "Physiology"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Matric-Tech",
+              "subjects": [
+                {
+                  "name": "Computer Science",
+                  "students": [
+                    {
+                      "name": "Student 1 COM",
+                      "rollNo": "PES-COM-001",
+                      "marks": 82
+                    },
+                    {
+                      "name": "Student 2 COM",
+                      "rollNo": "PES-COM-002",
+                      "marks": 67
+                    },
+                    {
+                      "name": "Student 3 COM",
+                      "rollNo": "PES-COM-003",
+                      "marks": 91
+                    },
+                    {
+                      "name": "Student 4 COM",
+                      "rollNo": "PES-COM-004",
+                      "marks": 80
+                    },
+                    {
+                      "name": "Student 5 COM",
+                      "rollNo": "PES-COM-005",
+                      "marks": 81
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Linda Harris",
+                    "subject": "Computer Science"
+                  }
+                },
+                {
+                  "name": "Chemistry",
+                  "students": [
+                    {
+                      "name": "Student 1 CHE",
+                      "rollNo": "PES-CHE-001",
+                      "marks": 87
+                    },
+                    {
+                      "name": "Student 2 CHE",
+                      "rollNo": "PES-CHE-002",
+                      "marks": 98
+                    },
+                    {
+                      "name": "Student 3 CHE",
+                      "rollNo": "PES-CHE-003",
+                      "marks": 80
+                    },
+                    {
+                      "name": "Student 4 CHE",
+                      "rollNo": "PES-CHE-004",
+                      "marks": 87
+                    },
+                    {
+                      "name": "Student 5 CHE",
+                      "rollNo": "PES-CHE-005",
+                      "marks": 94
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Mark Clark",
+                    "subject": "Chemistry"
+                  }
+                },
+                {
+                  "name": "Pak Studies",
+                  "students": [
+                    {
+                      "name": "Student 1 PAK",
+                      "rollNo": "PES-PAK-001",
+                      "marks": 97
+                    },
+                    {
+                      "name": "Student 2 PAK",
+                      "rollNo": "PES-PAK-002",
+                      "marks": 97
+                    },
+                    {
+                      "name": "Student 3 PAK",
+                      "rollNo": "PES-PAK-003",
+                      "marks": 93
+                    },
+                    {
+                      "name": "Student 4 PAK",
+                      "rollNo": "PES-PAK-004",
+                      "marks": 86
+                    },
+                    {
+                      "name": "Student 5 PAK",
+                      "rollNo": "PES-PAK-005",
+                      "marks": 79
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Linda Harris",
+                    "subject": "Pak Studies"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Peshawar Campus 3",
+          "programs": [
+            {
+              "name": "Inter-Tech",
+              "subjects": [
+                {
+                  "name": "Physics",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "PES-PHY-001",
+                      "marks": 71
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "PES-PHY-002",
+                      "marks": 60
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "PES-PHY-003",
+                      "marks": 75
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "PES-PHY-004",
+                      "marks": 95
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "PES-PHY-005",
+                      "marks": 69
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "John Smith",
+                    "subject": "Physics"
+                  }
+                },
+                {
+                  "name": "Mathematics",
+                  "students": [
+                    {
+                      "name": "Student 1 MAT",
+                      "rollNo": "PES-MAT-001",
+                      "marks": 77
+                    },
+                    {
+                      "name": "Student 2 MAT",
+                      "rollNo": "PES-MAT-002",
+                      "marks": 63
+                    },
+                    {
+                      "name": "Student 3 MAT",
+                      "rollNo": "PES-MAT-003",
+                      "marks": 91
+                    },
+                    {
+                      "name": "Student 4 MAT",
+                      "rollNo": "PES-MAT-004",
+                      "marks": 100
+                    },
+                    {
+                      "name": "Student 5 MAT",
+                      "rollNo": "PES-MAT-005",
+                      "marks": 97
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Paul Walker",
+                    "subject": "Mathematics"
+                  }
+                },
+                {
+                  "name": "English",
+                  "students": [
+                    {
+                      "name": "Student 1 ENG",
+                      "rollNo": "PES-ENG-001",
+                      "marks": 90
+                    },
+                    {
+                      "name": "Student 2 ENG",
+                      "rollNo": "PES-ENG-002",
+                      "marks": 64
+                    },
+                    {
+                      "name": "Student 3 ENG",
+                      "rollNo": "PES-ENG-003",
+                      "marks": 61
+                    },
+                    {
+                      "name": "Student 4 ENG",
+                      "rollNo": "PES-ENG-004",
+                      "marks": 77
+                    },
+                    {
+                      "name": "Student 5 ENG",
+                      "rollNo": "PES-ENG-005",
+                      "marks": 85
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "John Smith",
+                    "subject": "English"
+                  }
+                },
+                {
+                  "name": "Urdu",
+                  "students": [
+                    {
+                      "name": "Student 1 URD",
+                      "rollNo": "PES-URD-001",
+                      "marks": 73
+                    },
+                    {
+                      "name": "Student 2 URD",
+                      "rollNo": "PES-URD-002",
+                      "marks": 72
+                    },
+                    {
+                      "name": "Student 3 URD",
+                      "rollNo": "PES-URD-003",
+                      "marks": 64
+                    },
+                    {
+                      "name": "Student 4 URD",
+                      "rollNo": "PES-URD-004",
+                      "marks": 66
+                    },
+                    {
+                      "name": "Student 5 URD",
+                      "rollNo": "PES-URD-005",
+                      "marks": 91
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "John Smith",
+                    "subject": "Urdu"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Medical-Tech",
+              "subjects": [
+                {
+                  "name": "Biology",
+                  "students": [
+                    {
+                      "name": "Student 1 BIO",
+                      "rollNo": "PES-BIO-001",
+                      "marks": 80
+                    },
+                    {
+                      "name": "Student 2 BIO",
+                      "rollNo": "PES-BIO-002",
+                      "marks": 77
+                    },
+                    {
+                      "name": "Student 3 BIO",
+                      "rollNo": "PES-BIO-003",
+                      "marks": 96
+                    },
+                    {
+                      "name": "Student 4 BIO",
+                      "rollNo": "PES-BIO-004",
+                      "marks": 93
+                    },
+                    {
+                      "name": "Student 5 BIO",
+                      "rollNo": "PES-BIO-005",
+                      "marks": 61
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "James Taylor",
+                    "subject": "Biology"
+                  }
+                },
+                {
+                  "name": "Anatomy",
+                  "students": [
+                    {
+                      "name": "Student 1 ANA",
+                      "rollNo": "PES-ANA-001",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 2 ANA",
+                      "rollNo": "PES-ANA-002",
+                      "marks": 67
+                    },
+                    {
+                      "name": "Student 3 ANA",
+                      "rollNo": "PES-ANA-003",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 4 ANA",
+                      "rollNo": "PES-ANA-004",
+                      "marks": 72
+                    },
+                    {
+                      "name": "Student 5 ANA",
+                      "rollNo": "PES-ANA-005",
+                      "marks": 100
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Linda Harris",
+                    "subject": "Anatomy"
+                  }
+                },
+                {
+                  "name": "Physiology",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "PES-PHY-001",
+                      "marks": 91
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "PES-PHY-002",
+                      "marks": 91
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "PES-PHY-003",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "PES-PHY-004",
+                      "marks": 81
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "PES-PHY-005",
+                      "marks": 90
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Michael Johnson",
+                    "subject": "Physiology"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Matric-Tech",
+              "subjects": [
+                {
+                  "name": "Computer Science",
+                  "students": [
+                    {
+                      "name": "Student 1 COM",
+                      "rollNo": "PES-COM-001",
+                      "marks": 78
+                    },
+                    {
+                      "name": "Student 2 COM",
+                      "rollNo": "PES-COM-002",
+                      "marks": 100
+                    },
+                    {
+                      "name": "Student 3 COM",
+                      "rollNo": "PES-COM-003",
+                      "marks": 93
+                    },
+                    {
+                      "name": "Student 4 COM",
+                      "rollNo": "PES-COM-004",
+                      "marks": 68
+                    },
+                    {
+                      "name": "Student 5 COM",
+                      "rollNo": "PES-COM-005",
+                      "marks": 65
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Mark Clark",
+                    "subject": "Computer Science"
+                  }
+                },
+                {
+                  "name": "Chemistry",
+                  "students": [
+                    {
+                      "name": "Student 1 CHE",
+                      "rollNo": "PES-CHE-001",
+                      "marks": 75
+                    },
+                    {
+                      "name": "Student 2 CHE",
+                      "rollNo": "PES-CHE-002",
+                      "marks": 96
+                    },
+                    {
+                      "name": "Student 3 CHE",
+                      "rollNo": "PES-CHE-003",
+                      "marks": 72
+                    },
+                    {
+                      "name": "Student 4 CHE",
+                      "rollNo": "PES-CHE-004",
+                      "marks": 63
+                    },
+                    {
+                      "name": "Student 5 CHE",
+                      "rollNo": "PES-CHE-005",
+                      "marks": 73
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Linda Harris",
+                    "subject": "Chemistry"
+                  }
+                },
+                {
+                  "name": "Pak Studies",
+                  "students": [
+                    {
+                      "name": "Student 1 PAK",
+                      "rollNo": "PES-PAK-001",
+                      "marks": 87
+                    },
+                    {
+                      "name": "Student 2 PAK",
+                      "rollNo": "PES-PAK-002",
+                      "marks": 76
+                    },
+                    {
+                      "name": "Student 3 PAK",
+                      "rollNo": "PES-PAK-003",
+                      "marks": 64
+                    },
+                    {
+                      "name": "Student 4 PAK",
+                      "rollNo": "PES-PAK-004",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 5 PAK",
+                      "rollNo": "PES-PAK-005",
+                      "marks": 78
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Paul Walker",
+                    "subject": "Pak Studies"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Quetta",
+      "campuses": [
+        {
+          "name": "Quetta Campus 1",
+          "programs": [
+            {
+              "name": "Inter-Tech",
+              "subjects": [
+                {
+                  "name": "Physics",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "QUE-PHY-001",
+                      "marks": 80
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "QUE-PHY-002",
+                      "marks": 61
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "QUE-PHY-003",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "QUE-PHY-004",
+                      "marks": 62
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "QUE-PHY-005",
+                      "marks": 73
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Emily Davis",
+                    "subject": "Physics"
+                  }
+                },
+                {
+                  "name": "Mathematics",
+                  "students": [
+                    {
+                      "name": "Student 1 MAT",
+                      "rollNo": "QUE-MAT-001",
+                      "marks": 89
+                    },
+                    {
+                      "name": "Student 2 MAT",
+                      "rollNo": "QUE-MAT-002",
+                      "marks": 65
+                    },
+                    {
+                      "name": "Student 3 MAT",
+                      "rollNo": "QUE-MAT-003",
+                      "marks": 88
+                    },
+                    {
+                      "name": "Student 4 MAT",
+                      "rollNo": "QUE-MAT-004",
+                      "marks": 69
+                    },
+                    {
+                      "name": "Student 5 MAT",
+                      "rollNo": "QUE-MAT-005",
+                      "marks": 62
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "John Smith",
+                    "subject": "Mathematics"
+                  }
+                },
+                {
+                  "name": "English",
+                  "students": [
+                    {
+                      "name": "Student 1 ENG",
+                      "rollNo": "QUE-ENG-001",
+                      "marks": 87
+                    },
+                    {
+                      "name": "Student 2 ENG",
+                      "rollNo": "QUE-ENG-002",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 3 ENG",
+                      "rollNo": "QUE-ENG-003",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 4 ENG",
+                      "rollNo": "QUE-ENG-004",
+                      "marks": 80
+                    },
+                    {
+                      "name": "Student 5 ENG",
+                      "rollNo": "QUE-ENG-005",
+                      "marks": 80
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Sarah Brown",
+                    "subject": "English"
+                  }
+                },
+                {
+                  "name": "Urdu",
+                  "students": [
+                    {
+                      "name": "Student 1 URD",
+                      "rollNo": "QUE-URD-001",
+                      "marks": 93
+                    },
+                    {
+                      "name": "Student 2 URD",
+                      "rollNo": "QUE-URD-002",
+                      "marks": 75
+                    },
+                    {
+                      "name": "Student 3 URD",
+                      "rollNo": "QUE-URD-003",
+                      "marks": 83
+                    },
+                    {
+                      "name": "Student 4 URD",
+                      "rollNo": "QUE-URD-004",
+                      "marks": 84
+                    },
+                    {
+                      "name": "Student 5 URD",
+                      "rollNo": "QUE-URD-005",
+                      "marks": 98
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Michael Johnson",
+                    "subject": "Urdu"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Medical-Tech",
+              "subjects": [
+                {
+                  "name": "Biology",
+                  "students": [
+                    {
+                      "name": "Student 1 BIO",
+                      "rollNo": "QUE-BIO-001",
+                      "marks": 71
+                    },
+                    {
+                      "name": "Student 2 BIO",
+                      "rollNo": "QUE-BIO-002",
+                      "marks": 99
+                    },
+                    {
+                      "name": "Student 3 BIO",
+                      "rollNo": "QUE-BIO-003",
+                      "marks": 81
+                    },
+                    {
+                      "name": "Student 4 BIO",
+                      "rollNo": "QUE-BIO-004",
+                      "marks": 87
+                    },
+                    {
+                      "name": "Student 5 BIO",
+                      "rollNo": "QUE-BIO-005",
+                      "marks": 87
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Michael Johnson",
+                    "subject": "Biology"
+                  }
+                },
+                {
+                  "name": "Anatomy",
+                  "students": [
+                    {
+                      "name": "Student 1 ANA",
+                      "rollNo": "QUE-ANA-001",
+                      "marks": 60
+                    },
+                    {
+                      "name": "Student 2 ANA",
+                      "rollNo": "QUE-ANA-002",
+                      "marks": 89
+                    },
+                    {
+                      "name": "Student 3 ANA",
+                      "rollNo": "QUE-ANA-003",
+                      "marks": 74
+                    },
+                    {
+                      "name": "Student 4 ANA",
+                      "rollNo": "QUE-ANA-004",
+                      "marks": 89
+                    },
+                    {
+                      "name": "Student 5 ANA",
+                      "rollNo": "QUE-ANA-005",
+                      "marks": 86
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Mark Clark",
+                    "subject": "Anatomy"
+                  }
+                },
+                {
+                  "name": "Physiology",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "QUE-PHY-001",
+                      "marks": 62
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "QUE-PHY-002",
+                      "marks": 89
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "QUE-PHY-003",
+                      "marks": 62
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "QUE-PHY-004",
+                      "marks": 79
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "QUE-PHY-005",
+                      "marks": 60
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Sarah Brown",
+                    "subject": "Physiology"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Matric-Tech",
+              "subjects": [
+                {
+                  "name": "Computer Science",
+                  "students": [
+                    {
+                      "name": "Student 1 COM",
+                      "rollNo": "QUE-COM-001",
+                      "marks": 95
+                    },
+                    {
+                      "name": "Student 2 COM",
+                      "rollNo": "QUE-COM-002",
+                      "marks": 66
+                    },
+                    {
+                      "name": "Student 3 COM",
+                      "rollNo": "QUE-COM-003",
+                      "marks": 63
+                    },
+                    {
+                      "name": "Student 4 COM",
+                      "rollNo": "QUE-COM-004",
+                      "marks": 66
+                    },
+                    {
+                      "name": "Student 5 COM",
+                      "rollNo": "QUE-COM-005",
+                      "marks": 94
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Jessica Lee",
+                    "subject": "Computer Science"
+                  }
+                },
+                {
+                  "name": "Chemistry",
+                  "students": [
+                    {
+                      "name": "Student 1 CHE",
+                      "rollNo": "QUE-CHE-001",
+                      "marks": 65
+                    },
+                    {
+                      "name": "Student 2 CHE",
+                      "rollNo": "QUE-CHE-002",
+                      "marks": 81
+                    },
+                    {
+                      "name": "Student 3 CHE",
+                      "rollNo": "QUE-CHE-003",
+                      "marks": 95
+                    },
+                    {
+                      "name": "Student 4 CHE",
+                      "rollNo": "QUE-CHE-004",
+                      "marks": 68
+                    },
+                    {
+                      "name": "Student 5 CHE",
+                      "rollNo": "QUE-CHE-005",
+                      "marks": 91
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Emily Davis",
+                    "subject": "Chemistry"
+                  }
+                },
+                {
+                  "name": "Pak Studies",
+                  "students": [
+                    {
+                      "name": "Student 1 PAK",
+                      "rollNo": "QUE-PAK-001",
+                      "marks": 77
+                    },
+                    {
+                      "name": "Student 2 PAK",
+                      "rollNo": "QUE-PAK-002",
+                      "marks": 61
+                    },
+                    {
+                      "name": "Student 3 PAK",
+                      "rollNo": "QUE-PAK-003",
+                      "marks": 77
+                    },
+                    {
+                      "name": "Student 4 PAK",
+                      "rollNo": "QUE-PAK-004",
+                      "marks": 94
+                    },
+                    {
+                      "name": "Student 5 PAK",
+                      "rollNo": "QUE-PAK-005",
+                      "marks": 69
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Jessica Lee",
+                    "subject": "Pak Studies"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Quetta Campus 2",
+          "programs": [
+            {
+              "name": "Inter-Tech",
+              "subjects": [
+                {
+                  "name": "Physics",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "QUE-PHY-001",
+                      "marks": 93
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "QUE-PHY-002",
+                      "marks": 100
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "QUE-PHY-003",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "QUE-PHY-004",
+                      "marks": 62
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "QUE-PHY-005",
+                      "marks": 94
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Mark Clark",
+                    "subject": "Physics"
+                  }
+                },
+                {
+                  "name": "Mathematics",
+                  "students": [
+                    {
+                      "name": "Student 1 MAT",
+                      "rollNo": "QUE-MAT-001",
+                      "marks": 64
+                    },
+                    {
+                      "name": "Student 2 MAT",
+                      "rollNo": "QUE-MAT-002",
+                      "marks": 66
+                    },
+                    {
+                      "name": "Student 3 MAT",
+                      "rollNo": "QUE-MAT-003",
+                      "marks": 87
+                    },
+                    {
+                      "name": "Student 4 MAT",
+                      "rollNo": "QUE-MAT-004",
+                      "marks": 84
+                    },
+                    {
+                      "name": "Student 5 MAT",
+                      "rollNo": "QUE-MAT-005",
+                      "marks": 77
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "John Smith",
+                    "subject": "Mathematics"
+                  }
+                },
+                {
+                  "name": "English",
+                  "students": [
+                    {
+                      "name": "Student 1 ENG",
+                      "rollNo": "QUE-ENG-001",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 2 ENG",
+                      "rollNo": "QUE-ENG-002",
+                      "marks": 66
+                    },
+                    {
+                      "name": "Student 3 ENG",
+                      "rollNo": "QUE-ENG-003",
+                      "marks": 69
+                    },
+                    {
+                      "name": "Student 4 ENG",
+                      "rollNo": "QUE-ENG-004",
+                      "marks": 91
+                    },
+                    {
+                      "name": "Student 5 ENG",
+                      "rollNo": "QUE-ENG-005",
+                      "marks": 60
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "John Smith",
+                    "subject": "English"
+                  }
+                },
+                {
+                  "name": "Urdu",
+                  "students": [
+                    {
+                      "name": "Student 1 URD",
+                      "rollNo": "QUE-URD-001",
+                      "marks": 71
+                    },
+                    {
+                      "name": "Student 2 URD",
+                      "rollNo": "QUE-URD-002",
+                      "marks": 84
+                    },
+                    {
+                      "name": "Student 3 URD",
+                      "rollNo": "QUE-URD-003",
+                      "marks": 77
+                    },
+                    {
+                      "name": "Student 4 URD",
+                      "rollNo": "QUE-URD-004",
+                      "marks": 76
+                    },
+                    {
+                      "name": "Student 5 URD",
+                      "rollNo": "QUE-URD-005",
+                      "marks": 92
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Jessica Lee",
+                    "subject": "Urdu"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Medical-Tech",
+              "subjects": [
+                {
+                  "name": "Biology",
+                  "students": [
+                    {
+                      "name": "Student 1 BIO",
+                      "rollNo": "QUE-BIO-001",
+                      "marks": 87
+                    },
+                    {
+                      "name": "Student 2 BIO",
+                      "rollNo": "QUE-BIO-002",
+                      "marks": 93
+                    },
+                    {
+                      "name": "Student 3 BIO",
+                      "rollNo": "QUE-BIO-003",
+                      "marks": 77
+                    },
+                    {
+                      "name": "Student 4 BIO",
+                      "rollNo": "QUE-BIO-004",
+                      "marks": 84
+                    },
+                    {
+                      "name": "Student 5 BIO",
+                      "rollNo": "QUE-BIO-005",
+                      "marks": 90
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "James Taylor",
+                    "subject": "Biology"
+                  }
+                },
+                {
+                  "name": "Anatomy",
+                  "students": [
+                    {
+                      "name": "Student 1 ANA",
+                      "rollNo": "QUE-ANA-001",
+                      "marks": 78
+                    },
+                    {
+                      "name": "Student 2 ANA",
+                      "rollNo": "QUE-ANA-002",
+                      "marks": 99
+                    },
+                    {
+                      "name": "Student 3 ANA",
+                      "rollNo": "QUE-ANA-003",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 4 ANA",
+                      "rollNo": "QUE-ANA-004",
+                      "marks": 96
+                    },
+                    {
+                      "name": "Student 5 ANA",
+                      "rollNo": "QUE-ANA-005",
+                      "marks": 96
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Paul Walker",
+                    "subject": "Anatomy"
+                  }
+                },
+                {
+                  "name": "Physiology",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "QUE-PHY-001",
+                      "marks": 92
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "QUE-PHY-002",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "QUE-PHY-003",
+                      "marks": 62
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "QUE-PHY-004",
+                      "marks": 82
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "QUE-PHY-005",
+                      "marks": 100
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Emily Davis",
+                    "subject": "Physiology"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Matric-Tech",
+              "subjects": [
+                {
+                  "name": "Computer Science",
+                  "students": [
+                    {
+                      "name": "Student 1 COM",
+                      "rollNo": "QUE-COM-001",
+                      "marks": 78
+                    },
+                    {
+                      "name": "Student 2 COM",
+                      "rollNo": "QUE-COM-002",
+                      "marks": 88
+                    },
+                    {
+                      "name": "Student 3 COM",
+                      "rollNo": "QUE-COM-003",
+                      "marks": 63
+                    },
+                    {
+                      "name": "Student 4 COM",
+                      "rollNo": "QUE-COM-004",
+                      "marks": 66
+                    },
+                    {
+                      "name": "Student 5 COM",
+                      "rollNo": "QUE-COM-005",
+                      "marks": 74
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Emily Davis",
+                    "subject": "Computer Science"
+                  }
+                },
+                {
+                  "name": "Chemistry",
+                  "students": [
+                    {
+                      "name": "Student 1 CHE",
+                      "rollNo": "QUE-CHE-001",
+                      "marks": 78
+                    },
+                    {
+                      "name": "Student 2 CHE",
+                      "rollNo": "QUE-CHE-002",
+                      "marks": 69
+                    },
+                    {
+                      "name": "Student 3 CHE",
+                      "rollNo": "QUE-CHE-003",
+                      "marks": 84
+                    },
+                    {
+                      "name": "Student 4 CHE",
+                      "rollNo": "QUE-CHE-004",
+                      "marks": 82
+                    },
+                    {
+                      "name": "Student 5 CHE",
+                      "rollNo": "QUE-CHE-005",
+                      "marks": 93
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "James Taylor",
+                    "subject": "Chemistry"
+                  }
+                },
+                {
+                  "name": "Pak Studies",
+                  "students": [
+                    {
+                      "name": "Student 1 PAK",
+                      "rollNo": "QUE-PAK-001",
+                      "marks": 71
+                    },
+                    {
+                      "name": "Student 2 PAK",
+                      "rollNo": "QUE-PAK-002",
+                      "marks": 88
+                    },
+                    {
+                      "name": "Student 3 PAK",
+                      "rollNo": "QUE-PAK-003",
+                      "marks": 66
+                    },
+                    {
+                      "name": "Student 4 PAK",
+                      "rollNo": "QUE-PAK-004",
+                      "marks": 71
+                    },
+                    {
+                      "name": "Student 5 PAK",
+                      "rollNo": "QUE-PAK-005",
+                      "marks": 95
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "James Taylor",
+                    "subject": "Pak Studies"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Quetta Campus 3",
+          "programs": [
+            {
+              "name": "Inter-Tech",
+              "subjects": [
+                {
+                  "name": "Physics",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "QUE-PHY-001",
+                      "marks": 87
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "QUE-PHY-002",
+                      "marks": 97
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "QUE-PHY-003",
+                      "marks": 76
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "QUE-PHY-004",
+                      "marks": 87
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "QUE-PHY-005",
+                      "marks": 83
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Jessica Lee",
+                    "subject": "Physics"
+                  }
+                },
+                {
+                  "name": "Mathematics",
+                  "students": [
+                    {
+                      "name": "Student 1 MAT",
+                      "rollNo": "QUE-MAT-001",
+                      "marks": 97
+                    },
+                    {
+                      "name": "Student 2 MAT",
+                      "rollNo": "QUE-MAT-002",
+                      "marks": 62
+                    },
+                    {
+                      "name": "Student 3 MAT",
+                      "rollNo": "QUE-MAT-003",
+                      "marks": 81
+                    },
+                    {
+                      "name": "Student 4 MAT",
+                      "rollNo": "QUE-MAT-004",
+                      "marks": 61
+                    },
+                    {
+                      "name": "Student 5 MAT",
+                      "rollNo": "QUE-MAT-005",
+                      "marks": 85
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Sarah Brown",
+                    "subject": "Mathematics"
+                  }
+                },
+                {
+                  "name": "English",
+                  "students": [
+                    {
+                      "name": "Student 1 ENG",
+                      "rollNo": "QUE-ENG-001",
+                      "marks": 75
+                    },
+                    {
+                      "name": "Student 2 ENG",
+                      "rollNo": "QUE-ENG-002",
+                      "marks": 63
+                    },
+                    {
+                      "name": "Student 3 ENG",
+                      "rollNo": "QUE-ENG-003",
+                      "marks": 67
+                    },
+                    {
+                      "name": "Student 4 ENG",
+                      "rollNo": "QUE-ENG-004",
+                      "marks": 68
+                    },
+                    {
+                      "name": "Student 5 ENG",
+                      "rollNo": "QUE-ENG-005",
+                      "marks": 69
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "John Smith",
+                    "subject": "English"
+                  }
+                },
+                {
+                  "name": "Urdu",
+                  "students": [
+                    {
+                      "name": "Student 1 URD",
+                      "rollNo": "QUE-URD-001",
+                      "marks": 64
+                    },
+                    {
+                      "name": "Student 2 URD",
+                      "rollNo": "QUE-URD-002",
+                      "marks": 91
+                    },
+                    {
+                      "name": "Student 3 URD",
+                      "rollNo": "QUE-URD-003",
+                      "marks": 80
+                    },
+                    {
+                      "name": "Student 4 URD",
+                      "rollNo": "QUE-URD-004",
+                      "marks": 72
+                    },
+                    {
+                      "name": "Student 5 URD",
+                      "rollNo": "QUE-URD-005",
+                      "marks": 77
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Linda Harris",
+                    "subject": "Urdu"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Medical-Tech",
+              "subjects": [
+                {
+                  "name": "Biology",
+                  "students": [
+                    {
+                      "name": "Student 1 BIO",
+                      "rollNo": "QUE-BIO-001",
+                      "marks": 99
+                    },
+                    {
+                      "name": "Student 2 BIO",
+                      "rollNo": "QUE-BIO-002",
+                      "marks": 90
+                    },
+                    {
+                      "name": "Student 3 BIO",
+                      "rollNo": "QUE-BIO-003",
+                      "marks": 65
+                    },
+                    {
+                      "name": "Student 4 BIO",
+                      "rollNo": "QUE-BIO-004",
+                      "marks": 69
+                    },
+                    {
+                      "name": "Student 5 BIO",
+                      "rollNo": "QUE-BIO-005",
+                      "marks": 76
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Mark Clark",
+                    "subject": "Biology"
+                  }
+                },
+                {
+                  "name": "Anatomy",
+                  "students": [
+                    {
+                      "name": "Student 1 ANA",
+                      "rollNo": "QUE-ANA-001",
+                      "marks": 74
+                    },
+                    {
+                      "name": "Student 2 ANA",
+                      "rollNo": "QUE-ANA-002",
+                      "marks": 75
+                    },
+                    {
+                      "name": "Student 3 ANA",
+                      "rollNo": "QUE-ANA-003",
+                      "marks": 78
+                    },
+                    {
+                      "name": "Student 4 ANA",
+                      "rollNo": "QUE-ANA-004",
+                      "marks": 88
+                    },
+                    {
+                      "name": "Student 5 ANA",
+                      "rollNo": "QUE-ANA-005",
+                      "marks": 77
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Emily Davis",
+                    "subject": "Anatomy"
+                  }
+                },
+                {
+                  "name": "Physiology",
+                  "students": [
+                    {
+                      "name": "Student 1 PHY",
+                      "rollNo": "QUE-PHY-001",
+                      "marks": 98
+                    },
+                    {
+                      "name": "Student 2 PHY",
+                      "rollNo": "QUE-PHY-002",
+                      "marks": 80
+                    },
+                    {
+                      "name": "Student 3 PHY",
+                      "rollNo": "QUE-PHY-003",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 4 PHY",
+                      "rollNo": "QUE-PHY-004",
+                      "marks": 60
+                    },
+                    {
+                      "name": "Student 5 PHY",
+                      "rollNo": "QUE-PHY-005",
+                      "marks": 62
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Paul Walker",
+                    "subject": "Physiology"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Matric-Tech",
+              "subjects": [
+                {
+                  "name": "Computer Science",
+                  "students": [
+                    {
+                      "name": "Student 1 COM",
+                      "rollNo": "QUE-COM-001",
+                      "marks": 78
+                    },
+                    {
+                      "name": "Student 2 COM",
+                      "rollNo": "QUE-COM-002",
+                      "marks": 70
+                    },
+                    {
+                      "name": "Student 3 COM",
+                      "rollNo": "QUE-COM-003",
+                      "marks": 96
+                    },
+                    {
+                      "name": "Student 4 COM",
+                      "rollNo": "QUE-COM-004",
+                      "marks": 64
+                    },
+                    {
+                      "name": "Student 5 COM",
+                      "rollNo": "QUE-COM-005",
+                      "marks": 79
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "James Taylor",
+                    "subject": "Computer Science"
+                  }
+                },
+                {
+                  "name": "Chemistry",
+                  "students": [
+                    {
+                      "name": "Student 1 CHE",
+                      "rollNo": "QUE-CHE-001",
+                      "marks": 79
+                    },
+                    {
+                      "name": "Student 2 CHE",
+                      "rollNo": "QUE-CHE-002",
+                      "marks": 73
+                    },
+                    {
+                      "name": "Student 3 CHE",
+                      "rollNo": "QUE-CHE-003",
+                      "marks": 85
+                    },
+                    {
+                      "name": "Student 4 CHE",
+                      "rollNo": "QUE-CHE-004",
+                      "marks": 69
+                    },
+                    {
+                      "name": "Student 5 CHE",
+                      "rollNo": "QUE-CHE-005",
+                      "marks": 73
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Michael Johnson",
+                    "subject": "Chemistry"
+                  }
+                },
+                {
+                  "name": "Pak Studies",
+                  "students": [
+                    {
+                      "name": "Student 1 PAK",
+                      "rollNo": "QUE-PAK-001",
+                      "marks": 87
+                    },
+                    {
+                      "name": "Student 2 PAK",
+                      "rollNo": "QUE-PAK-002",
+                      "marks": 90
+                    },
+                    {
+                      "name": "Student 3 PAK",
+                      "rollNo": "QUE-PAK-003",
+                      "marks": 74
+                    },
+                    {
+                      "name": "Student 4 PAK",
+                      "rollNo": "QUE-PAK-004",
+                      "marks": 68
+                    },
+                    {
+                      "name": "Student 5 PAK",
+                      "rollNo": "QUE-PAK-005",
+                      "marks": 79
+                    }
+                  ],
+                  "teacher": {
+                    "teacher": "Linda Harris",
+                    "subject": "Pak Studies"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

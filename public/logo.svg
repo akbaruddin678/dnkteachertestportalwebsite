@@ -1,0 +1,15 @@
+<svg width="240" height="80" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Graduation Cap -->
+  <polygon points="60,60 120,30 180,60 120,90" fill="#1F618D"/>
+  <rect x="105" y="60" width="30" height="40" fill="#1F618D"/>
+  <line x1="120" y1="90" x2="120" y2="120" stroke="#F1C40F" stroke-width="4"/>
+  <circle cx="120" cy="120" r="5" fill="#F1C40F"/>
+
+  <!-- Text -->
+  <text x="200" y="80" font-family="Segoe UI, sans-serif" font-size="34" fill="#1F618D" font-weight="bold">
+    Nclex
+  </text>
+  <text x="200" y="120" font-family="Segoe UI, sans-serif" font-size="20" fill="#34495E">
+    LMS Portal
+  </text>
+</svg>
