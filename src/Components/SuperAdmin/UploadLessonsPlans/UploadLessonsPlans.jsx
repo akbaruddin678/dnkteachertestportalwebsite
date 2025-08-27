@@ -1,5 +1,4 @@
 import React, { useState, useCallback, useEffect } from "react";
-import "./UploadLessonsPlans.css";
 import { lessonPlanService } from "../../../services/api";
 import { useAuth } from "../../../context/AuthContext";
 
@@ -70,39 +69,110 @@ function SavedWeekTable({ snap, onWheelX }) {
   const unitTag = head.unitTag ? ` (${head.unitTag})` : "";
   const sundayOffset = timesSat.length; // use actual Sat length (not hardcoded 5)
 
+  // Inline styles
+  const tableWrapStyle = {
+    margin: '20px 0',
+    borderRadius: '8px',
+    overflow: 'hidden',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+    background: '#fff'
+  };
+
+  const scrollStyle = {
+    overflowX: 'auto',
+    WebkitOverflowScrolling: 'touch'
+  };
+
+  const tableStyle = {
+    width: '100%',
+    borderCollapse: 'collapse',
+    fontSize: '14px'
+  };
+
+  const stickyColStyle = {
+    position: 'sticky',
+    left: 0,
+    background: '#f0f4f8',
+    zIndex: 2,
+    border: '1px solid #e0e0e0',
+    padding: '10px 12px',
+    textAlign: 'left'
+  };
+
+  const stickyTopStyle = {
+    position: 'sticky',
+    top: 0,
+    background: '#f0f4f8',
+    zIndex: 1,
+    border: '1px solid #e0e0e0',
+    padding: '10px 12px',
+    textAlign: 'left'
+  };
+
+  const topicStyle = {
+    border: '1px solid #e0e0e0',
+    padding: '10px 12px',
+    textAlign: 'left',
+    minWidth: '150px'
+  };
+
+  const dayNameStyle = {
+    fontWeight: 'bold',
+    fontSize: '16px'
+  };
+
+  const dayDateStyle = {
+    fontSize: '14px',
+    color: '#666'
+  };
+
+  const unitStyle = {
+    fontSize: '14px',
+    fontStyle: 'italic'
+  };
+
+  const topicTextStyle = {
+    lineHeight: '1.4'
+  };
+
+  const topicEmptyStyle = {
+    color: '#999',
+    fontStyle: 'italic'
+  };
+
   return (
     <div
-      className="lp-table-wrap card lp-preview"
+      style={tableWrapStyle}
       aria-label="Saved weekly plan (read only)"
     >
-      <div className="lp-scroll" onWheel={onWheelX}>
-        <table className="lp-table view-style" role="table">
+      <div style={scrollStyle} onWheel={onWheelX}>
+        <table style={tableStyle} role="table">
           <tbody>
             {/* SATURDAY */}
             <tr>
-              <th className="vw-day sticky-col" rowSpan={2}>
-                <div className="vw-day-name">Saturday</div>
-                <div className="vw-day-date">
+              <th style={{...stickyColStyle, verticalAlign: 'top'}} rowSpan={2}>
+                <div style={dayNameStyle}>Saturday</div>
+                <div style={dayDateStyle}>
                   {head.startDateISO ? humanDate(head.startDateISO) : "—"}
                 </div>
-                <div className="vw-unit">
+                <div style={unitStyle}>
                   {head.unitSat || "—"}
                   {unitTag}
                 </div>
               </th>
               {timesSat.map((t, i) => (
-                <th key={`sat-t-${t}`} className="vw-time sticky-top">
+                <th key={`sat-t-${t}`} style={stickyTopStyle}>
                   {compact(t)}-{plus60(t)}
                 </th>
               ))}
             </tr>
             <tr>
               {timesSat.map((_, i) => (
-                <td key={`sat-c-${i}`} className="vw-topic">
+                <td key={`sat-c-${i}`} style={topicStyle}>
                   {cells[i]?.text ? (
-                    <div className="vw-topic-text">{cells[i].text}</div>
+                    <div style={topicTextStyle}>{cells[i].text}</div>
                   ) : (
-                    <div className="vw-topic-empty">—</div>
+                    <div style={topicEmptyStyle}>—</div>
                   )}
                 </td>
               ))}
@@ -110,12 +180,12 @@ function SavedWeekTable({ snap, onWheelX }) {
 
             {/* SUNDAY */}
             <tr>
-              <th className="vw-day sticky-col" rowSpan={2}>
-                <div className="vw-day-name">Sunday</div>
-                <div className="vw-day-date">
+              <th style={{...stickyColStyle, verticalAlign: 'top'}} rowSpan={2}>
+                <div style={dayNameStyle}>Sunday</div>
+                <div style={dayDateStyle}>
                   {head.endDateISO ? humanDate(head.endDateISO) : "—"}
                 </div>
-                <div className="vw-unit">
+                <div style={unitStyle}>
                   {head.unitSun || "—"}
                   {unitTag}
                 </div>
@@ -123,7 +193,7 @@ function SavedWeekTable({ snap, onWheelX }) {
               {timesSun.map((t, i) => {
                 const idx = sundayOffset + i;
                 return (
-                  <th key={`sun-t-${t}`} className="vw-time sticky-top">
+                  <th key={`sun-t-${t}`} style={stickyTopStyle}>
                     {compact(t)}-{plus60(t)}
                   </th>
                 );
@@ -133,11 +203,11 @@ function SavedWeekTable({ snap, onWheelX }) {
               {timesSun.map((_, i) => {
                 const idx = sundayOffset + i;
                 return (
-                  <td key={`sun-c-${i}`} className="vw-topic">
+                  <td key={`sun-c-${i}`} style={topicStyle}>
                     {cells[idx]?.text ? (
-                      <div className="vw-topic-text">{cells[idx].text}</div>
+                      <div style={topicTextStyle}>{cells[idx].text}</div>
                     ) : (
-                      <div className="vw-topic-empty">—</div>
+                      <div style={topicEmptyStyle}>—</div>
                     )}
                   </td>
                 );
@@ -162,6 +232,191 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
   const [timesSun, setTimesSun] = useState(snap.timesSun);
   const [cells, setCells] = useState(snap.cells);
   const [editingCell, setEditingCell] = useState(null);
+
+  // Inline styles
+  const savedItemStyle = {
+    marginBottom: '30px',
+    padding: '20px',
+    border: '1px solid #e0e0e0',
+    borderRadius: '8px',
+    background: '#fff'
+  };
+
+  const savedHeadStyle = {
+    marginBottom: '15px'
+  };
+
+  const savedNameStyle = {
+    fontSize: '18px',
+    fontWeight: 'bold',
+    marginBottom: '5px'
+  };
+
+  const savedSubStyle = {
+    fontSize: '14px',
+    color: '#666',
+    marginBottom: '5px'
+  };
+
+  const savedDateStyle = {
+    fontSize: '12px',
+    color: '#999'
+  };
+
+  const errorMessageStyle = {
+    color: '#d32f2f',
+    padding: '10px',
+    margin: '10px 0',
+    background: '#ffebee',
+    borderRadius: '4px'
+  };
+
+  const savedActionsStyle = {
+    display: 'flex',
+    gap: '10px',
+    marginBottom: '15px'
+  };
+
+  const btnStyle = {
+    padding: '8px 16px',
+    border: '1px solid #ccc',
+    borderRadius: '4px',
+    background: '#f5f5f5',
+    cursor: 'pointer'
+  };
+
+  const btnDangerStyle = {
+    ...btnStyle,
+    background: '#f44336',
+    color: 'white',
+    border: 'none'
+  };
+
+  const btnSuccessStyle = {
+    ...btnStyle,
+    background: '#4caf50',
+    color: 'white',
+    border: 'none'
+  };
+
+  const miniEditorStyle = {
+    padding: '15px',
+    border: '1px solid #e0e0e0',
+    borderRadius: '8px',
+    marginBottom: '15px',
+    background: '#f9f9f9'
+  };
+
+  const headGridStyle = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+    gap: '15px'
+  };
+
+  const labelStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    fontSize: '14px'
+  };
+
+  const inputStyle = {
+    padding: '8px 10px',
+    border: '1px solid #ccc',
+    borderRadius: '4px',
+    fontSize: '14px'
+  };
+
+  const hintStyle = {
+    fontSize: '12px',
+    color: '#666',
+    marginTop: '4px'
+  };
+
+  const topicBtnStyle = {
+    width: '100%',
+    height: '100%',
+    minHeight: '80px',
+    border: '1px dashed #ccc',
+    background: 'transparent',
+    cursor: 'pointer',
+    textAlign: 'left',
+    padding: '10px'
+  };
+
+  const textareaStyle = {
+    width: '100%',
+    minHeight: '80px',
+    padding: '10px',
+    border: '1px solid #ccc',
+    borderRadius: '4px',
+    resize: 'vertical',
+    fontFamily: 'inherit',
+    fontSize: '14px'
+  };
+
+  const topicTextStyle = {
+    lineHeight: '1.4'
+  };
+
+  const topicEmptyStyle = {
+    color: '#999',
+    fontStyle: 'italic'
+  };
+
+  const dayStyle = {
+    background: '#f0f4f8',
+    padding: '10px',
+    fontWeight: 'bold',
+    textAlign: 'center'
+  };
+
+  const dayNameStyle = {
+    fontSize: '16px',
+    fontWeight: 'bold'
+  };
+
+  const dayDateStyle = {
+    fontSize: '14px',
+    color: '#666'
+  };
+
+  const unitStyle = {
+    background: '#f0f4f8',
+    padding: '10px',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    minWidth: '120px'
+  };
+
+  const unitTopStyle = {
+    fontSize: '14px'
+  };
+
+  const unitSubStyle = {
+    fontSize: '12px',
+    color: '#666'
+  };
+
+  const timeStyle = {
+    background: '#f0f4f8',
+    padding: '10px',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    minWidth: '100px'
+  };
+
+  const topicCellStyle = {
+    padding: '10px',
+    border: '1px solid #e0e0e0',
+    minWidth: '150px',
+    verticalAlign: 'top'
+  };
+
+  const spacerStyle = {
+    background: '#f0f4f8',
+    border: '1px solid #e0e0e0',
+    minWidth: '120px'
+  };
 
   const saveChanges = async () => {
     try {
@@ -220,7 +475,7 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
 
   const renderTimeHeaderCells = (times) =>
     times.map((start) => (
-      <th className="lp-time sticky-top" key={`${index}-${start}`}>
+      <th style={timeStyle} key={`${index}-${start}`}>
         {start.replace(":", "")}-{plus60(start)}
       </th>
     ));
@@ -229,33 +484,27 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
     const item = cells[idx];
     const isEditing = editingCell === idx;
     return (
-      <td className="lp-topic" style={{ direction: "ltr" }}>
+      <td style={topicCellStyle}>
         {!isEditing ? (
-          <button className="lp-topic-btn" onClick={() => setEditingCell(idx)}>
+      <button style={topicBtnStyle} onClick={() => setEditingCell(idx)}>
             {item?.text ? (
-              <div className="lp-topic-text">{item.text}</div>
+              <div style={topicTextStyle}>{item.text}</div>
             ) : (
-              <div className="lp-topic-empty">+ Add lesson</div>
+              <div style={topicEmptyStyle}>+ Add lesson</div>
             )}
           </button>
         ) : (
           <textarea
-            className="lp-textarea"
+            style={textareaStyle}
             rows={4}
             value={item?.text || ""}
             placeholder="Type the topic/notes here…"
             autoFocus
-            // dir="ltr" // Explicitly set the direction for text input
             onBlur={() => setEditingCell(null)}
             onChange={(e) => {
               const next = [...cells];
               next[idx] = { text: e.target.value };
               setCells(next);
-            }}
-            style={{
-              direction: "rtl", // Ensures left-to-right writing
-              textAlign: "left", // Ensures text aligns left, fixing cursor behavior
-              writingMode: "horizontal-tb", // Ensures the default writing mode
             }}
           />
         )}
@@ -265,34 +514,34 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
 
   if (!editing) {
     return (
-      <div className="lp-saved-item">
-        <div className="lp-saved-head">
-          <div className="lp-saved-name">
+      <div style={savedItemStyle}>
+        <div style={savedHeadStyle}>
+          <div style={savedNameStyle}>
             {snap.head.weekLabel} — {snap.head.programName}
           </div>
-          <div className="lp-saved-sub">
+          <div style={savedSubStyle}>
             {humanDate(snap.head.startDateISO)} –{" "}
             {humanDate(snap.head.endDateISO)} • {snap.head.institute}
           </div>
           {snap.savedAt && (
-            <div className="lp-saved-date">
+            <div style={savedDateStyle}>
               Saved: {new Date(snap.savedAt).toLocaleDateString()}
             </div>
           )}
         </div>
 
-        {error && <div className="error-message">{error}</div>}
+        {error && <div style={errorMessageStyle}>{error}</div>}
 
-        <div className="lp-saved-actions">
+        <div style={savedActionsStyle}>
           <button
-            className="btn"
+            style={btnStyle}
             onClick={() => setEditing(true)}
             disabled={loading}
           >
             Edit
           </button>
           <button
-            className="btn btn-danger"
+            style={btnDangerStyle}
             onClick={handleDelete}
             disabled={loading}
           >
@@ -307,52 +556,56 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
 
   // EDIT MODE
   return (
-    <div className="lp-saved-item editing">
-      <div className="lp-saved-head">
-        <div className="lp-saved-name">
+    <div style={{...savedItemStyle, borderColor: '#1976d2'}}>
+      <div style={savedHeadStyle}>
+        <div style={savedNameStyle}>
           {head.weekLabel} — {head.programName}
         </div>
-        <div className="lp-saved-sub">
+        <div style={savedSubStyle}>
           {humanDate(head.startDateISO)} – {humanDate(head.endDateISO)} •{" "}
           {head.institute}
         </div>
       </div>
 
-      {error && <div className="error-message">{error}</div>}
+      {error && <div style={errorMessageStyle}>{error}</div>}
 
       {/* mini header editor */}
-      <div className="lp-mini-editor card">
-        <div className="lp-head-grid">
-          <label>
+      <div style={miniEditorStyle}>
+        <div style={headGridStyle}>
+          <label style={labelStyle}>
             Banner Title
             <input
+              style={inputStyle}
               value={head.bannerTitle}
               onChange={(e) =>
                 setHead((s) => ({ ...s, bannerTitle: e.target.value }))
               }
             />
           </label>
-          <label>
+          <label style={labelStyle}>
             Program Name
             <input
+              style={inputStyle}
               value={head.programName}
               onChange={(e) =>
                 setHead((s) => ({ ...s, programName: e.target.value }))
               }
             />
           </label>
-          <label>
+          <label style={labelStyle}>
             Week Label
             <input
+              style={inputStyle}
               value={head.weekLabel}
               onChange={(e) =>
                 setHead((s) => ({ ...s, weekLabel: e.target.value }))
               }
             />
           </label>
-          <label>
+          <label style={labelStyle}>
             Start Date
             <input
+              style={inputStyle}
               type="date"
               value={head.startDateISO}
               onChange={(e) =>
@@ -360,9 +613,10 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
               }
             />
           </label>
-          <label>
+          <label style={labelStyle}>
             End Date
             <input
+              style={inputStyle}
               type="date"
               value={head.endDateISO}
               onChange={(e) =>
@@ -370,36 +624,40 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
               }
             />
           </label>
-          <label>
+          <label style={labelStyle}>
             Institute
             <input
+              style={inputStyle}
               value={head.institute}
               onChange={(e) =>
                 setHead((s) => ({ ...s, institute: e.target.value }))
               }
             />
           </label>
-          <label>
+          <label style={labelStyle}>
             Saturday Unit
             <input
+              style={inputStyle}
               value={head.unitSat}
               onChange={(e) =>
                 setHead((s) => ({ ...s, unitSat: e.target.value }))
               }
             />
           </label>
-          <label>
+          <label style={labelStyle}>
             Sunday Unit
             <input
+              style={inputStyle}
               value={head.unitSun}
               onChange={(e) =>
                 setHead((s) => ({ ...s, unitSun: e.target.value }))
               }
             />
           </label>
-          <label>
+          <label style={labelStyle}>
             Unit Tag
             <input
+              style={inputStyle}
               value={head.unitTag || ""}
               onChange={(e) =>
                 setHead((s) => ({ ...s, unitTag: e.target.value }))
@@ -407,57 +665,59 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
               placeholder="AI"
             />
           </label>
-          <label>
+          <label style={labelStyle}>
             Saturday start time
             <input
+              style={inputStyle}
               type="time"
               value={timesSat[0]}
               onChange={(e) =>
                 setTimesSat(makeHourSeries(e.target.value || "00:00"))
               }
             />
-            <small className="lp-hint">Generates 5 slots, 1 hour apart.</small>
+            <small style={hintStyle}>Generates 5 slots, 1 hour apart.</small>
           </label>
-          <label>
+          <label style={labelStyle}>
             Sunday start time
             <input
+              style={inputStyle}
               type="time"
               value={timesSun[0]}
               onChange={(e) =>
                 setTimesSun(makeHourSeries(e.target.value || "00:00"))
               }
             />
-            <small className="lp-hint">Generates 5 slots, 1 hour apart.</small>
+            <small style={hintStyle}>Generates 5 slots, 1 hour apart.</small>
           </label>
         </div>
       </div>
 
       {/* inline editor table with inner scroll */}
-      <div className="lp-table-wrap card" aria-label="Saved week editor">
-        <div className="lp-scroll" onWheel={onWheelX}>
-          <table className="lp-table" role="table">
+      <div style={tableWrapStyle} aria-label="Saved week editor">
+        <div style={scrollStyle} onWheel={onWheelX}>
+          <table style={tableStyle} role="table">
             <tbody>
               {/* Saturday */}
               <tr>
-                <th className="lp-day" colSpan={1 + timesSat.length}>
-                  <div className="lp-day-name">Saturday</div>
-                  <div className="lp-day-date">
+                <th style={dayStyle} colSpan={1 + timesSat.length}>
+                  <div style={dayNameStyle}>Saturday</div>
+                  <div style={dayDateStyle}>
                     {humanDate(head.startDateISO)}
                   </div>
                 </th>
               </tr>
-              <tr className="lp-row-head">
-                <th className="lp-unit sticky-col">
-                  <div className="lp-unit-top">
+              <tr>
+                <th style={unitStyle}>
+                  <div style={unitTopStyle}>
                     {head.unitSat}
                     {head.unitTag ? ` (${head.unitTag})` : ""}
                   </div>
-                  <div className="lp-unit-sub">({head.weekLabel})</div>
+                  <div style={unitSubStyle}>({head.weekLabel})</div>
                 </th>
                 {renderTimeHeaderCells(timesSat)}
               </tr>
               <tr>
-                <td className="lp-unit-spacer sticky-col" aria-hidden />
+                <td style={spacerStyle} aria-hidden />
                 {timesSat.map((_, i) => (
                   <TopicCell key={`e-sat-${i}`} idx={i} />
                 ))}
@@ -465,25 +725,25 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
 
               {/* Sunday */}
               <tr>
-                <th className="lp-day" colSpan={1 + timesSun.length}>
-                  <div className="lp-day-name">Sunday</div>
-                  <div className="lp-day-date">
+                <th style={dayStyle} colSpan={1 + timesSun.length}>
+                  <div style={dayNameStyle}>Sunday</div>
+                  <div style={dayDateStyle}>
                     {humanDate(head.endDateISO)}
                   </div>
                 </th>
               </tr>
-              <tr className="lp-row-head">
-                <th className="lp-unit sticky-col">
-                  <div className="lp-unit-top">
+              <tr>
+                <th style={unitStyle}>
+                  <div style={unitTopStyle}>
                     {head.unitSun}
                     {head.unitTag ? ` (${head.unitTag})` : ""}
                   </div>
-                  <div className="lp-unit-sub">({head.weekLabel})</div>
+                  <div style={unitSubStyle}>({head.weekLabel})</div>
                 </th>
                 {renderTimeHeaderCells(timesSun)}
               </tr>
               <tr>
-                <td className="lp-unit-spacer sticky-col" aria-hidden />
+                <td style={spacerStyle} aria-hidden />
                 {timesSun.map((_, i) => (
                   <TopicCell key={`e-sun-${i}`} idx={5 + i} />
                 ))}
@@ -494,19 +754,19 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
       </div>
 
       {/* actions */}
-      <div className="lp-saved-actions">
-        <button className="btn" onClick={cancelChanges} disabled={loading}>
+      <div style={savedActionsStyle}>
+        <button style={btnStyle} onClick={cancelChanges} disabled={loading}>
           Cancel
         </button>
         <button
-          className="btn btn-success"
+          style={btnSuccessStyle}
           onClick={saveChanges}
           disabled={loading}
         >
           {loading ? "Saving..." : "Save changes"}
         </button>
         <button
-          className="btn btn-danger"
+          style={btnDangerStyle}
           onClick={handleDelete}
           disabled={loading}
         >
@@ -600,153 +860,316 @@ export default function UploadLessonsPlans() {
   };
 
   /** Header editor — includes start times (auto 5 slots, 1h apart) */
-  const HeaderEditor = () => (
-    <div className="lp-head-editor card">
-      <div className="lp-head-grid">
-        <label>
-          City
-          <input
-            value={head.city}
-            onChange={(e) => setHead((s) => ({ ...s, city: e.target.value }))}
-          />
-        </label>
-        <label>
-          Banner Title
-          <input
-            value={head.bannerTitle}
-            onChange={(e) =>
-              setHead((s) => ({ ...s, bannerTitle: e.target.value }))
-            }
-          />
-        </label>
-        <label>
-          Program Name
-          <input
-            value={head.programName}
-            onChange={(e) =>
-              setHead((s) => ({ ...s, programName: e.target.value }))
-            }
-          />
-        </label>
-        <label>
-          Week Label
-          <input
-            value={head.weekLabel}
-            onChange={(e) =>
-              setHead((s) => ({ ...s, weekLabel: e.target.value }))
-            }
-          />
-        </label>
-        <label>
-          Start Date
-          <input
-            type="date"
-            value={head.startDateISO}
-            onChange={(e) =>
-              setHead((s) => ({ ...s, startDateISO: e.target.value }))
-            }
-          />
-        </label>
-        <label>
-          End Date
-          <input
-            type="date"
-            value={head.endDateISO}
-            onChange={(e) =>
-              setHead((s) => ({ ...s, endDateISO: e.target.value }))
-            }
-          />
-        </label>
-        <label>
-          Institute
-          <input
-            value={head.institute}
-            onChange={(e) =>
-              setHead((s) => ({ ...s, institute: e.target.value }))
-            }
-          />
-        </label>
-        <label>
-          Saturday Unit
-          <input
-            value={head.unitSat}
-            onChange={(e) =>
-              setHead((s) => ({ ...s, unitSat: e.target.value }))
-            }
-          />
-        </label>
-        <label>
-          Sunday Unit
-          <input
-            value={head.unitSun}
-            onChange={(e) =>
-              setHead((s) => ({ ...s, unitSun: e.target.value }))
-            }
-          />
-        </label>
-        <label>
-          Unit Tag (optional)
-          <input
-            value={head.unitTag || ""}
-            onChange={(e) =>
-              setHead((s) => ({ ...s, unitTag: e.target.value }))
-            }
-            placeholder="AI"
-          />
-        </label>
+  const HeaderEditor = () => {
+    const headEditorStyle = {
+      padding: '20px',
+      border: '1px solid #e0e0e0',
+      borderRadius: '8px',
+      marginBottom: '20px',
+      background: '#f9f9f9'
+    };
 
-        <label>
-          Saturday start time
-          <input
-            type="time"
-            value={timesSat[0]}
-            onChange={(e) =>
-              setTimesSat(makeHourSeries(e.target.value || "00:00"))
-            }
-          />
-          <small className="lp-hint">Generates 5 slots, 1 hour apart.</small>
-        </label>
-        <label>
-          Sunday start time
-          <input
-            type="time"
-            value={timesSun[0]}
-            onChange={(e) =>
-              setTimesSun(makeHourSeries(e.target.value || "00:00"))
-            }
-          />
-          <small className="lp-hint">Generates 5 slots, 1 hour apart.</small>
-        </label>
-      </div>
+    const editActionsStyle = {
+      marginTop: '15px',
+      display: 'flex',
+      justifyContent: 'flex-end'
+    };
 
-      <div className="lp-edit-actions">
-        <button
-          className="btn btn-primary"
-          onClick={() => setEditingHead(false)}
-        >
-          Done
-        </button>
+    const btnPrimaryStyle = {
+      padding: '8px 16px',
+      background: '#1976d2',
+      color: 'white',
+      border: 'none',
+      borderRadius: '4px',
+      cursor: 'pointer'
+    };
+
+    return (
+      <div style={headEditorStyle}>
+        <div style={headGridStyle}>
+          <label style={labelStyle}>
+            City
+            <input
+              style={inputStyle}
+              value={head.city}
+              onChange={(e) => setHead((s) => ({ ...s, city: e.target.value }))}
+            />
+          </label>
+          <label style={labelStyle}>
+            Banner Title
+            <input
+              style={inputStyle}
+              value={head.bannerTitle}
+              onChange={(e) =>
+                setHead((s) => ({ ...s, bannerTitle: e.target.value }))
+              }
+            />
+          </label>
+          <label style={labelStyle}>
+            Program Name
+            <input
+              style={inputStyle}
+              value={head.programName}
+              onChange={(e) =>
+                setHead((s) => ({ ...s, programName: e.target.value }))
+              }
+            />
+          </label>
+          <label style={labelStyle}>
+            Week Label
+            <input
+              style={inputStyle}
+              value={head.weekLabel}
+              onChange={(e) =>
+                setHead((s) => ({ ...s, weekLabel: e.target.value }))
+              }
+            />
+          </label>
+          <label style={labelStyle}>
+            Start Date
+            <input
+              style={inputStyle}
+              type="date"
+              value={head.startDateISO}
+              onChange={(e) =>
+                setHead((s) => ({ ...s, startDateISO: e.target.value }))
+              }
+            />
+          </label>
+          <label style={labelStyle}>
+            End Date
+            <input
+              style={inputStyle}
+              type="date"
+              value={head.endDateISO}
+              onChange={(e) =>
+                setHead((s) => ({ ...s, endDateISO: e.target.value }))
+              }
+            />
+          </label>
+          <label style={labelStyle}>
+            Institute
+            <input
+              style={inputStyle}
+              value={head.institute}
+              onChange={(e) =>
+                setHead((s) => ({ ...s, institute: e.target.value }))
+              }
+            />
+          </label>
+          <label style={labelStyle}>
+            Saturday Unit
+            <input
+              style={inputStyle}
+              value={head.unitSat}
+              onChange={(e) =>
+                setHead((s) => ({ ...s, unitSat: e.target.value }))
+              }
+            />
+          </label>
+          <label style={labelStyle}>
+            Sunday Unit
+            <input
+              style={inputStyle}
+              value={head.unitSun}
+              onChange={(e) =>
+                setHead((s) => ({ ...s, unitSun: e.target.value }))
+              }
+            />
+          </label>
+          <label style={labelStyle}>
+            Unit Tag (optional)
+            <input
+              style={inputStyle}
+              value={head.unitTag || ""}
+              onChange={(e) =>
+                setHead((s) => ({ ...s, unitTag: e.target.value }))
+              }
+              placeholder="AI"
+            />
+          </label>
+
+          <label style={labelStyle}>
+            Saturday start time
+            <input
+              style={inputStyle}
+              type="time"
+              value={timesSat[0]}
+              onChange={(e) =>
+                setTimesSat(makeHourSeries(e.target.value || "00:00"))
+              }
+            />
+            <small style={hintStyle}>Generates 5 slots, 1 hour apart.</small>
+          </label>
+          <label style={labelStyle}>
+            Sunday start time
+            <input
+              style={inputStyle}
+              type="time"
+              value={timesSun[0]}
+              onChange={(e) =>
+                setTimesSun(makeHourSeries(e.target.value || "00:00"))
+              }
+            />
+            <small style={hintStyle}>Generates 5 slots, 1 hour apart.</small>
+          </label>
+        </div>
+
+        <div style={editActionsStyle}>
+          <button
+            style={btnPrimaryStyle}
+            onClick={() => setEditingHead(false)}
+          >
+            Done
+          </button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
+
+  // Inline styles for main component
+  const sectionStyle = {
+    padding: '30px',
+    maxWidth: '1100px',
+    margin: 'auto',
+    background: '#fff',
+    borderRadius: '10px',
+    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.06)'
+  };
+
+  const headerStyle = {
+    marginBottom: '25px'
+  };
+
+  const headerInnerStyle = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: '20px'
+  };
+
+  const headerTextStyle = {
+    flex: 1
+  };
+
+  const titleStyle = {
+    fontSize: '28px',
+    color: '#333',
+    fontWeight: '600',
+    marginBottom: '10px'
+  };
+
+  const programStyle = {
+    fontSize: '18px',
+    color: '#555',
+    marginBottom: '8px'
+  };
+
+  const cycleStyle = {
+    fontSize: '14px',
+    color: '#666',
+    marginBottom: '5px'
+  };
+
+  const sublineStyle = {
+    fontSize: '14px',
+    color: '#777'
+  };
+
+  const headControlsStyle = {
+    marginLeft: '20px'
+  };
+
+  const actionsStyle = {
+    display: 'flex',
+    gap: '10px',
+    margin: '20px 0'
+  };
+
+  const savedPanelStyle = {
+    padding: '20px',
+    border: '1px solid #e0e0e0',
+    borderRadius: '8px',
+    marginTop: '30px',
+    background: '#fff'
+  };
+
+  const savedPanelHeadStyle = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '15px'
+  };
+
+  const savedTitleStyle = {
+    fontSize: '20px',
+    fontWeight: 'bold'
+  };
+
+  const btnSmStyle = {
+    padding: '6px 12px',
+    fontSize: '12px',
+    border: '1px solid #ccc',
+    borderRadius: '4px',
+    background: '#f5f5f5',
+    cursor: 'pointer'
+  };
+
+  const loadingStyle = {
+    padding: '20px',
+    textAlign: 'center',
+    color: '#666'
+  };
+
+  const emptyStateStyle = {
+    padding: '30px',
+    textAlign: 'center',
+    color: '#999',
+    fontStyle: 'italic'
+  };
+
+  const savedScrollStyle = {
+    maxHeight: '500px',
+    overflowY: 'auto'
+  };
+
+  const savedGridStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '20px'
+  };
+
+  const loadMoreContainerStyle = {
+    textAlign: 'center',
+    marginTop: '20px'
+  };
+
+  const btnOutlineStyle = {
+    padding: '8px 16px',
+    border: '1px solid #1976d2',
+    background: 'transparent',
+    color: '#1976d2',
+    borderRadius: '4px',
+    cursor: 'pointer'
+  };
 
   // inline topic cell editor
   const TopicCell = ({ idx }) => {
     const item = draftCells[idx];
     const isEditing = editingCell === idx;
     return (
-      <td className="lp-topic">
+      <td style={topicCellStyle}>
         {!isEditing ? (
-          <button className="lp-topic-btn" onClick={() => setEditingCell(idx)}>
+          <button style={topicBtnStyle} onClick={() => setEditingCell(idx)}>
             {item?.text ? (
-              <div className="lp-topic-text">{item.text}</div>
+              <div style={topicTextStyle}>{item.text}</div>
             ) : (
-              <div className="lp-topic-empty">+ Add lesson</div>
+              <div style={topicEmptyStyle}>+ Add lesson</div>
             )}
           </button>
         ) : (
           <textarea
-            className="lp-textarea"
+            style={textareaStyle}
             rows={4}
             value={item?.text || ""}
             placeholder="Type the topic/notes here…"
@@ -802,7 +1225,7 @@ export default function UploadLessonsPlans() {
 
   const renderTimeHeaderCells = (times) =>
     times.map((start) => (
-      <th className="lp-time sticky-top" key={start}>
+      <th style={timeStyle} key={start}>
         {start.replace(":", "")}-{plus60(start)}
       </th>
     ));
@@ -812,23 +1235,23 @@ export default function UploadLessonsPlans() {
   };
 
   return (
-    <section className="lp-only">
-      <header className="lp-header">
-        <div className="lp-header-inner">
-          <div className="lp-header-text">
-            <h1 className="lp-title">
+    <section style={sectionStyle}>
+      <header style={headerStyle}>
+        <div style={headerInnerStyle}>
+          <div style={headerTextStyle}>
+            <h1 style={titleStyle}>
               {head.bannerTitle || `WEEKLY PLAN — ${head.city.toUpperCase()}`}
             </h1>
-            <h2 className="lp-program">{head.programName}</h2>
-            <div className="lp-cycle">
+            <h2 style={programStyle}>{head.programName}</h2>
+            <div style={cycleStyle}>
               ({humanDate(head.startDateISO)} – {humanDate(head.endDateISO)} •{" "}
               {head.weekLabel})
             </div>
-            <div className="lp-subline">{head.institute}</div>
+            <div style={sublineStyle}>{head.institute}</div>
           </div>
-          <div className="lp-head-controls">
+          <div style={headControlsStyle}>
             <button
-              className="btn btn-primary"
+              style={btnPrimaryStyle}
               onClick={() => setEditingHead(true)}
             >
               Edit header
@@ -838,34 +1261,34 @@ export default function UploadLessonsPlans() {
         {editingHead && <HeaderEditor />}
       </header>
 
-      {error && <div className="error-message">{error}</div>}
+      {error && <div style={errorMessageStyle}>{error}</div>}
 
       {/* Editable weekly plan (INNER SCROLL) */}
-      <div className="lp-table-wrap card" aria-label="Weekly plan editor">
-        <div className="lp-scroll" onWheel={onWheelX}>
-          <table className="lp-table" role="table">
+      <div style={tableWrapStyle} aria-label="Weekly plan editor">
+        <div style={scrollStyle} onWheel={onWheelX}>
+          <table style={tableStyle} role="table">
             <tbody>
               {/* SATURDAY */}
               <tr>
-                <th className="lp-day" colSpan={1 + timesSat.length}>
-                  <div className="lp-day-name">Saturday</div>
-                  <div className="lp-day-date">
+                <th style={dayStyle} colSpan={1 + timesSat.length}>
+                  <div style={dayNameStyle}>Saturday</div>
+                  <div style={dayDateStyle}>
                     {humanDate(head.startDateISO)}
                   </div>
                 </th>
               </tr>
-              <tr className="lp-row-head">
-                <th className="lp-unit sticky-col">
-                  <div className="lp-unit-top">
+              <tr>
+                <th style={unitStyle}>
+                  <div style={unitTopStyle}>
                     {head.unitSat}
                     {head.unitTag ? ` (${head.unitTag})` : ""}
                   </div>
-                  <div className="lp-unit-sub">({head.weekLabel})</div>
+                  <div style={unitSubStyle}>({head.weekLabel})</div>
                 </th>
                 {renderTimeHeaderCells(timesSat)}
               </tr>
               <tr>
-                <td className="lp-unit-spacer sticky-col" aria-hidden />
+                <td style={spacerStyle} aria-hidden />
                 {timesSat.map((_, i) => (
                   <TopicCell key={`sat-${i}`} idx={i} />
                 ))}
@@ -873,25 +1296,25 @@ export default function UploadLessonsPlans() {
 
               {/* SUNDAY */}
               <tr>
-                <th className="lp-day" colSpan={1 + timesSun.length}>
-                  <div className="lp-day-name">Sunday</div>
-                  <div className="lp-day-date">
+                <th style={dayStyle} colSpan={1 + timesSun.length}>
+                  <div style={dayNameStyle}>Sunday</div>
+                  <div style={dayDateStyle}>
                     {humanDate(head.endDateISO)}
                   </div>
                 </th>
               </tr>
-              <tr className="lp-row-head">
-                <th className="lp-unit sticky-col">
-                  <div className="lp-unit-top">
+              <tr>
+                <th style={unitStyle}>
+                  <div style={unitTopStyle}>
                     {head.unitSun}
                     {head.unitTag ? ` (${head.unitTag})` : ""}
                   </div>
-                  <div className="lp-unit-sub">({head.weekLabel})</div>
+                  <div style={unitSubStyle}>({head.weekLabel})</div>
                 </th>
                 {renderTimeHeaderCells(timesSun)}
               </tr>
               <tr>
-                <td className="lp-unit-spacer sticky-col" aria-hidden />
+                <td style={spacerStyle} aria-hidden />
                 {timesSun.map((_, i) => (
                   <TopicCell key={`sun-${i}`} idx={5 + i} />
                 ))}
@@ -901,12 +1324,12 @@ export default function UploadLessonsPlans() {
         </div>
       </div>
 
-      <div className="lp-actions">
-        <button className="btn" onClick={setToThisWeekend}>
+      <div style={actionsStyle}>
+        <button style={btnStyle} onClick={setToThisWeekend}>
           Set dates to this weekend
         </button>
         <button
-          className="btn btn-success"
+          style={btnSuccessStyle}
           onClick={saveWeek}
           disabled={saving}
         >
@@ -915,11 +1338,11 @@ export default function UploadLessonsPlans() {
       </div>
 
       {/* Saved previews (editable & deletable) in a VERTICAL SCROLLING PANEL */}
-      <section className="lp-saved-panel card" aria-label="Saved weeks">
-        <div className="lp-saved-panel-head">
-          <h3 className="lp-saved-title">Saved weeks</h3>
+      <section style={savedPanelStyle} aria-label="Saved weeks">
+        <div style={savedPanelHeadStyle}>
+          <h3 style={savedTitleStyle}>Saved weeks</h3>
           <button
-            className="btn btn-sm"
+            style={btnSmStyle}
             onClick={() => loadSavedWeeks(1, false)}
             disabled={loading}
           >
@@ -928,16 +1351,16 @@ export default function UploadLessonsPlans() {
         </div>
 
         {loading && savedWeeks.length === 0 && (
-          <div className="loading">Loading lesson plans...</div>
+          <div style={loadingStyle}>Loading lesson plans...</div>
         )}
 
         {!loading && savedWeeks.length === 0 && (
-          <div className="empty-state">No lesson plans saved yet.</div>
+          <div style={emptyStateStyle}>No lesson plans saved yet.</div>
         )}
 
         {savedWeeks.length > 0 && (
-          <div className="lp-saved-scroll">
-            <div className="lp-saved-grid">
+          <div style={savedScrollStyle}>
+            <div style={savedGridStyle}>
               {savedWeeks.map((snap, i) => (
                 <SavedWeekCard
                   key={snap._id || i}
@@ -957,9 +1380,9 @@ export default function UploadLessonsPlans() {
             </div>
 
             {hasMore && (
-              <div className="load-more-container">
+              <div style={loadMoreContainerStyle}>
                 <button
-                  className="btn btn-outline"
+                  style={btnOutlineStyle}
                   onClick={handleLoadMore}
                   disabled={loading}
                 >
