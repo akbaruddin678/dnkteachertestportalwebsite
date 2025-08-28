@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import "./TaDashboard.css";
+import "./style/TaDashboard.css";
 
 /** =========================
  * Config & utilities
