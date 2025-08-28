@@ -69,25 +69,7 @@ function SavedWeekTable({ snap, onWheelX }) {
   const unitTag = head.unitTag ? ` (${head.unitTag})` : "";
   const sundayOffset = timesSat.length; // use actual Sat length (not hardcoded 5)
 
-  // Inline styles
-  const tableWrapStyle = {
-    margin: '20px 0',
-    borderRadius: '8px',
-    overflow: 'hidden',
-    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-    background: '#fff'
-  };
 
-  const scrollStyle = {
-    overflowX: 'auto',
-    WebkitOverflowScrolling: 'touch'
-  };
-
-  const tableStyle = {
-    width: '100%',
-    borderCollapse: 'collapse',
-    fontSize: '14px'
-  };
 
   const stickyColStyle = {
     position: 'sticky',
@@ -116,46 +98,52 @@ function SavedWeekTable({ snap, onWheelX }) {
     minWidth: '150px'
   };
 
-  const dayNameStyle = {
-    fontWeight: 'bold',
-    fontSize: '16px'
-  };
 
-  const dayDateStyle = {
-    fontSize: '14px',
-    color: '#666'
-  };
 
-  const unitStyle = {
-    fontSize: '14px',
-    fontStyle: 'italic'
-  };
 
-  const topicTextStyle = {
-    lineHeight: '1.4'
-  };
-
-  const topicEmptyStyle = {
-    color: '#999',
-    fontStyle: 'italic'
-  };
 
   return (
     <div
-      style={tableWrapStyle}
+      style={{
+         margin: '20px 0',
+    borderRadius: '8px',
+    overflow: 'hidden',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+    background: '#fff'
+      }}
       aria-label="Saved weekly plan (read only)"
     >
-      <div style={scrollStyle} onWheel={onWheelX}>
-        <table style={tableStyle} role="table">
+      <div style={{
+        
+    overflowX: 'auto',
+    WebkitOverflowScrolling: 'touch'
+      }} onWheel={onWheelX}>
+        <table style={{
+             width: '100%',
+    borderCollapse: 'collapse',
+    fontSize: '14px'
+        }} role="table">
           <tbody>
             {/* SATURDAY */}
             <tr>
               <th style={{...stickyColStyle, verticalAlign: 'top'}} rowSpan={2}>
-                <div style={dayNameStyle}>Saturday</div>
-                <div style={dayDateStyle}>
+                <div style={
+                  {
+                        fontWeight: 'bold',
+    fontSize: '16px'
+                  }
+                }>Saturday</div>
+                <div style={{
+                  
+    fontSize: '14px',
+    color: '#666'
+                }}>
                   {head.startDateISO ? humanDate(head.startDateISO) : "—"}
                 </div>
-                <div style={unitStyle}>
+                <div style={{
+                     fontSize: '14px',
+    fontStyle: 'italic'
+                }}>
                   {head.unitSat || "—"}
                   {unitTag}
                 </div>
@@ -170,9 +158,15 @@ function SavedWeekTable({ snap, onWheelX }) {
               {timesSat.map((_, i) => (
                 <td key={`sat-c-${i}`} style={topicStyle}>
                   {cells[i]?.text ? (
-                    <div style={topicTextStyle}>{cells[i].text}</div>
+                    <div style={{
+                        lineHeight: '1.4'
+                    }}>{cells[i].text}</div>
                   ) : (
-                    <div style={topicEmptyStyle}>—</div>
+                    <div style={{
+                      
+    color: '#999',
+    fontStyle: 'italic',
+                    }}>—</div>
                   )}
                 </td>
               ))}
@@ -181,11 +175,21 @@ function SavedWeekTable({ snap, onWheelX }) {
             {/* SUNDAY */}
             <tr>
               <th style={{...stickyColStyle, verticalAlign: 'top'}} rowSpan={2}>
-                <div style={dayNameStyle}>Sunday</div>
-                <div style={dayDateStyle}>
+                <div style={{
+                      fontWeight: 'bold',
+    fontSize: '16px'
+                }}>Sunday</div>
+                <div style={{
+                  
+    fontSize: '14px',
+    color: '#666'
+                }}>
                   {head.endDateISO ? humanDate(head.endDateISO) : "—"}
                 </div>
-                <div style={unitStyle}>
+                <div style={{
+                     fontSize: '14px',
+    fontStyle: 'italic'
+                }}>
                   {head.unitSun || "—"}
                   {unitTag}
                 </div>
@@ -205,9 +209,16 @@ function SavedWeekTable({ snap, onWheelX }) {
                 return (
                   <td key={`sun-c-${i}`} style={topicStyle}>
                     {cells[idx]?.text ? (
-                      <div style={topicTextStyle}>{cells[idx].text}</div>
+                      <div style={{
+                        
+                        lineHeight: '1.4'
+                      }}>{cells[idx].text}</div>
                     ) : (
-                      <div style={topicEmptyStyle}>—</div>
+                      <div style={{
+                        
+    color: '#999',
+    fontStyle: 'italic',
+                      }}>—</div>
                     )}
                   </td>
                 );
@@ -277,27 +288,18 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
     marginBottom: '15px'
   };
 
-  const btnStyle = {
-    padding: '8px 16px',
+
+  const btnDangerStyle = {
+        padding: '8px 16px',
     border: '1px solid #ccc',
     borderRadius: '4px',
     background: '#f5f5f5',
-    cursor: 'pointer'
-  };
-
-  const btnDangerStyle = {
-    ...btnStyle,
+    cursor: 'pointer',
     background: '#f44336',
     color: 'white',
     border: 'none'
   };
 
-  const btnSuccessStyle = {
-    ...btnStyle,
-    background: '#4caf50',
-    color: 'white',
-    border: 'none'
-  };
 
   const miniEditorStyle = {
     padding: '15px',
@@ -332,91 +334,6 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
     marginTop: '4px'
   };
 
-  const topicBtnStyle = {
-    width: '100%',
-    height: '100%',
-    minHeight: '80px',
-    border: '1px dashed #ccc',
-    background: 'transparent',
-    cursor: 'pointer',
-    textAlign: 'left',
-    padding: '10px'
-  };
-
-  const textareaStyle = {
-    width: '100%',
-    minHeight: '80px',
-    padding: '10px',
-    border: '1px solid #ccc',
-    borderRadius: '4px',
-    resize: 'vertical',
-    fontFamily: 'inherit',
-    fontSize: '14px'
-  };
-
-  const topicTextStyle = {
-    lineHeight: '1.4'
-  };
-
-  const topicEmptyStyle = {
-    color: '#999',
-    fontStyle: 'italic'
-  };
-
-  const dayStyle = {
-    background: '#f0f4f8',
-    padding: '10px',
-    fontWeight: 'bold',
-    textAlign: 'center'
-  };
-
-  const dayNameStyle = {
-    fontSize: '16px',
-    fontWeight: 'bold'
-  };
-
-  const dayDateStyle = {
-    fontSize: '14px',
-    color: '#666'
-  };
-
-  const unitStyle = {
-    background: '#f0f4f8',
-    padding: '10px',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    minWidth: '120px'
-  };
-
-  const unitTopStyle = {
-    fontSize: '14px'
-  };
-
-  const unitSubStyle = {
-    fontSize: '12px',
-    color: '#666'
-  };
-
-  const timeStyle = {
-    background: '#f0f4f8',
-    padding: '10px',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    minWidth: '100px'
-  };
-
-  const topicCellStyle = {
-    padding: '10px',
-    border: '1px solid #e0e0e0',
-    minWidth: '150px',
-    verticalAlign: 'top'
-  };
-
-  const spacerStyle = {
-    background: '#f0f4f8',
-    border: '1px solid #e0e0e0',
-    minWidth: '120px'
-  };
 
   const saveChanges = async () => {
     try {
@@ -475,7 +392,13 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
 
   const renderTimeHeaderCells = (times) =>
     times.map((start) => (
-      <th style={timeStyle} key={`${index}-${start}`}>
+      <th style={{
+            background: '#f0f4f8',
+    padding: '10px',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    minWidth: '100px'
+      }} key={`${index}-${start}`}>
         {start.replace(":", "")}-{plus60(start)}
       </th>
     ));
@@ -484,18 +407,50 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
     const item = cells[idx];
     const isEditing = editingCell === idx;
     return (
-      <td style={topicCellStyle}>
+      <td style={{
+          padding: '10px',
+    border: '1px solid #e0e0e0',
+    minWidth: '150px',
+    verticalAlign: 'top'
+      }}>
         {!isEditing ? (
-      <button style={topicBtnStyle} onClick={() => setEditingCell(idx)}>
+      <button style={{
+        
+    width: '100%',
+    height: '100%',
+    minHeight: '80px',
+    border: '1px dashed #ccc',
+    background: 'transparent',
+    cursor: 'pointer',
+    textAlign: 'left',
+    padding: '10px'
+      }} onClick={() => setEditingCell(idx)}>
             {item?.text ? (
-              <div style={topicTextStyle}>{item.text}</div>
+              <div style={{
+                
+                        lineHeight: '1.4'
+              }}>{item.text}</div>
             ) : (
-              <div style={topicEmptyStyle}>+ Add lesson</div>
+              <div style={{
+                
+    color: '#999',
+    fontStyle: 'italic',
+              }}>+ Add lesson</div>
             )}
           </button>
         ) : (
           <textarea
-            style={textareaStyle}
+            style={{
+              
+    width: '100%',
+    minHeight: '80px',
+    padding: '10px',
+    border: '1px solid #ccc',
+    borderRadius: '4px',
+    resize: 'vertical',
+    fontFamily: 'inherit',
+    fontSize: '14px'
+            }}
             rows={4}
             value={item?.text || ""}
             placeholder="Type the topic/notes here…"
@@ -534,7 +489,13 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
 
         <div style={savedActionsStyle}>
           <button
-            style={btnStyle}
+            style={{
+                  padding: '8px 16px',
+    border: '1px solid #ccc',
+    borderRadius: '4px',
+    background: '#f5f5f5',
+    cursor: 'pointer'
+            }}
             onClick={() => setEditing(true)}
             disabled={loading}
           >
@@ -693,31 +654,76 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
       </div>
 
       {/* inline editor table with inner scroll */}
-      <div style={tableWrapStyle} aria-label="Saved week editor">
-        <div style={scrollStyle} onWheel={onWheelX}>
-          <table style={tableStyle} role="table">
+      <div style={{
+         margin: '20px 0',
+    borderRadius: '8px',
+    overflow: 'hidden',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+    background: '#fff'
+      }} aria-label="Saved week editor">
+        <div style={{
+          
+    overflowX: 'auto',
+    WebkitOverflowScrolling: 'touch'
+        }} onWheel={onWheelX}>
+          <table style={{
+               width: '100%',
+    borderCollapse: 'collapse',
+    fontSize: '14px'
+          }} role="table">
             <tbody>
               {/* Saturday */}
               <tr>
-                <th style={dayStyle} colSpan={1 + timesSat.length}>
-                  <div style={dayNameStyle}>Saturday</div>
-                  <div style={dayDateStyle}>
+                <th style={{
+                  
+    background: '#f0f4f8',
+    padding: '10px',
+    fontWeight: 'bold',
+    textAlign: 'center'
+                }} colSpan={1 + timesSat.length}>
+                  <div style={{
+                        fontWeight: 'bold',
+    fontSize: '16px'
+                  }}>Saturday</div>
+                  <div style={{
+                    
+    fontSize: '14px',
+    color: '#666'
+                  }}>
                     {humanDate(head.startDateISO)}
                   </div>
                 </th>
               </tr>
               <tr>
-                <th style={unitStyle}>
-                  <div style={unitTopStyle}>
+                <th style={{
+                  background: '#f0f4f8',
+    padding: '10px',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    minWidth: '120px',
+
+       fontSize: '14px',
+    fontStyle: 'italic'
+                }}>
+                  <div style={{
+                        fontSize: '14px'
+                  }}>
                     {head.unitSat}
                     {head.unitTag ? ` (${head.unitTag})` : ""}
                   </div>
-                  <div style={unitSubStyle}>({head.weekLabel})</div>
+                  <div style={{
+                      fontSize: '12px',
+    color: '#666'
+                  }}>({head.weekLabel})</div>
                 </th>
                 {renderTimeHeaderCells(timesSat)}
               </tr>
               <tr>
-                <td style={spacerStyle} aria-hidden />
+                <td style={{
+                    background: '#f0f4f8',
+    border: '1px solid #e0e0e0',
+    minWidth: '120px'
+                }} aria-hidden />
                 {timesSat.map((_, i) => (
                   <TopicCell key={`e-sat-${i}`} idx={i} />
                 ))}
@@ -725,25 +731,56 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
 
               {/* Sunday */}
               <tr>
-                <th style={dayStyle} colSpan={1 + timesSun.length}>
-                  <div style={dayNameStyle}>Sunday</div>
-                  <div style={dayDateStyle}>
+                <th style={{
+                  
+    background: '#f0f4f8',
+    padding: '10px',
+    fontWeight: 'bold',
+    textAlign: 'center'
+                }} colSpan={1 + timesSun.length}>
+                  <div style={{
+                        fontWeight: 'bold',
+    fontSize: '16px'
+                  }}>Sunday</div>
+                  <div style={{
+                    
+    fontSize: '14px',
+    color: '#666'
+                  }}>
                     {humanDate(head.endDateISO)}
                   </div>
                 </th>
               </tr>
               <tr>
-                <th style={unitStyle}>
-                  <div style={unitTopStyle}>
+                <th style={{
+                  background: '#f0f4f8',
+    padding: '10px',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    minWidth: '120px',
+
+       fontSize: '14px',
+    fontStyle: 'italic'
+                }}>
+                  <div style={{
+                        fontSize: '14px'
+                  }}>
                     {head.unitSun}
                     {head.unitTag ? ` (${head.unitTag})` : ""}
                   </div>
-                  <div style={unitSubStyle}>({head.weekLabel})</div>
+                  <div style={{
+                      fontSize: '12px',
+    color: '#666'
+                  }}>({head.weekLabel})</div>
                 </th>
                 {renderTimeHeaderCells(timesSun)}
               </tr>
               <tr>
-                <td style={spacerStyle} aria-hidden />
+                <td style={{
+                    background: '#f0f4f8',
+    border: '1px solid #e0e0e0',
+    minWidth: '120px'
+                }} aria-hidden />
                 {timesSun.map((_, i) => (
                   <TopicCell key={`e-sun-${i}`} idx={5 + i} />
                 ))}
@@ -755,11 +792,24 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
 
       {/* actions */}
       <div style={savedActionsStyle}>
-        <button style={btnStyle} onClick={cancelChanges} disabled={loading}>
+        <button style={{
+              padding: '8px 16px',
+    border: '1px solid #ccc',
+    borderRadius: '4px',
+    background: '#f5f5f5',
+    cursor: 'pointer'
+        }} onClick={cancelChanges} disabled={loading}>
           Cancel
         </button>
         <button
-          style={btnSuccessStyle}
+          style={{
+             padding: '8px 16px',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    background: '#4caf50',
+    color: 'white',
+    border: 'none'
+          }}
           onClick={saveChanges}
           disabled={loading}
         >
@@ -875,14 +925,7 @@ export default function UploadLessonsPlans() {
       justifyContent: 'flex-end'
     };
 
-    const btnPrimaryStyle = {
-      padding: '8px 16px',
-      background: '#1976d2',
-      color: 'white',
-      border: 'none',
-      borderRadius: '4px',
-      cursor: 'pointer'
-    };
+ 
 
     return (
       <div style={headEditorStyle}>
@@ -1017,7 +1060,14 @@ export default function UploadLessonsPlans() {
 
         <div style={editActionsStyle}>
           <button
-            style={btnPrimaryStyle}
+            style={{
+      padding: '8px 16px',
+      background: '#1976d2',
+      color: 'white',
+      border: 'none',
+      borderRadius: '4px',
+      cursor: 'pointer'
+            }}
             onClick={() => setEditingHead(false)}
           >
             Done
@@ -1158,18 +1208,50 @@ export default function UploadLessonsPlans() {
     const item = draftCells[idx];
     const isEditing = editingCell === idx;
     return (
-      <td style={topicCellStyle}>
+      <td style={{
+          padding: '10px',
+    border: '1px solid #e0e0e0',
+    minWidth: '150px',
+    verticalAlign: 'top'
+      }}>
         {!isEditing ? (
-          <button style={topicBtnStyle} onClick={() => setEditingCell(idx)}>
+          <button style={{
+            
+    width: '100%',
+    height: '100%',
+    minHeight: '80px',
+    border: '1px dashed #ccc',
+    background: 'transparent',
+    cursor: 'pointer',
+    textAlign: 'left',
+    padding: '10px'
+          }} onClick={() => setEditingCell(idx)}>
             {item?.text ? (
-              <div style={topicTextStyle}>{item.text}</div>
+              <div style={{
+                
+                        lineHeight: '1.4'
+              }}>{item.text}</div>
             ) : (
-              <div style={topicEmptyStyle}>+ Add lesson</div>
+              <div style={{
+                
+    color: '#999',
+    fontStyle: 'italic',
+              }}>+ Add lesson</div>
             )}
           </button>
         ) : (
           <textarea
-            style={textareaStyle}
+            style={{
+              
+    width: '100%',
+    minHeight: '80px',
+    padding: '10px',
+    border: '1px solid #ccc',
+    borderRadius: '4px',
+    resize: 'vertical',
+    fontFamily: 'inherit',
+    fontSize: '14px'
+            }}
             rows={4}
             value={item?.text || ""}
             placeholder="Type the topic/notes here…"
@@ -1225,7 +1307,13 @@ export default function UploadLessonsPlans() {
 
   const renderTimeHeaderCells = (times) =>
     times.map((start) => (
-      <th style={timeStyle} key={start}>
+      <th style={{
+            background: '#f0f4f8',
+    padding: '10px',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    minWidth: '100px'
+      }} key={start}>
         {start.replace(":", "")}-{plus60(start)}
       </th>
     ));
@@ -1251,7 +1339,15 @@ export default function UploadLessonsPlans() {
           </div>
           <div style={headControlsStyle}>
             <button
-              style={btnPrimaryStyle}
+              style={{
+                  
+      padding: '8px 16px',
+      background: '#1976d2',
+      color: 'white',
+      border: 'none',
+      borderRadius: '4px',
+      cursor: 'pointer'
+              }}
               onClick={() => setEditingHead(true)}
             >
               Edit header
@@ -1264,31 +1360,76 @@ export default function UploadLessonsPlans() {
       {error && <div style={errorMessageStyle}>{error}</div>}
 
       {/* Editable weekly plan (INNER SCROLL) */}
-      <div style={tableWrapStyle} aria-label="Weekly plan editor">
-        <div style={scrollStyle} onWheel={onWheelX}>
-          <table style={tableStyle} role="table">
+      <div style={{
+         margin: '20px 0',
+    borderRadius: '8px',
+    overflow: 'hidden',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+    background: '#fff'
+      }} aria-label="Weekly plan editor">
+        <div style={{
+          
+    overflowX: 'auto',
+    WebkitOverflowScrolling: 'touch'
+        }} onWheel={onWheelX}>
+          <table style={{
+               width: '100%',
+    borderCollapse: 'collapse',
+    fontSize: '14px'
+          }} role="table">
             <tbody>
               {/* SATURDAY */}
               <tr>
-                <th style={dayStyle} colSpan={1 + timesSat.length}>
-                  <div style={dayNameStyle}>Saturday</div>
-                  <div style={dayDateStyle}>
+                <th style={{
+                  
+    background: '#f0f4f8',
+    padding: '10px',
+    fontWeight: 'bold',
+    textAlign: 'center'
+                }} colSpan={1 + timesSat.length}>
+                  <div style={{
+                        fontWeight: 'bold',
+    fontSize: '16px'
+                  }}>Saturday</div>
+                  <div style={{
+                    
+    fontSize: '14px',
+    color: '#666'
+                  }}>
                     {humanDate(head.startDateISO)}
                   </div>
                 </th>
               </tr>
               <tr>
-                <th style={unitStyle}>
-                  <div style={unitTopStyle}>
+                <th style={{
+                  background: '#f0f4f8',
+    padding: '10px',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    minWidth: '120px',
+
+       fontSize: '14px',
+    fontStyle: 'italic'
+                }}>
+                  <div style={{
+                        fontSize: '14px'
+                  }}>
                     {head.unitSat}
                     {head.unitTag ? ` (${head.unitTag})` : ""}
                   </div>
-                  <div style={unitSubStyle}>({head.weekLabel})</div>
+                  <div style={{
+                      fontSize: '12px',
+    color: '#666'
+                  }}>({head.weekLabel})</div>
                 </th>
                 {renderTimeHeaderCells(timesSat)}
               </tr>
               <tr>
-                <td style={spacerStyle} aria-hidden />
+                <td style={{
+                    background: '#f0f4f8',
+    border: '1px solid #e0e0e0',
+    minWidth: '120px'
+                }} aria-hidden />
                 {timesSat.map((_, i) => (
                   <TopicCell key={`sat-${i}`} idx={i} />
                 ))}
@@ -1296,25 +1437,56 @@ export default function UploadLessonsPlans() {
 
               {/* SUNDAY */}
               <tr>
-                <th style={dayStyle} colSpan={1 + timesSun.length}>
-                  <div style={dayNameStyle}>Sunday</div>
-                  <div style={dayDateStyle}>
+                <th style={{
+                  
+    background: '#f0f4f8',
+    padding: '10px',
+    fontWeight: 'bold',
+    textAlign: 'center'
+                }} colSpan={1 + timesSun.length}>
+                  <div style={{
+                        fontWeight: 'bold',
+    fontSize: '16px'
+                  }}>Sunday</div>
+                  <div style={{
+                    
+    fontSize: '14px',
+    color: '#666'
+                  }}>
                     {humanDate(head.endDateISO)}
                   </div>
                 </th>
               </tr>
               <tr>
-                <th style={unitStyle}>
-                  <div style={unitTopStyle}>
+                <th style={{
+                  background: '#f0f4f8',
+    padding: '10px',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    minWidth: '120px',
+
+       fontSize: '14px',
+    fontStyle: 'italic'
+                }}>
+                  <div style={{
+                        fontSize: '14px'
+                  }}>
                     {head.unitSun}
                     {head.unitTag ? ` (${head.unitTag})` : ""}
                   </div>
-                  <div style={unitSubStyle}>({head.weekLabel})</div>
+                  <div style={{
+                      fontSize: '12px',
+    color: '#666'
+                  }}>({head.weekLabel})</div>
                 </th>
                 {renderTimeHeaderCells(timesSun)}
               </tr>
               <tr>
-                <td style={spacerStyle} aria-hidden />
+                <td style={{
+                    background: '#f0f4f8',
+    border: '1px solid #e0e0e0',
+    minWidth: '120px'
+                }} aria-hidden />
                 {timesSun.map((_, i) => (
                   <TopicCell key={`sun-${i}`} idx={5 + i} />
                 ))}
@@ -1325,11 +1497,24 @@ export default function UploadLessonsPlans() {
       </div>
 
       <div style={actionsStyle}>
-        <button style={btnStyle} onClick={setToThisWeekend}>
+        <button style={{
+              padding: '8px 16px',
+    border: '1px solid #ccc',
+    borderRadius: '4px',
+    background: '#f5f5f5',
+    cursor: 'pointer'
+        }} onClick={setToThisWeekend}>
           Set dates to this weekend
         </button>
         <button
-          style={btnSuccessStyle}
+          style={{
+                padding: '8px 16px',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    background: '#4caf50',
+    color: 'white',
+    border: 'none'
+          }}
           onClick={saveWeek}
           disabled={saving}
         >
@@ -1394,5 +1579,8 @@ export default function UploadLessonsPlans() {
         )}
       </section>
     </section>
+
+    
   );
+  
 }
