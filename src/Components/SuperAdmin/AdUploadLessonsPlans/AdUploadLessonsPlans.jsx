@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { lessonPlanService } from "../../../services/api";
 import { useAuth } from "../../../context/AuthContext";
-import "./AdUploadLessonsPlans.css";
+import { color } from "chart.js/helpers";
 
 /** ---------- Initial header ---------- */
 const initialHeader = {
@@ -92,9 +92,10 @@ function SavedWeekTable({ snap, onWheelX }) {
 
   const topicStyle = {
     border: "1px solid #e0e0e0",
-    padding: "10px 12px",
-    textAlign: "left",
+    // padding: "10px 12px",
+    // textAlign: "left",
     minWidth: "150px",
+    color: "#000",
   };
 
   return (
@@ -169,6 +170,7 @@ function SavedWeekTable({ snap, onWheelX }) {
                     <div
                       style={{
                         lineHeight: "1.4",
+                        color: "black",
                       }}
                     >
                       {cells[i].text}
@@ -176,7 +178,7 @@ function SavedWeekTable({ snap, onWheelX }) {
                   ) : (
                     <div
                       style={{
-                        color: "#bf1c1cff",
+                        color: "#f0efefff",
                         fontStyle: "italic",
                       }}
                     >
@@ -237,6 +239,7 @@ function SavedWeekTable({ snap, onWheelX }) {
                       <div
                         style={{
                           lineHeight: "1.4",
+                          color: "black",
                         }}
                       >
                         {cells[idx].text}
@@ -279,9 +282,9 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
   const savedItemStyle = {
     marginBottom: "30px",
     padding: "20px",
-    border: "1px solid #e0e0e0",
+    border: "1px solid #d8c6c6ff",
     borderRadius: "8px",
-    background: "#cfbfbfff",
+    background: "#e9ddddff",
   };
 
   const savedHeadStyle = {
@@ -296,13 +299,13 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
 
   const savedSubStyle = {
     fontSize: "14px",
-    color: "#666",
+    color: "#000000ff",
     marginBottom: "5px",
   };
 
   const savedDateStyle = {
     fontSize: "12px",
-    color: "#999",
+    color: "#1058e8ff",
   };
 
   const errorMessageStyle = {
@@ -323,11 +326,10 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
     padding: "8px 16px",
     border: "1px solid #ccc",
     borderRadius: "4px",
-    background: "#f5f5f5",
+    background: "#ce1f1fff",
     cursor: "pointer",
-    background: "#f44336",
-    color: "#000",
-    border: "none",
+
+    color: "#fdfdfdff",
   };
 
   const miniEditorStyle = {
@@ -335,7 +337,7 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
     border: "1px solid #e0e0e0",
     borderRadius: "8px",
     marginBottom: "15px",
-    background: "#f9f9f9",
+    background: "#dbd1d1ff",
   };
 
   const headGridStyle = {
@@ -440,10 +442,9 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
     return (
       <td
         style={{
-          padding: "10px",
-          border: "1px solid #e0e0e0",
+          // padding: "10px",
+          border: "1px solid #f3dedeff",
           minWidth: "150px",
-
           verticalAlign: "top",
         }}
       >
@@ -452,12 +453,12 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
             style={{
               width: "100%",
               height: "100%",
-              minHeight: "80px",
-              border: "1px dashed #ccc",
+              // minHeight: "80px",
+              // border: "1px dashed #ccc",
               background: "transparent",
               cursor: "pointer",
               textAlign: "left",
-              padding: "10px",
+              // padding: "10px",
             }}
             onClick={() => setEditingCell(idx)}
           >
@@ -465,6 +466,8 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
               <div
                 style={{
                   lineHeight: "1.4",
+                  border: "none",
+                  color: "black",
                 }}
               >
                 {item.text}
@@ -472,7 +475,7 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
             ) : (
               <div
                 style={{
-                  color: "#999",
+                  color: "#fefdfdff",
                   fontStyle: "italic",
                 }}
               >
@@ -483,10 +486,10 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
         ) : (
           <textarea
             style={{
-              width: "100%",
-              minHeight: "80px",
-              padding: "10px",
-              border: "1px solid #ccc",
+              // width: "100%",
+              // minHeight: "80px",
+              padding: "5px",
+              // border: "1px solid #fefcfcff",
               borderRadius: "4px",
               resize: "vertical",
               fontFamily: "inherit",
@@ -702,7 +705,7 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
           borderRadius: "8px",
           overflow: "hidden",
           boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-          background: "#e8e3e3ff",
+          background: "#ffffffff",
         }}
         aria-label="Saved week editor"
       >
@@ -726,7 +729,7 @@ function SavedWeekCard({ index, snap, onWheelX, onUpdate, onDelete }) {
               <tr>
                 <th
                   style={{
-                    background: "#f0f4f8",
+                    background: "#f4f4f4ff",
                     // padding: "10px",
                     fontWeight: "bold",
                     textAlign: "center",
@@ -1249,7 +1252,7 @@ export default function UploadLessonsPlans() {
     fontSize: "12px",
     border: "1px solid #ccc",
     borderRadius: "4px",
-    background: "#f5f5f5",
+    background: "#1d83dcff",
     cursor: "pointer",
   };
 
@@ -1322,6 +1325,8 @@ export default function UploadLessonsPlans() {
               <div
                 style={{
                   lineHeight: "1.4",
+                  color: "black",
+                  fontSize: "14px",
                 }}
               >
                 {item.text}
@@ -1442,7 +1447,7 @@ export default function UploadLessonsPlans() {
               style={{
                 padding: "8px 16px",
                 background: "#1976d2",
-                color: "#000",
+                color: "#ffffffff",
                 border: "none",
                 borderRadius: "4px",
                 cursor: "pointer",
@@ -1500,6 +1505,7 @@ export default function UploadLessonsPlans() {
                     style={{
                       fontWeight: "bold",
                       fontSize: "16px",
+                      color: "black",
                     }}
                   >
                     Saturday
@@ -1507,7 +1513,8 @@ export default function UploadLessonsPlans() {
                   <div
                     style={{
                       fontSize: "14px",
-                      color: "#666",
+
+                      color: "black",
                     }}
                   >
                     {humanDate(head.startDateISO)}
@@ -1525,10 +1532,12 @@ export default function UploadLessonsPlans() {
 
                     fontSize: "14px",
                     fontStyle: "italic",
+                    color: "black",
                   }}
                 >
                   <div
                     style={{
+                      color: "black",
                       fontSize: "14px",
                     }}
                   >
