@@ -1,912 +1,1818 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
-import * as api from "../../../services/api";
-import "./AdCategory.css";
+import { useState, useEffect } from "react";
+import {
+  MdSchool,
+  MdPeople,
+  MdPerson,
+  MdAttachFile,
+  MdAdd,
+  MdDelete,
+  MdVisibility,
+  MdVisibilityOff,
+  MdEdit,
+  MdSearch,
+} from "react-icons/md";
+import * as XLSX from "xlsx";
+import {
+  createCampus,
+  createCoordinator,
+  createTeacher,
+  createStudent,
+  createCourse,
+  getTeachers,
+  getCampuses,
+  getStudents,
+  getCourses,
+  getCoordinators,
+  updateCampus,
+  updateCoordinator,
+  updateTeacher,
+  updateStudent,
+  updateCourse,
+  deleteCampus,
+  deleteCoordinator,
+  deleteTeacher,
+  deleteStudent,
+  deleteCourse,
+} from "../../../services/api";
 
-const TARGET_CITIES = [
-  "Peshawar",
-  "Lahore",
-  "Karachi",
-  "Hyderabad",
-  "Swat",
-  "Swabi",
-  "Kohat",
-  "Mardan",
-  "Islamabad",
-  "Abatabod",
-];
-
-/** ---------- Safe display helpers ---------- */
-const getPersonName = (p) =>
-  p?.name ||
-  p?.fullName ||
-  p?.username ||
-  p?.user?.name ||
-  p?.profile?.name ||
-  "—";
-
-const getEmail = (p) => p?.email || p?.user?.email || p?.contact?.email || "";
-
-const getPhone = (p) =>
-  p?.phone ||
-  p?.contact ||
-  p?.mobile ||
-  p?.contactwhatsapp ||
-  p?.user?.phone ||
-  "";
-
-/** ---------- Main ---------- */
-const Category = () => {
-  const [data, setData] = useState({
-    campuses: [],
-    coordinators: [],
-    students: [],
-    courses: [],
-    teachers: [],
+const Registrations = () => {
+  const [activeTab, setActiveTab] = useState("campus");
+  const [viewMode, setViewMode] = useState("add");
+  const [formData, setFormData] = useState({
+    campus: {
+      name: "",
+      location: "",
+      address: "",
+      contactNumber: "",
+    },
+    principal: {
+      name: "",
+      email: "",
+      phone: "",
+      password: "",
+    },
+    teacher: {
+      name: "",
+      email: "",
+      phone: "",
+      cnic: "",
+      password: "",
+      subjectSpecialization: "",
+      qualifications: "",
+      campusId: "",
+    },
+    student: {
+      name: "",
+      email: "",
+      phone: "",
+      cnic: "",
+      pncNo: "",
+      passport: "",
+      status: "Active",
+      studentExcelFile: null,
+      documentstatus: "notverified",
+      city: "",
+    },
+    course: {
+      name: "",
+      code: "",
+      description: "",
+      creditHours: "",
+      startDate: "",
+      endDate: "",
+      courseContent: [],
+      currentContent: {
+        title: "",
+        duration: "",
+        description: "",
+        remarks: "",
+      },
+      courseFile: null,
+    },
   });
 
-  const [selectedCampus, setSelectedCampus] = useState(null);
-  const [selectedCourse, setSelectedCourse] = useState(null);
+  // --- Helpers ---
+  const normalizeCNIC = (cnic) => (cnic || "").replace(/\D/g, "");
+  const normalizePhone = (p) => (p || "").replace(/\D/g, "");
+  const isValidEmail = (e) => !!e && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [campuses, setCampuses] = useState([]);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [dataList, setDataList] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [editingId, setEditingId] = useState(null);
 
-  // Modal toggles
-  const [showCoordinatorForm, setShowCoordinatorForm] = useState(false);
-  const [showCourseForm, setShowCourseForm] = useState(false);
-  const [showTeacherForm, setShowTeacherForm] = useState(false);
-  const [showStudentForm, setShowStudentForm] = useState(false);
-
-  // Modal lists
-  const [availableCoordinators, setAvailableCoordinators] = useState([]);
-  const [availableTeachers, setAvailableTeachers] = useState([]);
-  const [availableStudents, setAvailableStudents] = useState([]);
-
-  // Modal forms
-  const [coordinatorForm, setCoordinatorForm] = useState({ coordinatorId: "" });
-  const [courseForm, setCourseForm] = useState({ courseId: "" });
-  const [teacherForm, setTeacherForm] = useState({ teacherId: "" });
-  const [studentForm, setStudentForm] = useState({ studentIds: [] });
-
-  const [city, setCity] = useState("");
-  const [activeTab, setActiveTab] = useState("campus");
-
-  /** Fetch everything */
-  const fetchData = useCallback(async () => {
+  // --- Fetch applicants and register ---
+  const handleFetchAndRegisterFromPortal = async () => {
     try {
       setLoading(true);
-      const [
-        campusesRes,
-        coordinatorsRes,
-        studentsRes,
-        coursesRes,
-        teachersRes,
-      ] = await Promise.all([
-        api.getCampuses(),
-        api.getCoordinators(),
-        api.getStudents(),
-        api.getCourses(),
-        api.getTeachers(),
-      ]);
+      setErrorMessage("");
+      setSuccessMessage("");
 
-      const nextData = {
-        campuses: campusesRes.data || [],
-        coordinators: coordinatorsRes.data || [],
-        students: studentsRes.data || [],
-        courses: coursesRes.data || [],
-        teachers: teachersRes.data || [],
-      };
-      setData(nextData);
-      setLoading(false);
+      // 1) Fetch remote applicants
+      const res = await fetch(
+        "https://unruffled-mirzakhani.210-56-25-68.plesk.page/api/applicants/searchbywholedata",
+        { method: "GET" }
+      );
+      if (!res.ok) {
+        throw new Error(`Remote fetch failed: ${res.status} ${res.statusText}`);
+      }
+      const remote = await res.json();
+      const remoteList = Array.isArray(remote?.data) ? remote.data : [];
 
-      // Re-link selections to the freshly fetched objects (prevents stale UI)
-      if (selectedCampus?._id) {
-        const freshCampus = nextData.campuses.find(
-          (c) => c._id === selectedCampus._id
-        );
-        setSelectedCampus(freshCampus || null);
+      // 2) Pull existing students once, build a CNIC set to de-dup
+      const existing = await getStudents();
+      const existingByCNIC = new Set(
+        (existing?.data || []).map((s) => normalizeCNIC(s.cnic)).filter(Boolean)
+      );
 
-        if (freshCampus && selectedCourse?._id) {
-          const freshCourse =
-            freshCampus.courses?.find((c) => c._id === selectedCourse._id) ||
-            null;
-          setSelectedCourse(freshCourse);
-        } else {
-          setSelectedCourse(null);
+      const toCreate = [];
+      const skipped = [];
+
+      for (const record of remoteList) {
+        const a = record?.applicant || {};
+        const r = record?.result || {};
+
+        const total =
+          Number(r?.testMark || 0) +
+          Number(r?.essayMark || 0) +
+          Number(r?.interviewMark || 0);
+
+        // Normalize
+        const cnicDigits = normalizeCNIC(a.cnic);
+        const phoneDigits = normalizePhone(a.contact);
+
+        // Basic validations
+        const payload = {
+          name: (a.applicant_name || "").trim(),
+          email: (a.email || "").trim(),
+          phone: phoneDigits,
+          cnic: cnicDigits,
+          pncNo: (a.pnmc_no || "").trim(),
+          passport: "",
+          status: "Active",
+          documentstatus: "notverified",
+          city: (a.district || a.province || "").trim(),
+        };
+
+        if (!payload.name) {
+          skipped.push({ cnic: a.cnic, reason: "Missing name" });
+          continue;
         }
+        if (!payload.cnic || payload.cnic.length !== 13) {
+          skipped.push({ cnic: a.cnic, reason: "Invalid CNIC (need 13 digits)" });
+          continue;
+        }
+        if (!payload.phone || payload.phone.length < 10) {
+          skipped.push({ cnic: a.cnic, reason: "Missing/invalid phone" });
+          continue;
+        }
+        if (!isValidEmail(payload.email)) {
+          skipped.push({ cnic: a.cnic, reason: "Missing/invalid email" });
+          continue;
+        }
+        if (!payload.pncNo) {
+          skipped.push({ cnic: a.cnic, reason: "Missing PNC No" });
+          continue;
+        }
+
+        if (total < 50) {
+          skipped.push({ cnic: a.cnic, reason: `Total marks ${total} < 50` });
+          continue;
+        }
+
+        if (existingByCNIC.has(payload.cnic)) {
+          skipped.push({ cnic: a.cnic, reason: "Already exists" });
+          continue;
+        }
+
+        toCreate.push(payload);
+      }
+
+      // 5) Create in parallel
+      const results = await Promise.allSettled(
+        toCreate.map((stu) => createStudent(stu))
+      );
+
+      let createdCount = 0;
+      results.forEach((r, idx) => {
+        if (r.status === "fulfilled") {
+          createdCount += 1;
+          existingByCNIC.add(toCreate[idx].cnic);
+        } else {
+          skipped.push({
+            cnic: toCreate[idx].cnic,
+            reason: r.reason?.message || "API create failed",
+          });
+        }
+      });
+
+      setSuccessMessage(
+        `Portal import done: ${createdCount} registered, ${skipped.length} skipped.`
+      );
+
+      if (skipped.length) {
+        const preview = skipped
+          .slice(0, 5)
+          .map((s) => `• ${s.cnic || "CNIC?"}: ${s.reason}`)
+          .join("\n");
+        setErrorMessage(
+          `${skipped.length} skipped:\n${preview}${
+            skipped.length > 5 ? "\n…more" : ""
+          }`
+        );
+      }
+
+      if (activeTab === "student" && viewMode === "view") {
+        const refreshed = await getStudents();
+        setDataList(refreshed.data || []);
       }
     } catch (err) {
-      setError("Failed to fetch data. Please try again.");
+      console.error(err);
+      setErrorMessage(err.message || "Failed to fetch/register from portal");
+    } finally {
       setLoading(false);
     }
-  }, [selectedCampus?._id, selectedCourse?._id]);
+  };
+
+  // Fetch data based on active tab and view mode
+  useEffect(() => {
+    const fetchData = async () => {
+      if (viewMode === "view") {
+        try {
+          setLoading(true);
+          let response;
+          switch (activeTab) {
+            case "campus":
+              response = await getCampuses();
+              break;
+            case "principal":
+              response = await getCoordinators();
+              break;
+            case "teacher":
+              response = await getTeachers();
+              break;
+            case "student":
+              response = await getStudents();
+              break;
+            case "course":
+              response = await getCourses();
+              break;
+            default:
+              response = { data: [] };
+          }
+          setDataList(response.data);
+        } catch (error) {
+          console.error("Failed to fetch data:", error);
+          setErrorMessage("Failed to fetch data. Please try again.");
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchData();
+  }, [viewMode, activeTab]);
+
+  // Fetch campuses when teacher tab is active in add mode
+  useEffect(() => {
+    if (activeTab === "teacher" && viewMode === "add") {
+      const fetchCampuses = async () => {
+        try {
+          const response = await getCampuses();
+          setCampuses(response.data);
+        } catch (error) {
+          console.error("Failed to fetch campuses:", error);
+          setErrorMessage("Failed to fetch campuses. Please try again.");
+        }
+      };
+      fetchCampuses();
+    }
+  }, [activeTab, viewMode]);
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    // Clear messages after 5 seconds
+    const timer = setTimeout(() => {
+      setSuccessMessage("");
+      setErrorMessage("");
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [successMessage, errorMessage]);
 
-  /** When user opens a campus */
-  const handleCampusSelect = async (campus) => {
-    setSelectedCampus(campus);
-    setSelectedCourse(null);
-    setActiveTab("campus");
-    setError(null);
+  // Map the active tab to its key
+  const activeKey = (tab) => tab;
 
-    // Fetch students for this campus
-    const campusStudents = await fetchCampusStudents(campus._id);
-    setSelectedCampus((prev) => ({
+  const handleInputChange = (field, value) => {
+    const key = activeKey(activeTab);
+    setFormData((prev) => ({
       ...prev,
-      students: campusStudents,
+      [key]: {
+        ...prev[key],
+        [field]: value,
+      },
     }));
   };
 
-  const fetchCampusStudents = async (campusId) => {
+  const handleContentChange = (field, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      course: {
+        ...prev.course,
+        currentContent: {
+          ...prev.course.currentContent,
+          [field]: value,
+        },
+      },
+    }));
+  };
+
+  const addContentItem = () => {
+    const cur = formData.course.currentContent;
+    if (!cur.title) {
+      setErrorMessage("Content title is required");
+      return;
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      course: {
+        ...prev.course,
+        courseContent: [...prev.course.courseContent, prev.course.currentContent],
+        currentContent: {
+          title: "",
+          duration: "",
+          description: "",
+          remarks: "",
+        },
+      },
+    }));
+  };
+
+  const removeContentItem = (index) => {
+    setFormData((prev) => ({
+      ...prev,
+      course: {
+        ...prev.course,
+        courseContent: prev.course.courseContent.filter((_, i) => i !== index),
+      },
+    }));
+  };
+
+  const handleFileChange = (field, e) => {
+    const key = activeKey(activeTab);
+    const file = e.target.files[0];
+    setFormData((prev) => ({
+      ...prev,
+      [key]: {
+        ...prev[key],
+        [field]: file,
+      },
+    }));
+  };
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    resetForm();
+  };
+
+  const resetForm = () => {
+    setFormData({
+      campus: { name: "", location: "", address: "", contactNumber: "" },
+      principal: { name: "", email: "", phone: "", password: "" },
+      teacher: {
+        name: "",
+        email: "",
+        phone: "",
+        cnic: "",
+        password: "",
+        subjectSpecialization: "",
+        qualifications: "",
+        campusId: "",
+      },
+      student: {
+        name: "",
+        email: "",
+        phone: "",
+        cnic: "",
+        pncNo: "",
+        passport: "",
+        status: "Active",
+        studentExcelFile: null,
+        documentstatus: "notverified",
+        city: "",
+      },
+      course: {
+        name: "",
+        code: "",
+        description: "",
+        creditHours: "",
+        startDate: "",
+        endDate: "",
+        courseContent: [],
+        currentContent: {
+          title: "",
+          duration: "",
+          description: "",
+          remarks: "",
+        },
+        courseFile: null,
+      },
+    });
+    setErrorMessage("");
+    setSuccessMessage("");
+    setShowPassword(false);
+    setEditingId(null);
+  };
+
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
+  const validatePhone = (phone) => {
+    const re = /^[0-9]{10,15}$/;
+    return re.test(phone);
+  };
+
+  const validateCNIC = (cnic) => {
+    const re = /^[0-9]{13}$/;
+    return re.test(cnic);
+  };
+
+  const validatePassword = (password) => {
+    return (password || "").length >= 6;
+  };
+
+  const handleImport = async () => {
+    if (!formData.student.studentExcelFile) {
+      setErrorMessage("Please select an Excel file first");
+      return;
+    }
+
     try {
-      const response = await api.getStudentsByCampus(campusId);
-      return response.data || [];
-    } catch (err) {
-      console.error("Failed to fetch campus students:", err);
-      return [];
+      setLoading(true);
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        const data = new Uint8Array(e.target.result);
+        const workbook = XLSX.read(data, { type: "array" });
+        const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+        const jsonData = XLSX.utils.sheet_to_json(firstSheet);
+
+        // Validate imported data
+        const validationErrors = [];
+        const validStudents = jsonData.map((student, index) => {
+          if (!student.name) {
+            validationErrors.push(`Row ${index + 2}: Name is required`);
+          }
+          if (!student.cnic) {
+            validationErrors.push(`Row ${index + 2}: CNIC is required`);
+          } else if (!validateCNIC(student.cnic)) {
+            validationErrors.push(`Row ${index + 2}: CNIC must be 13 digits`);
+          }
+          if (student.email && !validateEmail(student.email)) {
+            validationErrors.push(`Row ${index + 2}: Invalid email format`);
+          }
+          if (student.phone && !validatePhone(student.phone)) {
+            validationErrors.push(`Row ${index + 2}: Invalid phone format`);
+          }
+          return {
+            ...student,
+            documentstatus: "notverified",
+            status: "Active",
+          };
+        });
+
+        if (validationErrors.length > 0) {
+          throw new Error(validationErrors.join("\n"));
+        }
+
+        const response = await Promise.all(
+          validStudents.map((student) => createStudent(student))
+        );
+
+        setSuccessMessage(`${response.length} students imported successfully!`);
+        setFormData((prev) => ({
+          ...prev,
+          student: { ...prev.student, studentExcelFile: null },
+        }));
+        setLoading(false);
+      };
+      reader.readAsArrayBuffer(formData.student.studentExcelFile);
+    } catch (error) {
+      console.error("Import error:", error);
+      setErrorMessage(error.message || "Failed to import students");
+      setLoading(false);
     }
   };
 
-  const handleCourseSelect = (course) => {
-    console.log("Selected Course:", course); // Debugging line to verify course object
-    setSelectedCourse(course);
-    setActiveTab("course");
-  };
-
-  /** Filtered cities (only from your target list) */
-  const allCities = useMemo(() => {
-    const allStudentCities = (data.students || [])
-      .map((s) => s.city)
-      .filter(Boolean);
-    const filteredCities = allStudentCities.filter((city) =>
-      TARGET_CITIES.some(
-        (target) => target.toLowerCase() === city.toLowerCase()
-      )
-    );
-    const uniqueCities = [...new Set(filteredCities)];
-    return uniqueCities.sort((a, b) => a.localeCompare(b));
-  }, [data.students]);
-
-  /** City filter (students modal) */
-  const handleCityChange = async (e) => {
-    const selectedCity = e.target.value;
-    setCity(selectedCity);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setErrorMessage("");
+    setSuccessMessage("");
 
     try {
-      if (selectedCity && TARGET_CITIES.includes(selectedCity)) {
-        const response = await api.getStudentsByCity(selectedCity);
-        const list = response.data || [];
-        setAvailableStudents(
-          list.filter(
-            (student) =>
-              !selectedCampus?.students?.some((x) => x._id === student._id)
-          )
-        );
-      } else {
-        // Show all students from target cities when no specific city is selected
-        const response = await api.getStudents();
-        const allStudents = response.data || [];
-        const filteredStudents = allStudents.filter(
-          (student) =>
-            student.city &&
-            TARGET_CITIES.some(
-              (target) => target.toLowerCase() === student.city.toLowerCase()
-            )
-        );
-        setAvailableStudents(
-          filteredStudents.filter(
-            (student) =>
-              !selectedCampus?.students?.some((x) => x._id === student._id)
-          )
-        );
+      let validationErrors = [];
+      let apiCall;
+      let dataToSend = {};
+
+      const key = activeKey(activeTab);
+      const cur = formData[key];
+
+      switch (activeTab) {
+        case "campus": {
+          if (!cur.name) validationErrors.push("Campus name is required");
+          if (!cur.location) validationErrors.push("Location is required");
+          if (!cur.contactNumber) {
+            validationErrors.push("Contact number is required");
+          } else if (!validatePhone(cur.contactNumber)) {
+            validationErrors.push("Invalid contact number format");
+          }
+
+          dataToSend = {
+            name: cur.name,
+            location: cur.location,
+            address: cur.address,
+            contactNumber: cur.contactNumber,
+          };
+          apiCall = editingId
+            ? (data) => updateCampus(editingId, data)
+            : createCampus;
+          break;
+        }
+
+        case "principal": {
+          if (!cur.name) validationErrors.push("Name is required");
+          if (!cur.email) {
+            validationErrors.push("Email is required");
+          } else if (!validateEmail(cur.email)) {
+            validationErrors.push("Invalid email format");
+          }
+          if (!editingId && !cur.password) {
+            validationErrors.push("Password is required");
+          } else if (cur.password && !validatePassword(cur.password)) {
+            validationErrors.push("Password must be at least 6 characters");
+          }
+          if (cur.phone && !validatePhone(cur.phone)) {
+            validationErrors.push("Invalid phone number format");
+          }
+
+          dataToSend = {
+            name: cur.name,
+            email: cur.email,
+            contactNumber: cur.phone,
+          };
+          if (cur.password) dataToSend.password = cur.password;
+
+          apiCall = editingId
+            ? (data) => updateCoordinator(editingId, data)
+            : createCoordinator;
+          break;
+        }
+
+        case "teacher": {
+          if (!cur.name) validationErrors.push("Name is required");
+          if (!cur.email) {
+            validationErrors.push("Email is required");
+          } else if (!validateEmail(cur.email)) {
+            validationErrors.push("Invalid email format");
+          }
+          if (!editingId && !cur.password) {
+            validationErrors.push("Password is required");
+          } else if (cur.password && !validatePassword(cur.password)) {
+            validationErrors.push("Password must be at least 6 characters");
+          }
+          if (!cur.subjectSpecialization) {
+            validationErrors.push("Subject specialization is required");
+          }
+          if (!cur.qualifications) {
+            validationErrors.push("Qualifications are required");
+          }
+          if (cur.phone && !validatePhone(cur.phone)) {
+            validationErrors.push("Invalid phone number format");
+          }
+
+          dataToSend = {
+            name: cur.name,
+            email: cur.email,
+            contactNumber: cur.phone,
+            subjectSpecialization: cur.subjectSpecialization,
+            qualifications: cur.qualifications,
+          };
+          if (cur.password) dataToSend.password = cur.password;
+
+          apiCall = editingId
+            ? (data) => updateTeacher(editingId, data)
+            : createTeacher;
+          break;
+        }
+
+        case "student": {
+          if (!cur.name) validationErrors.push("Name is required");
+          if (!cur.cnic) {
+            validationErrors.push("CNIC is required");
+          } else if (!validateCNIC(cur.cnic)) {
+            validationErrors.push("CNIC must be 13 digits");
+          }
+          if (cur.email && !validateEmail(cur.email)) {
+            validationErrors.push("Invalid email format");
+          }
+          if (cur.phone && !validatePhone(cur.phone)) {
+            validationErrors.push("Invalid phone number format");
+          }
+
+          dataToSend = {
+            name: cur.name,
+            email: cur.email,
+            phone: cur.phone,
+            cnic: cur.cnic,
+            pncNo: cur.pncNo,
+            passport: cur.passport,
+            status: cur.status,
+            documentstatus: cur.documentstatus,
+            city: cur.city,
+          };
+          apiCall = editingId
+            ? (data) => updateStudent(editingId, data)
+            : createStudent;
+          break;
+        }
+
+        case "course": {
+          if (!cur.name) validationErrors.push("Course name is required");
+          if (!cur.code) validationErrors.push("Course code is required");
+          if (!cur.creditHours) {
+            validationErrors.push("Credit hours are required");
+          } else if (isNaN(cur.creditHours)) {
+            validationErrors.push("Credit hours must be a number");
+          }
+          if (cur.startDate && cur.endDate && cur.startDate > cur.endDate) {
+            validationErrors.push("End date must be after start date");
+          }
+
+          dataToSend = {
+            name: cur.name,
+            code: cur.code,
+            description: cur.description,
+            creditHours: cur.creditHours,
+            startDate: cur.startDate,
+            endDate: cur.endDate,
+            courseContent: cur.courseContent,
+          };
+          apiCall = editingId
+            ? (data) => updateCourse(editingId, data)
+            : createCourse;
+          break;
+        }
+
+        default:
+          break;
       }
-    } catch {
-      setError("Failed to fetch students by city");
-    }
-  };
 
-  /** ---------- Open modals (prepare fresh lists) ---------- */
-  const openCoordinatorModal = () => {
-    if (!selectedCampus) return;
-    setCoordinatorForm({ coordinatorId: "" });
-    setAvailableCoordinators(
-      (data.coordinators || []).filter(
-        (coordinator) =>
-          !selectedCampus?.coordinators?.some(
-            (assigned) => assigned._id === coordinator._id
-          )
-      )
-    );
-    setShowCoordinatorForm(true);
-  };
+      if (validationErrors.length > 0) {
+        throw new Error(validationErrors.join("\n"));
+      }
 
-  const openStudentModal = () => {
-    if (!selectedCampus) return;
-    setStudentForm({ studentIds: [] });
-    setAvailableStudents(
-      (data.students || []).filter(
-        (student) =>
-          !selectedCampus?.students?.some((x) => x._id === student._id)
-      )
-    );
-    setCity("");
-    setShowStudentForm(true);
-  };
-
-  const openCourseModal = () => {
-    if (!selectedCampus) return;
-    setCourseForm({ courseId: "" });
-    setShowCourseForm(true);
-  };
-
-  const openTeacherModal = () => {
-    if (!selectedCourse) return;
-    setTeacherForm({ teacherId: "" });
-    setAvailableTeachers(
-      (data.teachers || []).filter(
-        (teacher) =>
-          !selectedCourse?.teachers?.some((x) => x._id === teacher._id)
-      )
-    );
-    setShowTeacherForm(true);
-  };
-
-  /** ---------- Assign handlers ---------- */
-  const handleAssignCoordinator = async () => {
-    if (!coordinatorForm.coordinatorId || !selectedCampus?._id) {
-      setError("Please select a coordinator");
-      return;
-    }
-    try {
-      await api.assignCoordinatorToCampus(
-        coordinatorForm.coordinatorId,
-        selectedCampus._id
+      await apiCall(dataToSend);
+      setSuccessMessage(
+        `${activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} ${
+          editingId ? "updated" : "registered"
+        } successfully!`
       );
-      await fetchData();
-      setShowCoordinatorForm(false);
-      setCoordinatorForm({ coordinatorId: "" });
-      setError(null);
-    } catch {
-      setError("Failed to assign coordinator");
+      resetForm();
+      setViewMode("view");
+    } catch (error) {
+      console.error("Registration error:", error);
+      setErrorMessage(error.message || "Registration failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleAssignTeacher = async () => {
-    console.log("Selected Teacher ID:", teacherForm.teacherId);
-    console.log("Selected Course:", selectedCourse); // Debugging line
-  
+  const handleEdit = (item) => {
+    setEditingId(item._id);
+    setViewMode("add");
 
-    if (!teacherForm.teacherId || !selectedCourse) {
-      setError("Please select a teacher and a course");
+    switch (activeTab) {
+      case "campus":
+        setFormData((prev) => ({
+          ...prev,
+          campus: {
+            name: item.name || "",
+            location: item.location || "",
+            address: item.address || "",
+            contactNumber: item.contactNumber || "",
+          },
+        }));
+        break;
+      case "principal":
+        setFormData((prev) => ({
+          ...prev,
+          principal: {
+            name: item.name || "",
+            email: item.user?.email || "",
+            phone: item.contactNumber || "",
+            password: "",
+          },
+        }));
+        break;
+      case "teacher":
+        setFormData((prev) => ({
+          ...prev,
+          teacher: {
+            name: item.name || "",
+            email: item.user?.email || "",
+            phone: item.contactNumber || "",
+            cnic: item.cnic || "",
+            password: "",
+            subjectSpecialization: item.subjectSpecialization || "",
+            qualifications: item.qualifications || "",
+            campusId: item.campus?._id || "",
+          },
+        }));
+        break;
+      case "student":
+        setFormData((prev) => ({
+          ...prev,
+          student: {
+            name: item.name || "",
+            email: item.email || "",
+            phone: item.phone || "",
+            cnic: item.cnic || "",
+            pncNo: item.pncNo || "",
+            passport: item.passport || "",
+            status: item.status || "Active",
+            documentstatus: item.documentstatus || "notverified",
+            city: item.city || "",
+            studentExcelFile: null,
+          },
+        }));
+        break;
+      case "course":
+        setFormData((prev) => ({
+          ...prev,
+          course: {
+            name: item.name || "",
+            code: item.code || "",
+            description: item.description || "",
+            creditHours: item.creditHours || "",
+            startDate: item.startDate || "",
+            endDate: item.endDate || "",
+            courseContent: item.courseContent || [],
+            currentContent: { title: "", duration: "", description: "", remarks: "" },
+            courseFile: null,
+          },
+        }));
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this record?")) {
       return;
     }
 
     try {
-      await api.assignTeachersToCourses(teacherForm.teacherId, [
-        selectedCourse,
-      ]);
-      await fetchData();
-      setShowTeacherForm(false);
-      setTeacherForm({ teacherId: "" });
-      setError(null);
-    } catch (err) {
-      setError("Failed to assign teacher");
-      console.error("Teacher assignment error:", err);
-    }
-  };
+      setLoading(true);
+      switch (activeTab) {
+        case "campus":
+          await deleteCampus(id);
+          break;
+        case "principal":
+          await deleteCoordinator(id);
+          break;
+        case "teacher":
+          await deleteTeacher(id);
+          break;
+        case "student":
+          await deleteStudent(id);
+          break;
+        case "course":
+          await deleteCourse(id);
+          break;
+        default:
+          break;
+      }
 
-  const handleAssignStudentsToCampus = async () => {
-    if (!selectedCampus?._id || (studentForm.studentIds || []).length === 0) {
-      setError("Please select at least one student");
-      return;
-    }
-    try {
-      await api.assignStudentsToCampus(
-        studentForm.studentIds,
-        selectedCampus._id
+      setSuccessMessage(
+        `${activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} deleted successfully!`
       );
-      await fetchData();
-      setShowStudentForm(false);
-      setStudentForm({ studentIds: [] });
-      setError(null);
-    } catch {
-      setError("Failed to assign students");
+
+      // Refresh the data list
+      let response;
+      switch (activeTab) {
+        case "campus":
+          response = await getCampuses();
+          break;
+        case "principal":
+          response = await getCoordinators();
+          break;
+        case "teacher":
+          response = await getTeachers();
+          break;
+        case "student":
+          response = await getStudents();
+          break;
+        case "course":
+          response = await getCourses();
+          break;
+        default:
+          response = { data: [] };
+      }
+      setDataList(response.data);
+    } catch (error) {
+      console.error("Delete error:", error);
+      setErrorMessage("Failed to delete. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleAssignCourse = async () => {
-    if (!courseForm.courseId || !selectedCampus?._id) {
-      setError("Please select a course");
-      return;
-    }
-    try {
-      await api.assignCoursesToCampus(
-        [courseForm.courseId],
-        selectedCampus._id
-      );
-      await fetchData();
-      setShowCourseForm(false);
-      setCourseForm({ courseId: "" });
-      setError(null);
-    } catch (err) {
-      setError("Failed to assign course");
-      console.error("Assignment error:", err?.response?.data || err?.message);
-    }
-  };
+  // ---- search / filter computed list ----
+  const filteredData = dataList.filter((item) => {
+    const searchFields = {
+      campus: ["name", "location", "contactNumber"],
+      principal: ["name", "user.email", "contactNumber"],
+      teacher: ["name", "user.email", "subjectSpecialization"],
+      student: ["name", "email", "cnic"],
+      course: ["name", "code"],
+    };
 
-  /** ---------- Remove handlers (target specific IDs) ---------- */
-  const handleRemoveCoordinator = async (coordinatorId) => {
-    if (!coordinatorId || !selectedCampus?._id) return;
-    try {
-      await api.removeCoordinatorFromCampus(coordinatorId, selectedCampus._id);
-      await fetchData();
-      setError(null);
-    } catch {
-      setError("Failed to remove coordinator");
-    }
-  };
+    const fields = searchFields[activeTab] || [];
+    return fields.some((field) => {
+      const value = field.split(".").reduce((obj, key) => obj?.[key], item);
+      return value?.toString().toLowerCase().includes(searchTerm.toLowerCase());
+    });
+  });
 
-  const handleRemoveTeacher = async (teacherId) => {
-    if (!teacherId || !selectedCourse?._id) return;
-    try {
-      await api.removeTeacherFromCourse(teacherId, selectedCourse._id);
-      await fetchData();
-      setError(null);
-    } catch {
-      setError("Failed to remove teacher");
-    }
-  };
+  const renderForm = () => {
+    const cur = formData[activeKey(activeTab)];
 
-  const handleRemoveStudent = async (studentId) => {
-    if (!studentId || !selectedCampus?._id) return;
-    try {
-      await api.removeStudentFromCampus(studentId, selectedCampus._id);
-      await fetchData();
-      setError(null);
-    } catch {
-      setError("Failed to remove student");
-    }
-  };
-
-  const handleRemoveCourse = async (courseId) => {
-    if (!courseId || !selectedCampus?._id) return;
-    try {
-      await api.removeCourseFromCampus(courseId, selectedCampus._id);
-      await fetchData();
-      setError(null);
-    } catch {
-      setError("Failed to remove course");
-    }
-  };
-
-  /** ---------- View Components ---------- */
-  const CampusDetail = () => (
-    <div className="detail-container">
-      <div className="detail-header">
-        <h2>{selectedCampus?.name || "Campus"}</h2>
-        <div className="detail-stats">
-          <span>
-            <strong>Coordinators:</strong>{" "}
-            {selectedCampus?.coordinators?.length || 0}
-          </span>
-          <span>
-            <strong>Students:</strong> {selectedCampus?.students?.length || 0}
-          </span>
-          <span>
-            <strong>Courses:</strong> {selectedCampus?.courses?.length || 0}
-          </span>
-        </div>
-      </div>
-
-      <div className="tabs">
-        <button
-          className={`tab-btn ${activeTab === "campus" ? "active" : ""}`}
-          onClick={() => setActiveTab("campus")}
-        >
-          Campus Details
-        </button>
-        <button
-          className={`tab-btn ${activeTab === "course" ? "active" : ""}`}
-          onClick={() => setActiveTab("course")}
-        >
-          Courses
-        </button>
-      </div>
-
-      {activeTab === "campus" && (
-        <div className="tab-content">
-          <div className="action-buttons">
-            <button
-              className="action-btn assign"
-              onClick={openCoordinatorModal}
-            >
-              Assign Coordinator
-            </button>
-            <button className="action-btn assign" onClick={openStudentModal}>
-              Assign Students
-            </button>
-            <button className="action-btn assign" onClick={openCourseModal}>
-              Assign Course
-            </button>
-          </div>
-
-          {/* Assigned Coordinators */}
-          <div className="detail-section">
-            <h3>Assigned Coordinators</h3>
-            {selectedCampus?.coordinators?.length > 0 ? (
-              <ul className="assigned-list">
-                {selectedCampus.coordinators.map((c) => {
-                  const name = getPersonName(c);
-                  const email = getEmail(c);
-                  const phone = getPhone(c);
-                  return (
-                    <li
-                      key={c._id}
-                      className="assigned-item assigned-item--chip"
-                    >
-                      <div className="assigned-chip-main">
-                        <div className="assigned-avatar">
-                          {name.charAt(0).toUpperCase()}
-                        </div>
-                        <div className="assigned-meta">
-                          <div className="assigned-name">{name}</div>
-                          <div className="assigned-sub">
-                            {email && (
-                              <span className="assigned-sub-item">{email}</span>
-                            )}
-                            {phone && (
-                              <span className="assigned-sub-item">{phone}</span>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                      <button
-                        className="remove-btn"
-                        title="Remove coordinator"
-                        onClick={() => handleRemoveCoordinator(c._id)}
-                      >
-                        Remove
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            ) : (
-              <p>No coordinators assigned</p>
-            )}
-          </div>
-
-          {/* Assigned Students */}
-          <div className="detail-section">
-            <h3>Assigned Students</h3>
-            {selectedCampus?.students?.length > 0 ? (
-              <div className="students-grid">
-                {selectedCampus.students.map((student) => (
-                  <div key={student._id} className="student-card">
-                    <div className="student-header">
-                      <h4>{getPersonName(student)}</h4>
-                      <button
-                        className="remove-btn"
-                        onClick={() => handleRemoveStudent(student._id)}
-                      >
-                        Remove
-                      </button>
-                    </div>
-                    <div className="student-details">
-                      <div className="detail-row">
-                        <span className="detail-label">Email:</span>
-                        <span className="detail-value">
-                          {student.email || "—"}
-                        </span>
-                      </div>
-                      <div className="detail-row">
-                        <span className="detail-label">Phone:</span>
-                        <span className="detail-value">
-                          {student.phone || "—"}
-                        </span>
-                      </div>
-                      <div className="detail-row">
-                        <span className="detail-label">City:</span>
-                        <span className="detail-value">
-                          {student.city || "—"}
-                        </span>
-                      </div>
-                      <div className="detail-row">
-                        <span className="detail-label">CNIC:</span>
-                        <span className="detail-value">
-                          {student.cnic || "—"}
-                        </span>
-                      </div>
-                      <div className="detail-row">
-                        <span className="detail-label">PNC No:</span>
-                        <span className="detail-value">
-                          {student.pncNo || "—"}
-                        </span>
-                      </div>
-                      <div className="detail-row">
-                        <span className="detail-label">Passport:</span>
-                        <span className="detail-value">
-                          {student.passport || "—"}
-                        </span>
-                      </div>
-                      <div className="detail-row">
-                        <span className="detail-label">Document Status:</span>
-                        <span
-                          className={`status-badge ${
-                            student.documentstatus || "notverified"
-                          }`}
-                        >
-                          {student.documentstatus || "Not Verified"}
-                        </span>
-                      </div>
-                      {student.qualifications && (
-                        <div className="detail-row">
-                          <span className="detail-label">Qualifications:</span>
-                          <span className="detail-value">
-                            {student.qualifications}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
+    return (
+      <form onSubmit={handleSubmit} style={styles.formContainer}>
+        {activeTab === "campus" && (
+          <>
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
+                <label>Campus Name *</label>
+                <input
+                  type="text"
+                  value={cur.name}
+                  onChange={(e) => handleInputChange("name", e.target.value)}
+                  required
+                  style={styles.input}
+                />
               </div>
-            ) : (
-              <p>No students assigned</p>
-            )}
-          </div>
-        </div>
-      )}
+              <div style={styles.formGroup}>
+                <label>Location *</label>
+                <input
+                  type="text"
+                  value={cur.location}
+                  onChange={(e) => handleInputChange("location", e.target.value)}
+                  required
+                  style={styles.input}
+                />
+              </div>
+            </div>
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
+                <label>Address</label>
+                <textarea
+                  value={cur.address}
+                  onChange={(e) => handleInputChange("address", e.target.value)}
+                  rows="3"
+                  style={styles.textarea}
+                />
+              </div>
+              <div style={styles.formGroup}>
+                <label>Contact Number *</label>
+                <input
+                  type="tel"
+                  value={cur.contactNumber}
+                  onChange={(e) =>
+                    handleInputChange("contactNumber", e.target.value)
+                  }
+                  required
+                  pattern="[0-9]{10,15}"
+                  title="10-15 digit phone number"
+                  style={styles.input}
+                />
+              </div>
+            </div>
+          </>
+        )}
 
-      {activeTab === "course" && (
-        <div className="tab-content">
-          <div className="courses-list">
-            {selectedCampus?.courses?.length > 0 ? (
-              selectedCampus.courses.map((course) => (
-                <div
-                  key={course._id}
-                  className={`course-card ${
-                    selectedCourse?._id === course._id ? "selected" : ""
-                  }`}
-                  onClick={() => handleCourseSelect(course)}
-                >
-                  <h4>{course.name}</h4>
-                  <p>
-                    <strong>Teachers:</strong> {course.teachers?.length || 0}
-                  </p>
-
-                  {selectedCourse?._id === course._id && (
-                    <div className="course-details">
-                      <div className="action-buttons">
-                        <button
-                          className="action-btn assign"
-                          onClick={openTeacherModal}
-                        >
-                          Assign Teacher
-                        </button>
-                        <button
-                          className="action-btn remove"
-                          onClick={() => handleRemoveCourse(course._id)}
-                        >
-                          Remove Course
-                        </button>
-                      </div>
-
-                      <h5>Assigned Teachers</h5>
-                      {course.teachers?.length > 0 ? (
-                        <ul className="assigned-list">
-                          {course.teachers.map((teacher) => (
-                            <li key={teacher._id} className="assigned-item">
-                              <span>{getPersonName(teacher)}</span>
-                              <button
-                                className="remove-btn"
-                                onClick={() => handleRemoveTeacher(teacher._id)}
-                              >
-                                Remove
-                              </button>
-                            </li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <p>No teachers assigned</p>
-                      )}
-                    </div>
+        {activeTab === "principal" && (
+          <>
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
+                <label>Name *</label>
+                <input
+                  type="text"
+                  value={cur.name}
+                  onChange={(e) => handleInputChange("name", e.target.value)}
+                  required
+                  style={styles.input}
+                />
+              </div>
+              <div style={styles.formGroup}>
+                <label>Email *</label>
+                <input
+                  type="email"
+                  value={cur.email}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  required
+                  style={styles.input}
+                />
+              </div>
+            </div>
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
+                <label>
+                  {editingId ? "New Password" : "Password *"}
+                  {!editingId && (
+                    <small style={styles.hint}>Minimum 6 characters</small>
                   )}
-                </div>
-              ))
-            ) : (
-              <p>No courses assigned to this campus</p>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* ---------- Modals ---------- */}
-      {showCoordinatorForm && (
-        <div className="modal">
-          <div className="modal-content">
-            <button
-              className="close-btn"
-              onClick={() => setShowCoordinatorForm(false)}
-            >
-              &times;
-            </button>
-            <h3>Assign Coordinator</h3>
-            <div className="form-group">
-              <label>Select Coordinator</label>
-              <select
-                value={coordinatorForm.coordinatorId}
-                onChange={(e) =>
-                  setCoordinatorForm({ coordinatorId: e.target.value })
-                }
-              >
-                <option value="">-- Select Coordinator --</option>
-                {availableCoordinators.map((coordinator) => (
-                  <option key={coordinator._id} value={coordinator._id}>
-                    {getPersonName(coordinator)}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="form-actions">
-              <button
-                className="cancel-btn"
-                onClick={() => setShowCoordinatorForm(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="confirm-btn"
-                onClick={handleAssignCoordinator}
-                disabled={!coordinatorForm.coordinatorId}
-              >
-                Assign
-              </button>
-            </div>
-            {error && <div className="error-message">{error}</div>}
-          </div>
-        </div>
-      )}
-
-      {showCourseForm && (
-        <div className="modal" onClick={() => setShowCourseForm(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h3>Assign Course</h3>
-            <div className="form-group">
-              <label>Select Course</label>
-              <select
-                value={courseForm.courseId}
-                onChange={(e) => setCourseForm({ courseId: e.target.value })}
-              >
-                <option value="">-- Select Course --</option>
-                {(data.courses || [])
-                  .filter(
-                    (course) =>
-                      !selectedCampus?.courses?.some(
-                        (c) => c._id === course._id
-                      )
-                  )
-                  .map((course) => (
-                    <option key={course._id} value={course._id}>
-                      {course.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
-            <div className="form-actions">
-              <button
-                className="cancel-btn"
-                onClick={() => setShowCourseForm(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="confirm-btn"
-                onClick={handleAssignCourse}
-                disabled={!courseForm.courseId}
-              >
-                Assign
-              </button>
-            </div>
-            {error && <div className="error-message">{error}</div>}
-          </div>
-        </div>
-      )}
-
-      {showTeacherForm && selectedCourse && (
-        <div className="modal" onClick={() => setShowTeacherForm(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h3>Assign Teacher to {selectedCourse.name}</h3>
-            <div className="form-group">
-              <label>Select Teacher</label>
-              <select
-                value={teacherForm.teacherId}
-                onChange={(e) => setTeacherForm({ teacherId: e.target.value })}
-              >
-                <option value="">-- Select Teacher --</option>
-                {availableTeachers.map((teacher) => (
-                  <option key={teacher._id} value={teacher._id}>
-                    {getPersonName(teacher)}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="form-actions">
-              <button
-                className="cancel-btn"
-                onClick={() => setShowTeacherForm(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="confirm-btn"
-                onClick={handleAssignTeacher}
-                disabled={!teacherForm.teacherId}
-              >
-                Assign
-              </button>
-            </div>
-            {error && <div className="error-message">{error}</div>}
-          </div>
-        </div>
-      )}
-
-      {showStudentForm && (
-        <div className="modal" onClick={() => setShowStudentForm(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h3>Assign Students</h3>
-
-            <div className="form-group">
-              <label>Filter by City</label>
-              <select value={city} onChange={handleCityChange}>
-                <option value="">-- All Cities --</option>
-                {TARGET_CITIES.map((cityName) => (
-                  <option key={cityName} value={cityName}>
-                    {cityName}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {(availableStudents || []).length > 0 ? (
-              <div className="students-list">
-                <div className="select-all">
+                </label>
+                <div style={styles.passwordInput}>
                   <input
-                    type="checkbox"
-                    checked={
-                      studentForm.studentIds.length ===
-                        availableStudents.length && availableStudents.length > 0
-                    }
-                    onChange={() => {
-                      if (
-                        studentForm.studentIds.length ===
-                        availableStudents.length
-                      ) {
-                        setStudentForm({ studentIds: [] });
-                      } else {
-                        setStudentForm({
-                          studentIds: availableStudents.map((s) => s._id),
-                        });
-                      }
-                    }}
+                    type={showPassword ? "text" : "password"}
+                    value={cur.password}
+                    onChange={(e) => handleInputChange("password", e.target.value)}
+                    required={!editingId}
+                    minLength="6"
+                    style={styles.input}
                   />
-                  <span>Select All</span>
+                  <button
+                    type="button"
+                    style={styles.togglePassword}
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <MdVisibilityOff /> : <MdVisibility />}
+                  </button>
                 </div>
-                {availableStudents.map((student) => (
-                  <div key={student._id} className="student-item-modal">
-                    <input
-                      type="checkbox"
-                      checked={studentForm.studentIds.includes(student._id)}
-                      onChange={() =>
-                        setStudentForm((prev) => ({
-                          studentIds: prev.studentIds.includes(student._id)
-                            ? prev.studentIds.filter((id) => id !== student._id)
-                            : [...prev.studentIds, student._id],
-                        }))
-                      }
-                    />
-                    <div className="student-info-modal">
-                      <div className="student-name-modal">
-                        {getPersonName(student)}
-                      </div>
-                      <div className="student-details-modal">
-                        <span>{student.email}</span>
-                        {student.phone && <span> • {student.phone}</span>}
-                        {student.city && <span> • {student.city}</span>}
-                        {student.cnic && <span> • CNIC: {student.cnic}</span>}
-                        {student.pncNo && <span> • PNC: {student.pncNo}</span>}
-                      </div>
-                      <div className="student-status-modal">
-                        <span
-                          className={`status-badge ${
-                            student.documentstatus || "notverified"
-                          }`}
-                        >
-                          {student.documentstatus || "Not Verified"}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
               </div>
-            ) : (
-              <p>No students available</p>
-            )}
-
-            <div className="form-actions">
-              <button
-                className="cancel-btn"
-                onClick={() => setShowStudentForm(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="confirm-btn"
-                onClick={handleAssignStudentsToCampus}
-                disabled={(studentForm.studentIds || []).length === 0}
-              >
-                Assign Selected Students
-              </button>
+              <div style={styles.formGroup}>
+                <label>Phone *</label>
+                <input
+                  type="tel"
+                  value={cur.phone}
+                  onChange={(e) => handleInputChange("phone", e.target.value)}
+                  pattern="[0-9]{10,15}"
+                  title="10-15 digit phone number"
+                  required
+                  style={styles.input}
+                />
+              </div>
             </div>
-            {error && <div className="error-message">{error}</div>}
-          </div>
+          </>
+        )}
+
+        {activeTab === "teacher" && (
+          <>
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
+                <label>Name *</label>
+                <input
+                  type="text"
+                  value={cur.name}
+                  onChange={(e) => handleInputChange("name", e.target.value)}
+                  required
+                  style={styles.input}
+                />
+              </div>
+              <div style={styles.formGroup}>
+                <label>Email *</label>
+                <input
+                  type="email"
+                  value={cur.email}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  required
+                  style={styles.input}
+                />
+              </div>
+            </div>
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
+                <label>
+                  {editingId ? "New Password" : "Password *"}
+                  {!editingId && (
+                    <small style={styles.hint}>Minimum 6 characters</small>
+                  )}
+                </label>
+                <div style={styles.passwordInput}>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={cur.password}
+                    onChange={(e) => handleInputChange("password", e.target.value)}
+                    required={!editingId}
+                    minLength="6"
+                    style={styles.input}
+                  />
+                  <button
+                    type="button"
+                    style={styles.togglePassword}
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <MdVisibilityOff /> : <MdVisibility />}
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
+                <label>Subject Specialization *</label>
+                <input
+                  type="text"
+                  value={cur.subjectSpecialization}
+                  onChange={(e) =>
+                    handleInputChange("subjectSpecialization", e.target.value)
+                  }
+                  required
+                  style={styles.input}
+                />
+              </div>
+              <div style={styles.formGroup}>
+                <label>Qualifications </label>
+                <input
+                  type="text"
+                  value={cur.qualifications}
+                  onChange={(e) =>
+                    handleInputChange("qualifications", e.target.value)
+                  }
+                  required
+                  style={styles.input}
+                />
+              </div>
+            </div>
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
+                <label>Phone</label>
+                <input
+                  type="tel"
+                  value={cur.phone}
+                  onChange={(e) => handleInputChange("phone", e.target.value)}
+                  pattern="[0-9]{10,15}"
+                  title="10-15 digit phone number"
+                  style={styles.input}
+                />
+              </div>
+            </div>
+          </>
+        )}
+
+        {activeTab === "student" && (
+          <>
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
+                <label>Name *</label>
+                <input
+                  type="text"
+                  value={cur.name}
+                  onChange={(e) => handleInputChange("name", e.target.value)}
+                  required
+                  style={styles.input}
+                />
+              </div>
+              <div style={styles.formGroup}>
+                <label>CNIC *</label>
+                <input
+                  type="text"
+                  value={cur.cnic}
+                  onChange={(e) => handleInputChange("cnic", e.target.value)}
+                  required
+                  pattern="[0-9]{13}"
+                  title="13 digit CNIC number"
+                  style={styles.input}
+                />
+              </div>
+            </div>
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
+                <label>Email</label>
+                <input
+                  type="email"
+                  value={cur.email}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  style={styles.input}
+                />
+              </div>
+              <div style={styles.formGroup}>
+                <label>Phone *</label>
+                <input
+                  type="tel"
+                  value={cur.phone}
+                  onChange={(e) => handleInputChange("phone", e.target.value)}
+                  pattern="[0-9]{10,15}"
+                  title="10-15 digit phone number"
+                  required
+                  style={styles.input}
+                />
+              </div>
+            </div>
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
+                <label>PNC No</label>
+                <input
+                  type="text"
+                  value={cur.pncNo}
+                  onChange={(e) => handleInputChange("pncNo", e.target.value)}
+                  style={styles.input}
+                />
+              </div>
+              <div style={styles.formGroup}>
+                <label>Passport</label>
+                <input
+                  type="text"
+                  value={cur.passport}
+                  onChange={(e) => handleInputChange("passport", e.target.value)}
+                  style={styles.input}
+                />
+              </div>
+            </div>
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
+                <label>Document Status</label>
+                <select
+                  value={cur.documentstatus}
+                  onChange={(e) =>
+                    handleInputChange("documentstatus", e.target.value)
+                  }
+                  style={styles.input}
+                >
+                  <option value="notverified">Not Verified</option>
+                  <option value="verified">Verified</option>
+                </select>
+              </div>
+            </div>
+            {!editingId && (
+              <div style={styles.formRow}>
+                <div style={styles.formGroup}>
+                  <label>Bulk Import Students (Excel)</label>
+                  <div style={styles.fileUpload}>
+                    <input
+                      type="file"
+                      id="student-excel"
+                      accept=".xlsx,.xls,.csv"
+                      onChange={(e) => handleFileChange("studentExcelFile", e)}
+                      style={{ display: 'none' }}
+                    />
+                    <label htmlFor="student-excel" style={styles.fileUploadBtn}>
+                      <MdAttachFile />{" "}
+                      {cur.studentExcelFile
+                        ? cur.studentExcelFile.name
+                        : "Choose Excel File"}
+                    </label>
+                    {cur.studentExcelFile && (
+                      <button
+                        type="button"
+                        onClick={handleImport}
+                        style={styles.importBtn}
+                        disabled={loading}
+                      >
+                        {loading ? "Importing..." : "Import Students"}
+                      </button>
+                    )}
+
+                    {/* Fetch & Register from Portal */}
+                    <button
+                      type="button"
+                      onClick={handleFetchAndRegisterFromPortal}
+                      style={{ ...styles.importBtn, ...styles.secondaryBtn, marginLeft: "8px" }}
+                      disabled={loading}
+                    >
+                      {loading ? "Processing..." : "Fetch & Register from Portal"}
+                    </button>
+                  </div>
+                  <small style={styles.hint}>
+                    Excel should contain columns: name, email, phone, cnic, pncNo,
+                    passport
+                  </small>
+                </div>
+              </div>
+            )}
+          </>
+        )}
+
+        {activeTab === "course" && (
+          <>
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
+                <label>Course Name *</label>
+                <input
+                  type="text"
+                  value={cur.name}
+                  onChange={(e) => handleInputChange("name", e.target.value)}
+                  required
+                  style={styles.input}
+                />
+              </div>
+              <div style={styles.formGroup}>
+                <label>Course Code *</label>
+                <input
+                  type="text"
+                  value={cur.code}
+                  onChange={(e) => handleInputChange("code", e.target.value)}
+                  required
+                  style={styles.input}
+                />
+              </div>
+            </div>
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
+                <label>Credit Hours *</label>
+                <input
+                  type="number"
+                  value={cur.creditHours}
+                  onChange={(e) =>
+                    handleInputChange("creditHours", e.target.value)
+                  }
+                  required
+                  min="1"
+                  style={styles.input}
+                />
+              </div>
+              <div style={styles.formGroup}>
+                <label>Description</label>
+                <textarea
+                  value={cur.description}
+                  onChange={(e) =>
+                    handleInputChange("description", e.target.value)
+                  }
+                  rows="3"
+                  style={styles.textarea}
+                />
+              </div>
+            </div>
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
+                <label>Start Date</label>
+                <input
+                  type="date"
+                  value={cur.startDate}
+                  onChange={(e) => handleInputChange("startDate", e.target.value)}
+                  style={styles.input}
+                />
+              </div>
+              <div style={styles.formGroup}>
+                <label>End Date</label>
+                <input
+                  type="date"
+                  value={cur.endDate}
+                  onChange={(e) => handleInputChange("endDate", e.target.value)}
+                  min={cur.startDate}
+                  style={styles.input}
+                />
+              </div>
+            </div>
+          </>
+        )}
+
+        <div style={styles.formActions}>
+          <button
+            type="button"
+            style={styles.cancelBtn}
+            onClick={() => {
+              setViewMode("view");
+              resetForm();
+            }}
+          >
+            Cancel
+          </button>
+          <button type="submit" style={styles.submitBtn} disabled={loading}>
+            {loading
+              ? "Processing..."
+              : `${editingId ? "Update" : "Save"} ${
+                  activeTab.charAt(0).toUpperCase() + activeTab.slice(1)
+                }`}
+          </button>
         </div>
-      )}
+      </form>
+    );
+  };
 
-      <button className="back-btn" onClick={() => setSelectedCampus(null)}>
-        Back to All Campuses
-      </button>
-    </div>
-  );
+  const renderDataTable = () => {
+    if (loading) {
+      return <div style={styles.loading}>Loading...</div>;
+    }
 
+    if (filteredData.length === 0) {
+      return <div style={styles.noData}>No data found</div>;
+    }
+
+    const getColumns = () => {
+      switch (activeTab) {
+        case "campus":
+          return [
+            { header: "Name", accessor: "name" },
+            { header: "Location", accessor: "location" },
+            { header: "Contact", accessor: "contactNumber" },
+            { header: "Actions", accessor: "actions" },
+          ];
+        case "principal":
+          return [
+            { header: "Name", accessor: "name" },
+            { header: "Email", accessor: "user.email" },
+            { header: "Phone", accessor: "contactNumber" },
+            { header: "Actions", accessor: "actions" },
+          ];
+        case "teacher":
+          return [
+            { header: "Name", accessor: "name" },
+            { header: "Email", accessor: "user.email" },
+            { header: "Specialization", accessor: "subjectSpecialization" },
+            { header: "Qualification", accessor: "qualifications" },
+            { header: "Actions", accessor: "actions" },
+          ];
+        case "student":
+          return [
+            { header: "Name", accessor: "name" },
+            { header: "CNIC", accessor: "cnic" },
+            { header: "Email", accessor: "email" },
+            { header: "Phone", accessor: "phone" },
+            { header: "City", accessor: "city" },
+            { header: "PNC No", accessor: "pncNo" },
+            { header: "Passport", accessor: "passport" },
+            { header: "Doc Status", accessor: "documentstatus" },
+            { header: "Actions", accessor: "actions" },
+          ];
+        case "course":
+          return [
+            { header: "Name", accessor: "name" },
+            { header: "Code", accessor: "code" },
+            { header: "Credit Hours", accessor: "creditHours" },
+            {
+              header: "Duration",
+              accessor: (item) =>
+                `${
+                  item.startDate
+                    ? new Date(item.startDate).toLocaleDateString()
+                    : ""
+                } -
+                 ${
+                   item.endDate
+                     ? new Date(item.endDate).toLocaleDateString()
+                     : ""
+                 }`,
+            },
+            { header: "Actions", accessor: "actions" },
+          ];
+        default:
+          return [];
+      }
+    };
+
+    const getNestedValue = (obj, path) => {
+      return path
+        .split(".")
+        .reduce((o, key) => (o && o[key] !== undefined ? o[key] : ""), obj);
+    };
+
+    return (
+      <div style={styles.dataTableContainer}>
+        <div style={styles.searchBar}>
+          <MdSearch style={styles.searchIcon} />
+          <input
+            type="text"
+            placeholder={`Search ${activeTab}s...`}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={styles.searchInput}
+          />
+        </div>
+        <table style={styles.dataTable}>
+          <thead>
+            <tr>
+              {getColumns().map((column, index) => (
+                <th key={index} style={styles.tableHeader}>{column.header}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {filteredData.map((item) => (
+              <tr key={item._id} style={styles.tableRow}>
+                {getColumns().map((column, colIndex) => {
+                  if (column.accessor === "actions") {
+                    return (
+                      <td key={colIndex} style={styles.actionsCell}>
+                        <button
+                          onClick={() => handleEdit(item)}
+                          style={styles.editBtn}
+                          title="Edit"
+                        >
+                          <MdEdit />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(item._id)}
+                          style={styles.deleteBtn}
+                          title="Delete"
+                        >
+                          <MdDelete />
+                        </button>
+                      </td>
+                    );
+                  }
+
+                  const value =
+                    typeof column.accessor === "function"
+                      ? column.accessor(item)
+                      : getNestedValue(item, column.accessor);
+
+                  return <td key={colIndex} style={styles.tableCell}>{value || "-"}</td>;
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+
+  // ---- component return (kept same layout / classes) ----
   return (
-    <div className="category-container">
-      <div className="header">
-        <h1>Campus Management</h1>
-        <p>Manage campuses, coordinators, students, courses, and teachers</p>
+    <div style={styles.registrationsContainer}>
+      <div style={styles.header}>
+        <h2 style={styles.headerTitle}>Registrations</h2>
+        <div style={styles.viewToggle}>
+          <button
+            style={{
+              ...styles.viewBtn,
+              ...(viewMode === "add" ? styles.viewBtnActive : {})
+            }}
+            onClick={() => {
+              setViewMode("add");
+              resetForm();
+            }}
+          >
+            <MdAdd /> Add New
+          </button>
+          <button
+            style={{
+              ...styles.viewBtn,
+              ...(viewMode === "view" ? styles.viewBtnActive : {})
+            }}
+            onClick={() => setViewMode("view")}
+          >
+            <MdPeople /> View All
+          </button>
+        </div>
       </div>
 
-      {error &&
-        !showCoordinatorForm &&
-        !showCourseForm &&
-        !showTeacherForm &&
-        !showStudentForm && <div className="error-message">{error}</div>}
+      <div style={styles.tabs}>
+        <button
+          style={{
+            ...styles.tabBtn,
+            ...(activeTab === "campus" ? styles.tabBtnActive : {})
+          }}
+          onClick={() => handleTabChange("campus")}
+        >
+          <MdSchool /> Campuses
+        </button>
+        <button
+          style={{
+            ...styles.tabBtn,
+            ...(activeTab === "principal" ? styles.tabBtnActive : {})
+          }}
+          onClick={() => handleTabChange("principal")}
+        >
+          <MdPerson /> Principals
+        </button>
+        <button
+          style={{
+            ...styles.tabBtn,
+            ...(activeTab === "teacher" ? styles.tabBtnActive : {})
+          }}
+          onClick={() => handleTabChange("teacher")}
+        >
+          <MdPerson /> Teachers
+        </button>
+        <button
+          style={{
+            ...styles.tabBtn,
+            ...(activeTab === "student" ? styles.tabBtnActive : {})
+          }}
+          onClick={() => handleTabChange("student")}
+        >
+          <MdPeople /> Students
+        </button>
+        <button
+          style={{
+            ...styles.tabBtn,
+            ...(activeTab === "course" ? styles.tabBtnActive : {})
+          }}
+          onClick={() => handleTabChange("course")}
+        >
+          <MdSchool /> Courses
+        </button>
+      </div>
 
-      {loading ? (
-        <div className="loading">Loading data...</div>
-      ) : !selectedCampus ? (
-        <div className="campuses-grid">
-          {data.campuses.map((campus) => (
-            <div
-              key={campus._id}
-              className="campus-card"
-              onClick={() => handleCampusSelect(campus)}
-            >
-              <h3>{campus.name}</h3>
-              <div className="campus-stats">
-                <div>
-                  <span>{campus.coordinators?.length || 0}</span>
-                  <small>Coordinators</small>
-                </div>
-                <div>
-                  <span>{campus.students?.length || 0}</span>
-                  <small>Students</small>
-                </div>
-                <div>
-                  <span>{campus.courses?.length || 0}</span>
-                  <small>Courses</small>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <CampusDetail />
-      )}
+      {successMessage && <div style={{...styles.alert, ...styles.successAlert}}>{successMessage}</div>}
+      {errorMessage && <div style={{...styles.alert, ...styles.errorAlert}}>{errorMessage}</div>}
+
+      <div style={styles.contentArea}>
+        {viewMode === "add" ? renderForm() : renderDataTable()}
+      </div>
     </div>
   );
 };
 
-export default Category;
+// Inline styles object
+const styles = {
+  registrationsContainer: {
+    maxWidth: '1200px',
+    margin: '0 auto',
+    padding: '20px',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    backgroundColor: '#f5f7fa',
+    minHeight: '100vh'
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '20px',
+    paddingBottom: '15px',
+    borderBottom: '1px solid #e0e0e0'
+  },
+  headerTitle: {
+    margin: 0,
+    color: '#333',
+    fontSize: '24px',
+    fontWeight: 600
+  },
+  viewToggle: {
+    display: 'flex',
+    gap: '10px'
+  },
+  viewBtn: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '5px',
+    padding: '8px 15px',
+    border: '1px solid #ddd',
+    borderRadius: '4px',
+    backgroundColor: '#f8f9fa',
+    color: '#555',
+    fontSize: '14px',
+    fontWeight: 500,
+    cursor: 'pointer',
+    transition: 'all 0.3s ease'
+  },
+  viewBtnActive: {
+    backgroundColor: '#3f51b5',
+    borderColor: '#3f51b5',
+    color: 'white'
+  },
+  tabs: {
+    display: 'flex',
+    marginBottom: '20px',
+    borderBottom: '1px solid #ddd',
+    overflowX: 'auto',
+    paddingBottom: '10px'
+  },
+  tabBtn: {
+    padding: '10px 20px',
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    fontSize: '16px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    color: '#7f8c8d',
+    borderBottom: '3px solid transparent',
+    transition: 'all 0.3s ease',
+    whiteSpace: 'nowrap'
+  },
+  tabBtnActive: {
+    color: '#3498db',
+    borderBottomColor: '#3498db',
+    fontWeight: 600
+  },
+  formContainer: {
+    background: '#fff',
+    padding: '25px',
+    borderRadius: '8px',
+    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)'
+  },
+  formRow: {
+    display: 'flex',
+    gap: '20px',
+    marginBottom: '20px'
+  },
+  formGroup: {
+    flex: 1,
+    marginBottom: '15px'
+  },
+  input: {
+    width: '100%',
+    padding: '10px 12px',
+    border: '1px solid #ddd',
+    borderRadius: '4px',
+    fontSize: '16px',
+    transition: 'border-color 0.3s'
+  },
+  textarea: {
+    width: '100%',
+    padding: '10px 12px',
+    border: '1px solid #ddd',
+    borderRadius: '4px',
+    fontSize: '16px',
+    transition: 'border-color 0.3s',
+    minHeight: '80px',
+    resize: 'vertical'
+  },
+  passwordInput: {
+    position: 'relative'
+  },
+  togglePassword: {
+    position: 'absolute',
+    right: '10px',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    color: '#7f8c8d',
+    fontSize: '20px'
+  },
+  hint: {
+    color: '#7f8c8d',
+    fontSize: '12px',
+    marginTop: '4px',
+    display: 'block'
+  },
+  fileUpload: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px'
+  },
+  fileUploadBtn: {
+    background: '#ecf0f1',
+    padding: '10px 15px',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '5px',
+    fontSize: '14px',
+    border: '1px dashed #bdc3c7',
+    flex: 1
+  },
+  importBtn: {
+    background: '#2ecc71',
+    color: 'white',
+    border: 'none',
+    padding: '10px 15px',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    fontSize: '14px'
+  },
+  secondaryBtn: {
+    background: '#2196f3'
+  },
+  formActions: {
+    marginTop: '30px',
+    textAlign: 'right'
+  },
+  submitBtn: {
+    background: '#2ecc71',
+    color: 'white',
+    border: 'none',
+    padding: '12px 25px',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    fontSize: '16px',
+    fontWeight: 500
+  },
+  cancelBtn: {
+    background: '#95a5a6',
+    color: 'white',
+    border: 'none',
+    padding: '12px 25px',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    fontSize: '16px',
+    fontWeight: 500,
+    marginRight: '10px'
+  },
+  alert: {
+    padding: '15px',
+    borderRadius: '4px',
+    marginBottom: '20px'
+  },
+  successAlert: {
+    background: '#d4edda',
+    color: '#155724',
+    border: '1px solid #c3e6cb'
+  },
+  errorAlert: {
+    background: '#f8d7da',
+    color: '#721c24',
+    border: '1px solid #f5c6cb'
+  },
+  dataTableContainer: {
+    background: 'white',
+    borderRadius: '8px',
+    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+    marginTop: '20px',
+    overflow: 'hidden'
+  },
+  searchBar: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    padding: '15px 20px',
+    backgroundColor: '#f8f9fa',
+    borderBottom: '1px solid #e0e0e0'
+  },
+  searchInput: {
+    flex: 1,
+    border: 'none',
+    outline: 'none',
+    fontSize: '14px',
+    padding: '8px 0',
+    background: 'transparent'
+  },
+  searchIcon: {
+    fontSize: '18px',
+    color: '#6c757d',
+    marginRight: '10px'
+  },
+  dataTable: {
+    width: '100%',
+    borderCollapse: 'collapse',
+    fontSize: '14px'
+  },
+  tableHeader: {
+    backgroundColor: '#f5f7fa',
+    padding: '12px 20px',
+    textAlign: 'left',
+    fontWeight: 600,
+    color: '#495057',
+    borderBottom: '1px solid #e0e0e0'
+  },
+  tableRow: {
+    borderBottom: '1px solid #f0f0f0'
+  },
+  tableCell: {
+    padding: '12px 20px',
+    color: '#212529'
+  },
+  actionsCell: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    gap: '10px',
+    padding: '12px 20px'
+  },
+  editBtn: {
+    padding: '6px',
+    border: 'none',
+    background: 'none',
+    cursor: 'pointer',
+    borderRadius: '50%',
+    color: '#6c757d',
+    transition: 'all 0.2s ease',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '32px',
+    height: '32px'
+  },
+  deleteBtn: {
+    padding: '6px',
+    border: 'none',
+    background: 'none',
+    cursor: 'pointer',
+    borderRadius: '50%',
+    color: '#6c757d',
+    transition: 'all 0.2s ease',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '32px',
+    height: '32px'
+  },
+  loading: {
+    padding: '30px',
+    textAlign: 'center',
+    color: '#6c757d',
+    fontSize: '15px'
+  },
+  noData: {
+    padding: '30px',
+    textAlign: 'center',
+    color: '#6c757d',
+    fontStyle: 'italic',
+    fontSize: '15px'
+  },
+  contentArea: {
+    marginTop: '20px'
+  }
+};
+
+export default Registrations;

@@ -32,7 +32,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       icon: <MdNotifications />,
     },
     { id: "/admin/reports", label: "Reports", icon: <MdBarChart /> },
-    { id: "/admin/settings", label: "Settings", icon: <MdSettings /> },
+    // { id: "/admin/settings", label: "Settings", icon: <MdSettings /> },
   ];
 
   return (
