@@ -13,13 +13,14 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
   const menuItems = [
     { id: "/admin/dashboard", label: "Dashboard", icon: <MdHome /> },
-    { id: "/admin/category", label: "Category", icon: <MdCategory /> },
     {
       id: "/admin/registrations",
       label: "Registrations",
       icon: <MdAssignment />,
     },
-    { id: "/admin/courses", label: "Courses", icon: <MdMenuBook /> },
+    { id: "/admin/category", label: "Category", icon: <MdCategory /> },
+
+    // { id: "/admin/courses", label: "Courses", icon: <MdMenuBook /> },
     {
       id: "/admin/uploadlessonsplans",
       label: "Lesson Plans",
