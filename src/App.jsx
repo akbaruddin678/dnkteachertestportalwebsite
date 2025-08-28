@@ -7,39 +7,39 @@ import {
 import "./App.css";
 
 import SuperAdminLayout from "./Layout/SuperAdminLayout";
-import SuperAdminCategory from './Components/SuperAdmin/Category/Category.jsx'
-import SuperAdminDashboard from "./Components/SuperAdmin/Dashbaord/Dashboard";
-import SuperAdminNotifications from "./Components/SuperAdmin/Notifications/Notifications";
-import SuperAdminRegistrations from "./Components/SuperAdmin/Registrations/Registrations";
-import SuperAdminReports from "./Components/SuperAdmin/Reports/Reports";
-import SuperAdminSettings from "./Components/SuperAdmin/Settings/Settings";
-import SuperAdminUploadLessonsPlans from "./Components/SuperAdmin/UploadLessonsPlans/UploadLessonsPlans";
-import SuperAdminCourses from "./Components/SuperAdmin/Courses/Courses";
+import SuperAdminCategory from './Components/SuperAdmin/AdCategory/AdCategory.jsx'
+import SuperAdminDashboard from "./Components/SuperAdmin/AdDashbaord/AdDashboard";
+import SuperAdminNotifications from "./Components/SuperAdmin/AdNotifications/AdNotifications";
+import SuperAdminRegistrations from "./Components/SuperAdmin/AdRegistrations/AdRegistrations";
+import SuperAdminReports from "./Components/SuperAdmin/AdReports/AdReports";
+import SuperAdminSettings from "./Components/SuperAdmin/AdSettings/AdSettings";
+import SuperAdminUploadLessonsPlans from "./Components/SuperAdmin/AdUploadLessonsPlans/AdUploadLessonsPlans";
+import SuperAdminCourses from "./Components/SuperAdmin/AdCourses/AdCourses";
 
 import CoordinatorLayout from "./Layout/CoordinatorLayout";
-import CoordinatorDashboard from "./Components/Coordinator/Dashbaord/Dashboard";
-import CoordinatorAttendance from "./Components/Coordinator/Attendance/Attendance.jsx";
-import CoordinatorCategory from './Components/Coordinator/Category/Category.jsx'
-import CoordinatorManageStudents from "./Components/Coordinator/ManageStudents/ManageStudents";
-import CoordinatorManageTeachers from "./Components/Coordinator/ManageTeachers/ManageTeachers";
-import CoordinatorNotifications from "./Components/Coordinator/Notifications/Notifications";
-import CoordinatorRegistrations from "./Components/Coordinator/Registrations/Registrations";
-import CoordinatorReports from "./Components/Coordinator/Reports/Reports";
-import CoordinatorSettings from "./Components/Coordinator/Settings/Settings";
-import CoordinatorUploadLessonsPlans from "./Components/Coordinator/UploadLessonsPlans/UploadLessonsPlans";
-import CoordinatorCourses from "./Components/Coordinator/Courses/Courses";
+import CoordinatorDashboard from "./Components/Coordinator/CoDashbaord/CoDashboard";
+import CoordinatorAttendance from "./Components/Coordinator/CoAttendance/CoAttendance.jsx";
+import CoordinatorCategory from './Components/Coordinator/CoCategory/CoCategory.jsx'
+import CoordinatorManageStudents from "./Components/Coordinator/CoManageStudents/CoManageStudents";
+import CoordinatorManageTeachers from "./Components/Coordinator/CoManageTeachers/CoManageTeachers";
+import CoordinatorNotifications from "./Components/Coordinator/CoNotifications/CoNotifications";
+import CoordinatorRegistrations from "./Components/Coordinator/CoRegistrations/CoRegistrations";
+import CoordinatorReports from "./Components/Coordinator/CoReports/CoReports";
+import CoordinatorSettings from "./Components/Coordinator/CoSettings/CoSettings";
+import CoordinatorUploadLessonsPlans from "./Components/Coordinator/CoUploadLessonsPlans/CoUploadLessonsPlans";
+import CoordinatorCourses from "./Components/Coordinator/CoCourses/CoCourses";
 
 import TeacherLayout from "./Layout/TeacherLayout";
-import TeacherDashboard from "./Components/Teacher/Dashbaord/Dashboard";
-import TeacherCategory from "./Components/Teacher/Category/Category.jsx";
-import TeacherManageStudents from "./Components/Teacher/ManageStudents/ManageStudents";
-import TeacherNotifications from "./Components/Teacher/Notifications/Notifications";
-import TeacherRegistrations from "./Components/Teacher/Registrations/Registrations";
-import TeacherReports from "./Components/Teacher/Reports/Reports";
-import TeacherSettings from "./Components/Teacher/Settings/Settings";
-import TeacherUploadLessonsPlans from "./Components/Teacher/UploadLessonsPlans/UploadLessonsPlans";
-import TeacherCourses from "./Components/Teacher/Courses/Courses.jsx";
-import TeacherAttendance from "./Components/Teacher/Attendance/Attendance.jsx";
+import TeacherDashboard from "./Components/Teacher/TaDashbaord/TaDashboard";
+import TeacherCategory from "./Components/Teacher/TaCategory/TaCategory.jsx";
+import TeacherManageStudents from "./Components/Teacher/TaManageStudents/TaManageStudents";
+import TeacherNotifications from "./Components/Teacher/TaNotifications/TaNotifications";
+import TeacherRegistrations from "./Components/Teacher/TaRegistrations/TaRegistrations";
+import TeacherReports from "./Components/Teacher/TaReports/TaReports";
+import TeacherSettings from "./Components/Teacher/TaSettings/TaSettings";
+import TeacherUploadLessonsPlans from "./Components/Teacher/TaUploadLessonsPlans/TaUploadLessonsPlans";
+import TeacherCourses from "./Components/Teacher/TaCourses/TaCourses.jsx";
+import TeacherAttendance from "./Components/Teacher/TaAttendance/TaAttendance.jsx";
 
 
 import Help from './Components/Common/Help/Help'

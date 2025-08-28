@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import SuperAdminSidebar from './SuperAdminSidebar/Sidebar';
+import SuperAdminSidebar from './SuperAdminSidebar/SASidebar';
 import Header from './SuperAdminHeader/SuperAdminHeader';
 
 const Layout = () => {

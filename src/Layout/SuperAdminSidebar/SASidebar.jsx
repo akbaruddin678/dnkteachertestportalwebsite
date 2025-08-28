@@ -1,8 +1,8 @@
 
-import "./CoordSidebar.css";
+import "./SASidebar.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
-  MdHome, MdSchool, MdCategory, MdHowToReg, MdAssignment,
+  MdHome, MdSchool, MdCategory, MdPerson, MdAssignment,
   MdLibraryBooks, MdNotifications, MdBarChart, MdSettings, MdMenuBook , MdHelp
 } from "react-icons/md";
 
@@ -12,22 +12,33 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
   const activeComponent = location.pathname;
 
   const menuItems = [
-    { id: "/coordinator/dashboard", label: "Dashboard", icon: <MdHome /> },
-    { id: "/coordinator/category", label: "Category", icon: <MdCategory /> },
-    { id: "/coordinator/registrations", label: "Registrations", icon: <MdAssignment /> },
-    { id: "/coordinator/courses", label: "Courses", icon: <MdMenuBook  /> },
-    { id: "/coordinator/uploadlessonsplans", label: "Lesson Plans", icon: <MdLibraryBooks /> },
-    { id: "/coordinator/notifications", label: "Notifications", icon: <MdNotifications /> },
-    { id: "/coordinator/reports", label: "Reports", icon: <MdBarChart /> },
-    { id: "/coordinator/attendance", label: "Attendance", icon: <MdHowToReg  /> },
-    { id: "/coordinator/settings", label: "Settings", icon: <MdSettings /> },
+    { id: "/admin/dashboard", label: "Dashboard", icon: <MdHome /> },
+    { id: "/admin/category", label: "Category", icon: <MdCategory /> },
+    {
+      id: "/admin/registrations",
+      label: "Registrations",
+      icon: <MdAssignment />,
+    },
+    { id: "/admin/courses", label: "Courses", icon: <MdMenuBook /> },
+    {
+      id: "/admin/uploadlessonsplans",
+      label: "Lesson Plans",
+      icon: <MdLibraryBooks />,
+    },
+    {
+      id: "/admin/notifications",
+      label: "Notifications",
+      icon: <MdNotifications />,
+    },
+    { id: "/admin/reports", label: "Reports", icon: <MdBarChart /> },
+    { id: "/admin/settings", label: "Settings", icon: <MdSettings /> },
   ];
 
   return (
     <div className={`sidebar ${isOpen ? "open" : ""}`}>
       <div className="sidebar-header">
         <h2
-          onClick={() => navigate("/coordinator/dashboard")}
+          onClick={() => navigate("/admin/dashboard")}
           style={{ cursor: "pointer" }}
         >
           Nclex LMS
@@ -54,10 +65,10 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       <div className="sidebar-footer">
         <button
           className={`nav-item ${
-            activeComponent === "/coordinator/help" ? "active" : ""
+            activeComponent === "/admin/help" ? "active" : ""
           }`}
           onClick={() => {
-            navigate("/coordinator/help");
+            navigate("/admin/help");
             setIsOpen?.(false);
           }}
         >
@@ -69,7 +80,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       </div>
     </div>
   );
-   };
-   
+};
 
 export default Sidebar;

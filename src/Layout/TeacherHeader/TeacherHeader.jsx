@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './Header.css';
+import './TeacherHeader.css';
 import { FiBell, FiUser, FiMenu } from 'react-icons/fi';
 import { useNavigate, Link } from 'react-router-dom';
 

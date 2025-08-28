@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import CoordinatorSidebar from './CoordinatorSidebar/CoordinatorSidebar.jsx';
 import CoordinatorHeader from './CoordinatorHeader/CoordinatorHeader.jsx';
-import data from "../Components/SuperAdmin/Category/categoryData.json"; // Import your category data
-import './Layout.css'; // <- you need styles for overlay and responsive margin
+import data from "../Components/SuperAdmin/AdCategory/categoryData.json"; // Import your category data
+import './CoordLayout.css'; // <- you need styles for overlay and responsive margin
 
 const Layout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);

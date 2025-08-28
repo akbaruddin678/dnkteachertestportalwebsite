@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import "./Header.css";
+import "./CoordHeader.css";
 import { FiBell, FiUser, FiMenu } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
