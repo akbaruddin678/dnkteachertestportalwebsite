@@ -34,11 +34,10 @@ import {
   deleteStudent,
   deleteCourse,
 } from "../../../services/api";
-import "./AdRegistrations.css";
 
 const Registrations = () => {
   const [activeTab, setActiveTab] = useState("campus");
-  const [viewMode, setViewMode] = useState("add"); // 'add' or 'view'
+  const [viewMode, setViewMode] = useState("add");
   const [formData, setFormData] = useState({
     campus: {
       name: "",
@@ -93,7 +92,7 @@ const Registrations = () => {
   });
 
   // --- Helpers ---
-  const normalizeCNIC = (cnic) => (cnic || "").replace(/\D/g, ""); // keep digits only
+  const normalizeCNIC = (cnic) => (cnic || "").replace(/\D/g, "");
   const normalizePhone = (p) => (p || "").replace(/\D/g, "");
   const isValidEmail = (e) => !!e && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 
@@ -164,7 +163,10 @@ const Registrations = () => {
           continue;
         }
         if (!payload.cnic || payload.cnic.length !== 13) {
-          skipped.push({ cnic: a.cnic, reason: "Invalid CNIC (need 13 digits)" });
+          skipped.push({
+            cnic: a.cnic,
+            reason: "Invalid CNIC (need 13 digits)",
+          });
           continue;
         }
         if (!payload.phone || payload.phone.length < 10) {
@@ -304,7 +306,7 @@ const Registrations = () => {
   }, [successMessage, errorMessage]);
 
   // Map the active tab to its key
-  const activeKey = (tab) => tab; // "campus" | "principal" | "teacher" | "student" | "course"
+  const activeKey = (tab) => tab;
 
   const handleInputChange = (field, value) => {
     const key = activeKey(activeTab);
@@ -318,7 +320,6 @@ const Registrations = () => {
   };
 
   const handleContentChange = (field, value) => {
-    // Only used for course.currentContent
     setFormData((prev) => ({
       ...prev,
       course: {
@@ -342,7 +343,10 @@ const Registrations = () => {
       ...prev,
       course: {
         ...prev.course,
-        courseContent: [...prev.course.courseContent, prev.course.currentContent],
+        courseContent: [
+          ...prev.course.courseContent,
+          prev.course.currentContent,
+        ],
         currentContent: {
           title: "",
           duration: "",
@@ -688,7 +692,9 @@ const Registrations = () => {
       setViewMode("view");
     } catch (error) {
       console.error("Registration error:", error);
-      setErrorMessage(error.message || "Registration failed. Please try again.");
+      setErrorMessage(
+        error.message || "Registration failed. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -764,7 +770,12 @@ const Registrations = () => {
             startDate: item.startDate || "",
             endDate: item.endDate || "",
             courseContent: item.courseContent || [],
-            currentContent: { title: "", duration: "", description: "", remarks: "" },
+            currentContent: {
+              title: "",
+              duration: "",
+              description: "",
+              remarks: "",
+            },
             courseFile: null,
           },
         }));
@@ -802,7 +813,9 @@ const Registrations = () => {
       }
 
       setSuccessMessage(
-        `${activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} deleted successfully!`
+        `${
+          activeTab.charAt(0).toUpperCase() + activeTab.slice(1)
+        } deleted successfully!`
       );
 
       // Refresh the data list
@@ -856,39 +869,44 @@ const Registrations = () => {
     const cur = formData[activeKey(activeTab)];
 
     return (
-      <form onSubmit={handleSubmit} className="form-container">
+      <form onSubmit={handleSubmit} style={styles.formContainer}>
         {activeTab === "campus" && (
           <>
-            <div className="form-row">
-              <div className="form-group">
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
                 <label>Campus Name *</label>
                 <input
                   type="text"
                   value={cur.name}
                   onChange={(e) => handleInputChange("name", e.target.value)}
                   required
+                  style={styles.input}
                 />
               </div>
-              <div className="form-group">
+              <div style={styles.formGroup}>
                 <label>Location *</label>
                 <input
                   type="text"
                   value={cur.location}
-                  onChange={(e) => handleInputChange("location", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("location", e.target.value)
+                  }
                   required
+                  style={styles.input}
                 />
               </div>
             </div>
-            <div className="form-row">
-              <div className="form-group">
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
                 <label>Address</label>
                 <textarea
                   value={cur.address}
                   onChange={(e) => handleInputChange("address", e.target.value)}
                   rows="3"
+                  style={styles.textarea}
                 />
               </div>
-              <div className="form-group">
+              <div style={styles.formGroup}>
                 <label>Contact Number *</label>
                 <input
                   type="tel"
@@ -899,6 +917,7 @@ const Registrations = () => {
                   required
                   pattern="[0-9]{10,15}"
                   title="10-15 digit phone number"
+                  style={styles.input}
                 />
               </div>
             </div>
@@ -907,52 +926,57 @@ const Registrations = () => {
 
         {activeTab === "principal" && (
           <>
-            <div className="form-row">
-              <div className="form-group">
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
                 <label>Name *</label>
                 <input
                   type="text"
                   value={cur.name}
                   onChange={(e) => handleInputChange("name", e.target.value)}
                   required
+                  style={styles.input}
                 />
               </div>
-              <div className="form-group">
+              <div style={styles.formGroup}>
                 <label>Email *</label>
                 <input
                   type="email"
                   value={cur.email}
                   onChange={(e) => handleInputChange("email", e.target.value)}
                   required
+                  style={styles.input}
                 />
               </div>
             </div>
-            <div className="form-row">
-              <div className="form-group">
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
                 <label>
                   {editingId ? "New Password" : "Password *"}
                   {!editingId && (
-                    <small className="hint">Minimum 6 characters</small>
+                    <small style={styles.hint}>Minimum 6 characters</small>
                   )}
                 </label>
-                <div className="password-input">
+                <div style={styles.passwordInput}>
                   <input
                     type={showPassword ? "text" : "password"}
                     value={cur.password}
-                    onChange={(e) => handleInputChange("password", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("password", e.target.value)
+                    }
                     required={!editingId}
                     minLength="6"
+                    style={styles.input}
                   />
                   <button
                     type="button"
-                    className="toggle-password"
+                    style={styles.togglePassword}
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? <MdVisibilityOff /> : <MdVisibility />}
                   </button>
                 </div>
               </div>
-              <div className="form-group">
+              <div style={styles.formGroup}>
                 <label>Phone *</label>
                 <input
                   type="tel"
@@ -961,6 +985,7 @@ const Registrations = () => {
                   pattern="[0-9]{10,15}"
                   title="10-15 digit phone number"
                   required
+                  style={styles.input}
                 />
               </div>
             </div>
@@ -969,71 +994,59 @@ const Registrations = () => {
 
         {activeTab === "teacher" && (
           <>
-            <div className="form-row">
-              <div className="form-group">
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
                 <label>Name *</label>
                 <input
                   type="text"
                   value={cur.name}
                   onChange={(e) => handleInputChange("name", e.target.value)}
                   required
+                  style={styles.input}
                 />
               </div>
-              <div className="form-group">
+              <div style={styles.formGroup}>
                 <label>Email *</label>
                 <input
                   type="email"
                   value={cur.email}
                   onChange={(e) => handleInputChange("email", e.target.value)}
                   required
+                  style={styles.input}
                 />
               </div>
             </div>
-            <div className="form-row">
-              <div className="form-group">
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
                 <label>
                   {editingId ? "New Password" : "Password *"}
                   {!editingId && (
-                    <small className="hint">Minimum 6 characters</small>
+                    <small style={styles.hint}>Minimum 6 characters</small>
                   )}
                 </label>
-                <div className="password-input">
+                <div style={styles.passwordInput}>
                   <input
                     type={showPassword ? "text" : "password"}
                     value={cur.password}
-                    onChange={(e) => handleInputChange("password", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("password", e.target.value)
+                    }
                     required={!editingId}
                     minLength="6"
+                    style={styles.input}
                   />
                   <button
                     type="button"
-                    className="toggle-password"
+                    style={styles.togglePassword}
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? <MdVisibilityOff /> : <MdVisibility />}
                   </button>
                 </div>
               </div>
-              {/* 
-              <div className="form-group">
-                <label>Campus *</label>
-                <select
-                  value={cur.campusId}
-                  onChange={(e) => handleInputChange("campusId", e.target.value)}
-                  required
-                >
-                  <option value="">Select Campus</option>
-                  {campuses.map((campus) => (
-                    <option key={campus._id} value={campus._id}>
-                      {campus.name}
-                    </option>
-                  ))}
-                </select>
-              </div> 
-              */}
             </div>
-            <div className="form-row">
-              <div className="form-group">
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
                 <label>Subject Specialization *</label>
                 <input
                   type="text"
@@ -1042,9 +1055,10 @@ const Registrations = () => {
                     handleInputChange("subjectSpecialization", e.target.value)
                   }
                   required
+                  style={styles.input}
                 />
               </div>
-              <div className="form-group">
+              <div style={styles.formGroup}>
                 <label>Qualifications </label>
                 <input
                   type="text"
@@ -1053,11 +1067,12 @@ const Registrations = () => {
                     handleInputChange("qualifications", e.target.value)
                   }
                   required
+                  style={styles.input}
                 />
               </div>
             </div>
-            <div className="form-row">
-              <div className="form-group">
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
                 <label>Phone</label>
                 <input
                   type="tel"
@@ -1065,6 +1080,7 @@ const Registrations = () => {
                   onChange={(e) => handleInputChange("phone", e.target.value)}
                   pattern="[0-9]{10,15}"
                   title="10-15 digit phone number"
+                  style={styles.input}
                 />
               </div>
             </div>
@@ -1073,17 +1089,18 @@ const Registrations = () => {
 
         {activeTab === "student" && (
           <>
-            <div className="form-row">
-              <div className="form-group">
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
                 <label>Name *</label>
                 <input
                   type="text"
                   value={cur.name}
                   onChange={(e) => handleInputChange("name", e.target.value)}
                   required
+                  style={styles.input}
                 />
               </div>
-              <div className="form-group">
+              <div style={styles.formGroup}>
                 <label>CNIC *</label>
                 <input
                   type="text"
@@ -1092,19 +1109,21 @@ const Registrations = () => {
                   required
                   pattern="[0-9]{13}"
                   title="13 digit CNIC number"
+                  style={styles.input}
                 />
               </div>
             </div>
-            <div className="form-row">
-              <div className="form-group">
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
                 <label>Email</label>
                 <input
                   type="email"
                   value={cur.email}
                   onChange={(e) => handleInputChange("email", e.target.value)}
+                  style={styles.input}
                 />
               </div>
-              <div className="form-group">
+              <div style={styles.formGroup}>
                 <label>Phone *</label>
                 <input
                   type="tel"
@@ -1113,35 +1132,41 @@ const Registrations = () => {
                   pattern="[0-9]{10,15}"
                   title="10-15 digit phone number"
                   required
+                  style={styles.input}
                 />
               </div>
             </div>
-            <div className="form-row">
-              <div className="form-group">
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
                 <label>PNC No</label>
                 <input
                   type="text"
                   value={cur.pncNo}
                   onChange={(e) => handleInputChange("pncNo", e.target.value)}
+                  style={styles.input}
                 />
               </div>
-              <div className="form-group">
+              <div style={styles.formGroup}>
                 <label>Passport</label>
                 <input
                   type="text"
                   value={cur.passport}
-                  onChange={(e) => handleInputChange("passport", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("passport", e.target.value)
+                  }
+                  style={styles.input}
                 />
               </div>
             </div>
-            <div className="form-row">
-              <div className="form-group">
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
                 <label>Document Status</label>
                 <select
                   value={cur.documentstatus}
                   onChange={(e) =>
                     handleInputChange("documentstatus", e.target.value)
                   }
+                  style={styles.input}
                 >
                   <option value="notverified">Not Verified</option>
                   <option value="verified">Verified</option>
@@ -1149,17 +1174,18 @@ const Registrations = () => {
               </div>
             </div>
             {!editingId && (
-              <div className="form-row">
-                <div className="form-group">
+              <div style={styles.formRow}>
+                <div style={styles.formGroup}>
                   <label>Bulk Import Students (Excel)</label>
-                  <div className="file-upload">
+                  <div style={styles.fileUpload}>
                     <input
                       type="file"
                       id="student-excel"
                       accept=".xlsx,.xls,.csv"
                       onChange={(e) => handleFileChange("studentExcelFile", e)}
+                      style={{ display: "none" }}
                     />
-                    <label htmlFor="student-excel" className="file-upload-btn">
+                    <label htmlFor="student-excel" style={styles.fileUploadBtn}>
                       <MdAttachFile />{" "}
                       {cur.studentExcelFile
                         ? cur.studentExcelFile.name
@@ -1169,7 +1195,7 @@ const Registrations = () => {
                       <button
                         type="button"
                         onClick={handleImport}
-                        className="import-btn"
+                        style={styles.importBtn}
                         disabled={loading}
                       >
                         {loading ? "Importing..." : "Import Students"}
@@ -1180,16 +1206,21 @@ const Registrations = () => {
                     <button
                       type="button"
                       onClick={handleFetchAndRegisterFromPortal}
-                      className="import-btn secondary"
+                      style={{
+                        ...styles.importBtn,
+                        ...styles.secondaryBtn,
+                        marginLeft: "8px",
+                      }}
                       disabled={loading}
-                      style={{ marginLeft: "8px" }}
                     >
-                      {loading ? "Processing..." : "Fetch & Register from Portal"}
+                      {loading
+                        ? "Processing..."
+                        : "Fetch & Register from Portal"}
                     </button>
                   </div>
-                  <small className="hint">
-                    Excel should contain columns: name, email, phone, cnic, pncNo,
-                    passport
+                  <small style={styles.hint}>
+                    Excel should contain columns: name, email, phone, cnic,
+                    pncNo, passport
                   </small>
                 </div>
               </div>
@@ -1199,28 +1230,30 @@ const Registrations = () => {
 
         {activeTab === "course" && (
           <>
-            <div className="form-row">
-              <div className="form-group">
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
                 <label>Course Name *</label>
                 <input
                   type="text"
                   value={cur.name}
                   onChange={(e) => handleInputChange("name", e.target.value)}
                   required
+                  style={styles.input}
                 />
               </div>
-              <div className="form-group">
+              <div style={styles.formGroup}>
                 <label>Course Code *</label>
                 <input
                   type="text"
                   value={cur.code}
                   onChange={(e) => handleInputChange("code", e.target.value)}
                   required
+                  style={styles.input}
                 />
               </div>
             </div>
-            <div className="form-row">
-              <div className="form-group">
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
                 <label>Credit Hours *</label>
                 <input
                   type="number"
@@ -1230,9 +1263,10 @@ const Registrations = () => {
                   }
                   required
                   min="1"
+                  style={styles.input}
                 />
               </div>
-              <div className="form-group">
+              <div style={styles.formGroup}>
                 <label>Description</label>
                 <textarea
                   value={cur.description}
@@ -1240,35 +1274,40 @@ const Registrations = () => {
                     handleInputChange("description", e.target.value)
                   }
                   rows="3"
+                  style={styles.textarea}
                 />
               </div>
             </div>
-            <div className="form-row">
-              <div className="form-group">
+            <div style={styles.formRow}>
+              <div style={styles.formGroup}>
                 <label>Start Date</label>
                 <input
                   type="date"
                   value={cur.startDate}
-                  onChange={(e) => handleInputChange("startDate", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("startDate", e.target.value)
+                  }
+                  style={styles.input}
                 />
               </div>
-              <div className="form-group">
+              <div style={styles.formGroup}>
                 <label>End Date</label>
                 <input
                   type="date"
                   value={cur.endDate}
                   onChange={(e) => handleInputChange("endDate", e.target.value)}
                   min={cur.startDate}
+                  style={styles.input}
                 />
               </div>
             </div>
           </>
         )}
 
-        <div className="form-actions">
+        <div style={styles.formActions}>
           <button
             type="button"
-            className="cancel-btn"
+            style={styles.cancelBtn}
             onClick={() => {
               setViewMode("view");
               resetForm();
@@ -1276,7 +1315,7 @@ const Registrations = () => {
           >
             Cancel
           </button>
-          <button type="submit" className="submit-btn" disabled={loading}>
+          <button type="submit" style={styles.submitBtn} disabled={loading}>
             {loading
               ? "Processing..."
               : `${editingId ? "Update" : "Save"} ${
@@ -1290,11 +1329,11 @@ const Registrations = () => {
 
   const renderDataTable = () => {
     if (loading) {
-      return <div className="loading">Loading...</div>;
+      return <div style={styles.loading}>Loading...</div>;
     }
 
     if (filteredData.length === 0) {
-      return <div className="no-data">No data found</div>;
+      return <div style={styles.noData}>No data found</div>;
     }
 
     const getColumns = () => {
@@ -1366,41 +1405,44 @@ const Registrations = () => {
     };
 
     return (
-      <div className="data-table-container">
-        <div className="search-bar">
-          <MdSearch className="search-icon" />
+      <div style={styles.dataTableContainer}>
+        <div style={styles.searchBar}>
+          <MdSearch style={styles.searchIcon} />
           <input
             type="text"
             placeholder={`Search ${activeTab}s...`}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            style={styles.searchInput}
           />
         </div>
-        <table className="data-table">
+        <table style={styles.dataTable}>
           <thead>
             <tr>
               {getColumns().map((column, index) => (
-                <th key={index}>{column.header}</th>
+                <th key={index} style={styles.tableHeader}>
+                  {column.header}
+                </th>
               ))}
             </tr>
           </thead>
           <tbody>
             {filteredData.map((item) => (
-              <tr key={item._id}>
+              <tr key={item._id} style={styles.tableRow}>
                 {getColumns().map((column, colIndex) => {
                   if (column.accessor === "actions") {
                     return (
-                      <td key={colIndex} className="actions-cell">
+                      <td key={colIndex} style={styles.actionsCell}>
                         <button
                           onClick={() => handleEdit(item)}
-                          className="edit-btn"
+                          style={styles.editBtn}
                           title="Edit"
                         >
                           <MdEdit />
                         </button>
                         <button
                           onClick={() => handleDelete(item._id)}
-                          className="delete-btn"
+                          style={styles.deleteBtn}
                           title="Delete"
                         >
                           <MdDelete />
@@ -1414,7 +1456,11 @@ const Registrations = () => {
                       ? column.accessor(item)
                       : getNestedValue(item, column.accessor);
 
-                  return <td key={colIndex}>{value || "-"}</td>;
+                  return (
+                    <td key={colIndex} style={styles.tableCell}>
+                      {value || "-"}
+                    </td>
+                  );
                 })}
               </tr>
             ))}
@@ -1426,12 +1472,15 @@ const Registrations = () => {
 
   // ---- component return (kept same layout / classes) ----
   return (
-    <div className="registrations-container">
-      <div className="header">
-        <h2>Registrations</h2>
-        <div className="view-toggle">
+    <div style={styles.registrationsContainer}>
+      <div style={styles.header}>
+        <h2 style={styles.headerTitle}>Registrations</h2>
+        <div style={styles.viewToggle}>
           <button
-            className={`view-btn ${viewMode === "add" ? "active" : ""}`}
+            style={{
+              ...styles.viewBtn,
+              ...(viewMode === "add" ? styles.viewBtnActive : {}),
+            }}
             onClick={() => {
               setViewMode("add");
               resetForm();
@@ -1440,7 +1489,10 @@ const Registrations = () => {
             <MdAdd /> Add New
           </button>
           <button
-            className={`view-btn ${viewMode === "view" ? "active" : ""}`}
+            style={{
+              ...styles.viewBtn,
+              ...(viewMode === "view" ? styles.viewBtnActive : {}),
+            }}
             onClick={() => setViewMode("view")}
           >
             <MdPeople /> View All
@@ -1448,47 +1500,364 @@ const Registrations = () => {
         </div>
       </div>
 
-      <div className="tabs">
+      <div style={styles.tabs}>
         <button
-          className={`tab-btn ${activeTab === "campus" ? "active" : ""}`}
+          style={{
+            ...styles.tabBtn,
+            ...(activeTab === "campus" ? styles.tabBtnActive : {}),
+          }}
           onClick={() => handleTabChange("campus")}
         >
           <MdSchool /> Campuses
         </button>
         <button
-          className={`tab-btn ${activeTab === "principal" ? "active" : ""}`}
+          style={{
+            ...styles.tabBtn,
+            ...(activeTab === "principal" ? styles.tabBtnActive : {}),
+          }}
           onClick={() => handleTabChange("principal")}
         >
           <MdPerson /> Principals
         </button>
         <button
-          className={`tab-btn ${activeTab === "teacher" ? "active" : ""}`}
+          style={{
+            ...styles.tabBtn,
+            ...(activeTab === "teacher" ? styles.tabBtnActive : {}),
+          }}
           onClick={() => handleTabChange("teacher")}
         >
           <MdPerson /> Teachers
         </button>
         <button
-          className={`tab-btn ${activeTab === "student" ? "active" : ""}`}
+          style={{
+            ...styles.tabBtn,
+            ...(activeTab === "student" ? styles.tabBtnActive : {}),
+          }}
           onClick={() => handleTabChange("student")}
         >
           <MdPeople /> Students
         </button>
         <button
-          className={`tab-btn ${activeTab === "course" ? "active" : ""}`}
+          style={{
+            ...styles.tabBtn,
+            ...(activeTab === "course" ? styles.tabBtnActive : {}),
+          }}
           onClick={() => handleTabChange("course")}
         >
           <MdSchool /> Courses
         </button>
       </div>
 
-      {successMessage && <div className="alert success">{successMessage}</div>}
-      {errorMessage && <div className="alert error">{errorMessage}</div>}
+      {successMessage && (
+        <div style={{ ...styles.alert, ...styles.successAlert }}>
+          {successMessage}
+        </div>
+      )}
+      {errorMessage && (
+        <div style={{ ...styles.alert, ...styles.errorAlert }}>
+          {errorMessage}
+        </div>
+      )}
 
-      <div className="content-area">
+      <div style={styles.contentArea}>
         {viewMode === "add" ? renderForm() : renderDataTable()}
       </div>
     </div>
   );
+};
+
+// Inline styles object
+const styles = {
+  registrationsContainer: {
+    maxWidth: "1200px",
+    margin: "0 auto",
+    padding: "20px",
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    backgroundColor: "#f5f7fa",
+    minHeight: "100vh",
+  },
+  header: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: "20px",
+    paddingBottom: "15px",
+    borderBottom: "1px solid #e0e0e0",
+  },
+  headerTitle: {
+    margin: 0,
+    color: "#333",
+    fontSize: "24px",
+    fontWeight: 600,
+  },
+  viewToggle: {
+    display: "flex",
+    gap: "10px",
+  },
+  viewBtn: {
+    display: "flex",
+    alignItems: "center",
+    gap: "5px",
+    padding: "8px 15px",
+    border: "1px solid #ddd",
+    borderRadius: "4px",
+    backgroundColor: "#f8f9fa",
+    color: "#555",
+    fontSize: "14px",
+    fontWeight: 500,
+    cursor: "pointer",
+    transition: "all 0.3s ease",
+  },
+  viewBtnActive: {
+    backgroundColor: "#3f51b5",
+    borderColor: "#3f51b5",
+    color: "white",
+  },
+  tabs: {
+    display: "flex",
+    marginBottom: "20px",
+    borderBottom: "1px solid #ddd",
+    overflowX: "auto",
+    paddingBottom: "10px",
+  },
+  tabBtn: {
+    padding: "10px 20px",
+    background: "none",
+    border: "none",
+    cursor: "pointer",
+    fontSize: "16px",
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    color: "#7f8c8d",
+    borderBottom: "3px solid transparent",
+    transition: "all 0.3s ease",
+    whiteSpace: "nowrap",
+  },
+  tabBtnActive: {
+    color: "#3498db",
+    borderBottomColor: "#3498db",
+    fontWeight: 600,
+  },
+  formContainer: {
+    background: "#fff",
+    padding: "25px",
+    borderRadius: "8px",
+    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+  },
+  formRow: {
+    display: "flex",
+    gap: "20px",
+    marginBottom: "20px",
+  },
+  formGroup: {
+    flex: 1,
+    marginBottom: "15px",
+  },
+  input: {
+    width: "100%",
+    padding: "10px 12px",
+    border: "1px solid #ddd",
+    borderRadius: "4px",
+    fontSize: "16px",
+    transition: "border-color 0.3s",
+  },
+  textarea: {
+    width: "100%",
+    padding: "10px 12px",
+    border: "1px solid #ddd",
+    borderRadius: "4px",
+    fontSize: "16px",
+    transition: "border-color 0.3s",
+    minHeight: "80px",
+    resize: "vertical",
+  },
+  passwordInput: {
+    position: "relative",
+  },
+  togglePassword: {
+    position: "absolute",
+    right: "10px",
+    top: "50%",
+    transform: "translateY(-50%)",
+    background: "none",
+    border: "none",
+    cursor: "pointer",
+    color: "#7f8c8d",
+    fontSize: "20px",
+  },
+  hint: {
+    color: "#7f8c8d",
+    fontSize: "12px",
+    marginTop: "4px",
+    display: "block",
+  },
+  fileUpload: {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+  },
+  fileUploadBtn: {
+    background: "#ecf0f1",
+    padding: "10px 15px",
+    borderRadius: "4px",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    gap: "5px",
+    fontSize: "14px",
+    border: "1px dashed #bdc3c7",
+    flex: 1,
+  },
+  importBtn: {
+    background: "#2ecc71",
+    color: "white",
+    border: "none",
+    padding: "10px 15px",
+    borderRadius: "4px",
+    cursor: "pointer",
+    fontSize: "14px",
+  },
+  secondaryBtn: {
+    background: "#2196f3",
+  },
+  formActions: {
+    marginTop: "30px",
+    textAlign: "right",
+  },
+  submitBtn: {
+    background: "#2ecc71",
+    color: "white",
+    border: "none",
+    padding: "12px 25px",
+    borderRadius: "4px",
+    cursor: "pointer",
+    fontSize: "16px",
+    fontWeight: 500,
+  },
+  cancelBtn: {
+    background: "#95a5a6",
+    color: "white",
+    border: "none",
+    padding: "12px 25px",
+    borderRadius: "4px",
+    cursor: "pointer",
+    fontSize: "16px",
+    fontWeight: 500,
+    marginRight: "10px",
+  },
+  alert: {
+    padding: "15px",
+    borderRadius: "4px",
+    marginBottom: "20px",
+  },
+  successAlert: {
+    background: "#d4edda",
+    color: "#155724",
+    border: "1px solid #c3e6cb",
+  },
+  errorAlert: {
+    background: "#f8d7da",
+    color: "#721c24",
+    border: "1px solid #f5c6cb",
+  },
+  dataTableContainer: {
+    background: "white",
+    borderRadius: "8px",
+    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+    marginTop: "20px",
+    overflow: "hidden",
+  },
+  searchBar: {
+    display: "flex",
+    justifyContent: "flex-end",
+    padding: "15px 20px",
+    backgroundColor: "#f8f9fa",
+    borderBottom: "1px solid #e0e0e0",
+  },
+  searchInput: {
+    flex: 1,
+    border: "none",
+    outline: "none",
+    fontSize: "14px",
+    padding: "8px 0",
+    background: "transparent",
+  },
+  searchIcon: {
+    fontSize: "18px",
+    color: "#6c757d",
+    marginRight: "10px",
+  },
+  dataTable: {
+    width: "100%",
+    borderCollapse: "collapse",
+    fontSize: "14px",
+  },
+  tableHeader: {
+    backgroundColor: "#f5f7fa",
+    padding: "12px 20px",
+    textAlign: "left",
+    fontWeight: 600,
+    color: "#495057",
+    borderBottom: "1px solid #e0e0e0",
+  },
+  tableRow: {
+    borderBottom: "1px solid #f0f0f0",
+  },
+  tableCell: {
+    padding: "12px 20px",
+    color: "#212529",
+  },
+  actionsCell: {
+    display: "flex",
+    justifyContent: "flex-end",
+    gap: "10px",
+    padding: "12px 20px",
+  },
+  editBtn: {
+    padding: "6px",
+    border: "none",
+    background: "none",
+    cursor: "pointer",
+    borderRadius: "50%",
+    color: "#6c757d",
+    transition: "all 0.2s ease",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "32px",
+    height: "32px",
+  },
+  deleteBtn: {
+    padding: "6px",
+    border: "none",
+    background: "none",
+    cursor: "pointer",
+    borderRadius: "50%",
+    color: "#6c757d",
+    transition: "all 0.2s ease",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "32px",
+    height: "32px",
+  },
+  loading: {
+    padding: "30px",
+    textAlign: "center",
+    color: "#6c757d",
+    fontSize: "15px",
+  },
+  noData: {
+    padding: "30px",
+    textAlign: "center",
+    color: "#6c757d",
+    fontStyle: "italic",
+    fontSize: "15px",
+  },
+  contentArea: {
+    marginTop: "20px",
+  },
 };
 
 export default Registrations;
