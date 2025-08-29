@@ -1,5 +1,5 @@
 import { useAuth } from "./context/AuthContext";
-import Loading from "./components/Common/Loading";
+import Loading from "./Components/Common/Loading";
 import { Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 
