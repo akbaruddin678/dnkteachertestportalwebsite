@@ -9,42 +9,49 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const loadUser = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (token) {
-          const response = await api.get("/auth/me");
-          setUser(response.data.data.user);
-        }
-      } catch (err) {
-        console.error("Error loading user", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadUser();
-  }, []);
+ useEffect(() => {
+   const loadUser = async () => {
+     try {
+       const token = localStorage.getItem("token");
+       if (token) {
+         // ensure api adds the token
+         api.defaults.headers.common.Authorization = `Bearer ${token}`;
 
-  const login = async (email, password) => {
-    try {
-      const response = await api.post("/auth/login", {
-        email,
-        password,
-      });
-      const { token, data } = response.data;
+         const res = await api.get("/auth/me");
+         setUser(res.data.data.user);
+       }
+     } catch (err) {
+       console.error("Error loading user", err);
+       // optionally clear bad token
+       localStorage.removeItem("token");
+       localStorage.removeItem("user");
+     } finally {
+       setLoading(false);
+     }
+   };
+   loadUser();
+ }, []);
 
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-      setUser(data.user);
+ const login = async (email, password) => {
+   try {
+     const response = await api.post("/auth/login", {
+       email,
+       password,
+     });
+     const { token, data } = response.data;
 
-      // Redirect based on role
-      navigate(`/${data.user.role}/dashboard`);
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  };
+     localStorage.setItem("token", token);
+     localStorage.setItem("user", JSON.stringify(data.user));
+     api.defaults.headers.common.Authorization = `Bearer ${token}`;
+     setUser(data.user);
+
+     // Redirect based on role
+     navigate(`/${data.user.role}/dashboard`);
+     return data;
+   } catch (error) {
+     throw error;
+   }
+ };
 
   const logout = async () => {
     try {
