@@ -122,78 +122,80 @@ const Registrations = () => {
       }
       const remote = await res.json();
       const remoteList = Array.isArray(remote?.data) ? remote.data : [];
+       console.log(remoteList);
+       // 2) Pull existing students once, build a CNIC set to de-dup
+       const existing = await getStudents();
+       const existingByCNIC = new Set(
+         (existing?.data || [])
+           .map((s) => normalizeCNIC(s.cnic))
+           .filter(Boolean)
+       );
 
-      // 2) Pull existing students once, build a CNIC set to de-dup
-      const existing = await getStudents();
-      const existingByCNIC = new Set(
-        (existing?.data || []).map((s) => normalizeCNIC(s.cnic)).filter(Boolean)
-      );
+       const toCreate = [];
+       const skipped = [];
 
-      const toCreate = [];
-      const skipped = [];
+       for (const record of remoteList) {
+         const a = record?.applicant || {};
+         const r = record?.result || {};
 
-      for (const record of remoteList) {
-        const a = record?.applicant || {};
-        const r = record?.result || {};
+         const total =
+           Number(r?.testMark || 0) +
+           Number(r?.essayMark || 0) +
+           Number(r?.interviewMark || 0);
 
-        const total =
-          Number(r?.testMark || 0) +
-          Number(r?.essayMark || 0) +
-          Number(r?.interviewMark || 0);
+         // Normalize
+         const cnicDigits = normalizeCNIC(a.cnic);
+         const phoneDigits = normalizePhone(a.contact);
 
-        // Normalize
-        const cnicDigits = normalizeCNIC(a.cnic);
-        const phoneDigits = normalizePhone(a.contact);
+         // Basic validations
+         const payload = {
+           name: (a.applicant_name || "").trim(),
+           email: (a.email || "").trim(),
+           phone: phoneDigits,
+           cnic: cnicDigits,
+           pncNo: (a.pnmc_no || "").trim(),
+           passport: "",
+           status: "Active",
+           documentstatus: "notverified",
+           city: (a.preferred_institute || "").trim(),
+         };
 
-        // Basic validations
-        const payload = {
-          name: (a.applicant_name || "").trim(),
-          email: (a.email || "").trim(),
-          phone: phoneDigits,
-          cnic: cnicDigits,
-          pncNo: (a.pnmc_no || "").trim(),
-          passport: "",
-          status: "Active",
-          documentstatus: "notverified",
-          city: (a.district || a.province || "").trim(),
-        };
+         if (!payload.name) {
+           skipped.push({ cnic: a.cnic, reason: "Missing name" });
+           continue;
+         }
+         if (!payload.cnic || payload.cnic.length !== 13) {
+           skipped.push({
+             cnic: a.cnic,
+             reason: "Invalid CNIC (need 13 digits)",
+           });
+           continue;
+         }
+         // if (!payload.phone || payload.phone.length < 10) {
+         //   skipped.push({ cnic: a.cnic, reason: "Missing/invalid phone" });
+         //   continue;
+         // }
+         if (!isValidEmail(payload.email)) {
+           skipped.push({ cnic: a.cnic, reason: "Missing/invalid email" });
+           continue;
+         }
+         // if (!payload.pncNo) {
+         //   skipped.push({ cnic: a.cnic, reason: "Missing PNC No" });
+         //   continue;
+         // }
 
-        if (!payload.name) {
-          skipped.push({ cnic: a.cnic, reason: "Missing name" });
-          continue;
-        }
-        if (!payload.cnic || payload.cnic.length !== 13) {
-          skipped.push({
-            cnic: a.cnic,
-            reason: "Invalid CNIC (need 13 digits)",
-          });
-          continue;
-        }
-        if (!payload.phone || payload.phone.length < 10) {
-          skipped.push({ cnic: a.cnic, reason: "Missing/invalid phone" });
-          continue;
-        }
-        if (!isValidEmail(payload.email)) {
-          skipped.push({ cnic: a.cnic, reason: "Missing/invalid email" });
-          continue;
-        }
-        if (!payload.pncNo) {
-          skipped.push({ cnic: a.cnic, reason: "Missing PNC No" });
-          continue;
-        }
+         if (total < 50) {
+           skipped.push({ cnic: a.cnic, reason: `Total marks ${total} < 50` });
+           continue;
+         }
 
-        if (total < 50) {
-          skipped.push({ cnic: a.cnic, reason: `Total marks ${total} < 50` });
-          continue;
-        }
+         if (existingByCNIC.has(payload.cnic)) {
+           skipped.push({ cnic: a.cnic, reason: "Already exists" });
+           continue;
+         }
 
-        if (existingByCNIC.has(payload.cnic)) {
-          skipped.push({ cnic: a.cnic, reason: "Already exists" });
-          continue;
-        }
-
-        toCreate.push(payload);
-      }
+         toCreate.push(payload);
+       }
 
       // 5) Create in parallel
       const results = await Promise.allSettled(

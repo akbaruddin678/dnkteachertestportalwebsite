@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 
-
 /** ===== Local Storage keys (from your Teacher Dashboard) ===== */
 const LS_TDB_TEACHER = "tdb_teacher";
 const LS_TDB_CAMPUSES = "tdb_campuses";
@@ -295,7 +294,7 @@ const Attendance = () => {
 
   return (
     <>
-    <style>{`.attendance-container {
+      <style>{`.attendance-container {
   padding: 1.5rem;
   font-family: 'Segoe UI', sans-serif;
   color: #111827;
@@ -511,55 +510,55 @@ const Attendance = () => {
   background:#f3f4f6;color:#111827;border:1px solid #e5e7eb;font-weight:700;font-size:.85rem;
 }
 `}</style>
-    <div className="attendance-container">
-      {/* top: course info (and actions) */}
-      <div className="course-bar">
-        <div
-          className="course-left"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <h2 className="attendance-title">Attendance</h2>
+      <div className="attendance-container">
+        {/* top: course info (and actions) */}
+        <div className="course-bar">
+          <div
+            className="course-left"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <h2 className="attendance-title">Attendance</h2>
 
-          <div className="course-info">
-            <label>Course</label>
-            <select
-              className="course-select"
-              value={courseId}
-              onChange={(e) => setCourseId(e.target.value)}
-            >
-              {(allCourses || []).map((c) => (
-                <option key={c._id} value={c._id}>
-                  {c.name} {c.code ? `• ${c.code}` : ""}
-                </option>
-              ))}
-            </select>
+            <div className="course-info">
+              <label>Course</label>
+              <select
+                className="course-select"
+                value={courseId}
+                onChange={(e) => setCourseId(e.target.value)}
+              >
+                {(allCourses || []).map((c) => (
+                  <option key={c._id} value={c._id}>
+                    {c.name} {c.code ? `• ${c.code}` : ""}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="course-meta">
+              {course ? (
+                <>
+                  <span className="pill">Code: {course.code || "—"}</span>
+                  <span className="pill">
+                    Campus Students: {(students || []).length}
+                  </span>
+                </>
+              ) : (
+                <span className="muted">No course assigned.</span>
+              )}
+            </div>
           </div>
 
-          <div className="course-meta">
-            {course ? (
-              <>
-                <span className="pill">Code: {course.code || "—"}</span>
-                <span className="pill">
-                  Campus Students: {(students || []).length}
-                </span>
-              </>
-            ) : (
-              <span className="muted">No course assigned.</span>
-            )}
-          </div>
-        </div>
-
-        <div className="head-actions">
-          <input
-            type="date"
-            className="date-input"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
-          {/* <div className="search-wrap">
+          <div className="head-actions">
+            <input
+              type="date"
+              className="date-input"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+            />
+            {/* <div className="search-wrap">
             <input
               className="search-input"
               placeholder="Search name, email, phone…"
@@ -567,164 +566,163 @@ const Attendance = () => {
               onChange={(e) => setQuery(e.target.value)}
             />
           </div> */}
-          <select
-            className="filter-select"
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-          >
-            <option>All</option>
-            {UI_STATUSES.map((s) => (
-              <option key={s}>{s}</option>
-            ))}
-            <option>Unmarked</option>
-          </select>
+            <select
+              className="filter-select"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+            >
+              <option>All</option>
+              {UI_STATUSES.map((s) => (
+                <option key={s}>{s}</option>
+              ))}
+              <option>Unmarked</option>
+            </select>
 
-          {/* <button
+            {/* <button
             className="btn"
             onClick={loadFromBackend}
             disabled={!courseId || loadingFromBackend}
           >
             {loadingFromBackend ? "Syncing…" : "Load from backend"}
           </button> */}
+          </div>
         </div>
-      </div>
 
-      {err && (
-        <div className="error-banner">
-          <strong>Error:</strong> {err}
+        {err && (
+          <div className="error-banner">
+            <strong>Error:</strong> {err}
+          </div>
+        )}
+
+        {/* summary */}
+        <div className="summary-row">
+          <div className="chip present">Present: {summary.Present}</div>
+          <div className="chip absent">Absent: {summary.Absent}</div>
+          <div className="chip half">Half Day: {summary["Half Day"]}</div>
+          <div className="chip leave">Leave: {summary.Leave}</div>
+          <div className="chip other">Other: {summary.Other}</div>
+          <div className="chip unmarked">Unmarked: {summary.Unmarked}</div>
         </div>
-      )}
 
-      {/* summary */}
-      <div className="summary-row">
-        <div className="chip present">Present: {summary.Present}</div>
-        <div className="chip absent">Absent: {summary.Absent}</div>
-        <div className="chip half">Half Day: {summary["Half Day"]}</div>
-        <div className="chip leave">Leave: {summary.Leave}</div>
-        <div className="chip other">Other: {summary.Other}</div>
-        <div className="chip unmarked">Unmarked: {summary.Unmarked}</div>
-      </div>
-
-      {/* bulk */}
-      <div className="bulk-row">
-        <div className="bulk-left">
-          <label className="bulk-label">Bulk mark (filtered rows):</label>
-          <select
-            className="bulk-select"
-            value={bulkStatus}
-            onChange={(e) => setBulkStatus(e.target.value)}
-          >
-            <option value="">Choose status…</option>
-            {UI_STATUSES.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
-            ))}
-          </select>
-          <button
-            className="btn primary"
-            onClick={bulkApply}
-            disabled={!bulkStatus || !courseId}
-          >
-            Apply
-          </button>
+        {/* bulk */}
+        <div className="bulk-row">
+          <div className="bulk-left">
+            <label className="bulk-label">Bulk mark (filtered rows):</label>
+            <select
+              className="bulk-select"
+              value={bulkStatus}
+              onChange={(e) => setBulkStatus(e.target.value)}
+            >
+              <option value="">Choose status…</option>
+              {UI_STATUSES.map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
+              ))}
+            </select>
+            <button
+              className="btn primary"
+              onClick={bulkApply}
+              disabled={!bulkStatus || !courseId}
+            >
+              Apply
+            </button>
+          </div>
+          <div className="bulk-right">
+            <button
+              className="btn danger"
+              onClick={clearDay}
+              disabled={!courseId}
+            >
+              Clear {date}
+            </button>
+          </div>
         </div>
-        <div className="bulk-right">
-          <button
-            className="btn danger"
-            onClick={clearDay}
-            disabled={!courseId}
-          >
-            Clear {date}
-          </button>
-        </div>
-      </div>
 
-      {/* table: ONLY user info */}
-      <div className="table-wrap">
-        <table className="attendance-table">
-          <thead>
-            <tr>
-              <th>Sr#</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th style={{ width: 180 }}>Status</th>
-              <th>Reason (if Other)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map((s, idx) => {
-              const sid = s._id;
-              const rec = dayRecord[sid] || {};
-              const status = rec.status || "";
-              return (
-                <tr key={sid}>
-                  <td>{idx + 1}</td>
-                  <td className="strong">{s.name}</td>
-                  <td className="muted">{s.email || "—"}</td>
-                  <td className="muted">{s.phone || "—"}</td>
-                  <td>
-                    <div className="status-cell">
-                      <span className={`status-dot ${statusClass(status)}`} />
-                      <select
-                        className="status-select"
-                        value={status}
-                        onChange={(e) => setStatus(sid, e.target.value)}
-                        disabled={!courseId}
-                      >
-                        <option value="">— Select —</option>
-                        {UI_STATUSES.map((opt) => (
-                          <option key={opt} value={opt}>
-                            {opt}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </td>
-                  <td>
-                    {status === "Other" ? (
-                      <input
-                        className="reason-input"
-                        placeholder="Enter reason"
-                        value={rec.reason || ""}
-                        onChange={(e) => setReason(sid, e.target.value)}
-                      />
-                    ) : (
-                      <span className="dash">—</span>
-                    )}
+        {/* table: ONLY user info */}
+        <div className="table-wrap">
+          <table className="attendance-table">
+            <thead>
+              <tr>
+                <th>Sr#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th style={{ width: 180 }}>Status</th>
+                <th>Reason (if Other)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((s, idx) => {
+                const sid = s._id;
+                const rec = dayRecord[sid] || {};
+                const status = rec.status || "";
+                return (
+                  <tr key={sid}>
+                    <td>{idx + 1}</td>
+                    <td className="strong">{s.name}</td>
+                    <td className="muted">{s.email || "—"}</td>
+                    <td className="muted">{s.phone || "—"}</td>
+                    <td>
+                      <div className="status-cell">
+                        <span className={`status-dot ${statusClass(status)}`} />
+                        <select
+                          className="status-select"
+                          value={status}
+                          onChange={(e) => setStatus(sid, e.target.value)}
+                          disabled={!courseId}
+                        >
+                          <option value="">— Select —</option>
+                          {UI_STATUSES.map((opt) => (
+                            <option key={opt} value={opt}>
+                              {opt}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </td>
+                    <td>
+                      {status === "Other" ? (
+                        <input
+                          className="reason-input"
+                          placeholder="Enter reason"
+                          value={rec.reason || ""}
+                          onChange={(e) => setReason(sid, e.target.value)}
+                        />
+                      ) : (
+                        <span className="dash">—</span>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+              {filtered.length === 0 && (
+                <tr>
+                  <td colSpan={6} className="empty-row">
+                    {students?.length
+                      ? "No students match your search/filter."
+                      : "No cached campus students found. Open the Teacher Dashboard once to cache campus data."}
                   </td>
                 </tr>
-              );
-            })}
-            {filtered.length === 0 && (
-              <tr>
-                <td colSpan={6} className="empty-row">
-                  {students?.length
-                    ? "No students match your search/filter."
-                    : "No cached campus students found. Open the Teacher Dashboard once to cache campus data."}
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              )}
+            </tbody>
+          </table>
 
-        <button
-          style={{
-            marginBlock: "20px",
-            marginRight: "20px",
-            float: "right",
-          }}
-          className="btn primary"
-          onClick={saveToBackend}
-          disabled={!courseId || saving}
-        >
-          {saving ? "Saving…" : "Save"}
-        </button>
+          <button
+            style={{
+              marginBlock: "20px",
+              marginRight: "20px",
+              float: "right",
+            }}
+            className="btn primary"
+            onClick={saveToBackend}
+            disabled={!courseId || saving}
+          >
+            {saving ? "Saving…" : "Save"}
+          </button>
+        </div>
       </div>
-    </div>
-</>
-
+    </>
   );
 };
 
