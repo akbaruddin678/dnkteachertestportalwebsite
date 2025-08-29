@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react";
 import axios from "axios";
-import "./CoNotifications.css";
+// import "./CoNotifications.css";
 
 const API_BASE =
   import.meta?.env?.VITE_API_BASE?.replace(/\/$/, "") ||
@@ -196,6 +196,108 @@ const Notifications = ({ role = "principals" }) => {
   }, [allNotifications, currentUserId]);
 
   return (
+    <>
+    <style>{`
+    /* Notifications.css */
+.notifications {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.notifications h1 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.notifications h2 {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  color: #34495e;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 0.3rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+input[type="text"],
+textarea,
+select {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+button[type="submit"] {
+  background-color: #3498db;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #2980b9;
+}
+
+.notifications > div {
+  margin-top: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  border: 1px solid #e1e1e1;
+}
+
+.notifications strong {
+  font-size: 1.1rem;
+  color: #2c3e50;
+}
+
+.notifications p {
+  color: #555;
+  margin: 0.5rem 0;
+}
+
+.notifications small {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin-top: 1rem;
+}
+
+    `}</style>
+   
     <div className="notifications">
       <h1 className="title">Application</h1>
 
@@ -337,6 +439,7 @@ const Notifications = ({ role = "principals" }) => {
         </section>
       </div>
     </div>
+     </>
   );
 };
 

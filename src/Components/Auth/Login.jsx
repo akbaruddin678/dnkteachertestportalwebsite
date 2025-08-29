@@ -176,6 +176,170 @@ const Login = () => {
     <>
       {/* Tiny responsive helper without external CSS */}
       <style>{`
+      /* Container */
+.auth-container {
+  display: flex;
+  height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  background: #f5f7fa;
+}
+
+/* Left panel */
+.auth-side-left {
+  flex: 1;
+  background: #eef2f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  text-align: center;
+}
+
+.auth-tagline {
+  margin-top: 20px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #0066cc;
+  line-height: 1.5;
+}
+
+.auth-socials {
+  margin-top: 30px;
+}
+
+.auth-socials i {
+  font-size: 20px;
+  margin: 0 10px;
+  color: #444;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.auth-socials i:hover {
+  color: #0066cc;
+}
+
+/* Right panel */
+.auth-side-right {
+  flex: 1;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card */
+.auth-card {
+  width: 100%;
+  max-width: 380px;
+  padding: 35px 40px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.auth-title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.auth-subtitle {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 15px;
+}
+
+.auth-error {
+  text-align: center;
+  color: #d9534f;
+  background: #fcebea;
+  padding: 8px 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+/* Inputs */
+.auth-label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: border 0.3s ease;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: #0066cc;
+}
+
+/* Password field */
+.auth-password-field {
+  position: relative;
+}
+
+.auth-toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  color: #666;
+  cursor: pointer;
+}
+
+/* Button */
+.auth-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #0066cc;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.auth-button:hover {
+  background-color: #0052a3;
+}
+
+.auth-button:disabled {
+  background-color: #7aaed6;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .auth-container {
+    flex-direction: column;
+  }
+
+  .auth-side-left,
+  .auth-side-right {
+    width: 100%;
+    height: auto;
+  }
+
+  .auth-card {
+    margin: 20px;
+  }
+}
+
         @media (max-width: 768px) {
           .stack {
             flex-direction: column !important;
