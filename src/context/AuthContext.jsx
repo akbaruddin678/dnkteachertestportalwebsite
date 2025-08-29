@@ -7,51 +7,56 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
- useEffect(() => {
-   const loadUser = async () => {
-     try {
-       const token = localStorage.getItem("token");
-       if (token) {
-         // ensure api adds the token
-         api.defaults.headers.common.Authorization = `Bearer ${token}`;
+  useEffect(() => {
+    const loadUser = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (token) {
+          api.defaults.headers.common.Authorization = `Bearer ${token}`;
+          const res = await api.get("/auth/me");
+          setUser(res.data.data.user);
+        }
+      } catch (err) {
+        console.error("Error loading user", err);
+        setError("Failed to load user session");
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-         const res = await api.get("/auth/me");
-         setUser(res.data.data.user);
-       }
-     } catch (err) {
-       console.error("Error loading user", err);
-       // optionally clear bad token
-       localStorage.removeItem("token");
-       localStorage.removeItem("user");
-     } finally {
-       setLoading(false);
-     }
-   };
-   loadUser();
- }, []);
+    // Add a small delay to ensure proper loading visualization
+    const timer = setTimeout(() => {
+      loadUser();
+    }, 1000);
 
- const login = async (email, password) => {
-   try {
-     const response = await api.post("/auth/login", {
-       email,
-       password,
-     });
-     const { token, data } = response.data;
+    return () => clearTimeout(timer);
+  }, []);
 
-     localStorage.setItem("token", token);
-     localStorage.setItem("user", JSON.stringify(data.user));
-     api.defaults.headers.common.Authorization = `Bearer ${token}`;
-     setUser(data.user);
+  const login = async (email, password) => {
+    try {
+      setLoading(true);
+      const response = await api.post("/auth/login", { email, password });
+      const { token, data } = response.data;
 
-     // Redirect based on role
-     navigate(`/${data.user.role}/dashboard`);
-     return data;
-   } catch (error) {
-     throw error;
-   }
- };
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
+      setUser(data.user);
+
+      navigate(`/${data.user.role}/dashboard`);
+      return data;
+    } catch (error) {
+      setError(error.response?.data?.message || "Login failed");
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const logout = async () => {
     try {
@@ -66,11 +71,23 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const clearError = () => {
+    setError(null);
+  };
+
   const isAuthenticated = !!user;
 
   return (
     <AuthContext.Provider
-      value={{ user, login, logout, isAuthenticated, loading }}
+      value={{
+        user,
+        login,
+        logout,
+        isAuthenticated,
+        loading,
+        error,
+        clearError,
+      }}
     >
       {children}
     </AuthContext.Provider>
