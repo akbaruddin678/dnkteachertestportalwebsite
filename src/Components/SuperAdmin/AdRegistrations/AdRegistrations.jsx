@@ -155,38 +155,15 @@ const Registrations = () => {
           passport: "",
           status: "Active",
           documentstatus: "notverified",
-          city: (a.district || a.province || "").trim(),
+          city: (a.preferred_institute || "").trim(),
         };
-
-        if (!payload.name) {
-          skipped.push({ cnic: a.cnic, reason: "Missing name" });
-          continue;
-        }
-        if (!payload.cnic || payload.cnic.length !== 13) {
-          skipped.push({
-            cnic: a.cnic,
-            reason: "Invalid CNIC (need 13 digits)",
-          });
-          continue;
-        }
-        if (!payload.phone || payload.phone.length < 10) {
-          skipped.push({ cnic: a.cnic, reason: "Missing/invalid phone" });
-          continue;
-        }
-        if (!isValidEmail(payload.email)) {
-          skipped.push({ cnic: a.cnic, reason: "Missing/invalid email" });
-          continue;
-        }
-        if (!payload.pncNo) {
-          skipped.push({ cnic: a.cnic, reason: "Missing PNC No" });
-          continue;
-        }
 
         if (total < 50) {
           skipped.push({ cnic: a.cnic, reason: `Total marks ${total} < 50` });
           continue;
         }
-
+        console.log(payload);
+        console.log(total);
         if (existingByCNIC.has(payload.cnic)) {
           skipped.push({ cnic: a.cnic, reason: "Already exists" });
           continue;
@@ -381,7 +358,13 @@ const Registrations = () => {
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
-    resetForm();
+
+    if (tab === "student") {
+      // Force student tab to open in view mode only
+      setViewMode("view");
+    } else {
+      resetForm(); // others behave normally
+    }
   };
 
   const resetForm = () => {
@@ -869,7 +852,6 @@ const Registrations = () => {
     const cur = formData[activeKey(activeTab)];
 
     return (
-
       <form onSubmit={handleSubmit} style={styles.formContainer}>
         {activeTab === "campus" && (
           <>
@@ -1363,6 +1345,7 @@ const Registrations = () => {
           ];
         case "student":
           return [
+            { header: "S.No", accessor: "serial" },
             { header: "Name", accessor: "name" },
             { header: "CNIC", accessor: "cnic" },
             { header: "Email", accessor: "email" },
@@ -1428,7 +1411,7 @@ const Registrations = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredData.map((item) => (
+            {filteredData.map((item, index) => (
               <tr key={item._id} style={styles.tableRow}>
                 {getColumns().map((column, colIndex) => {
                   if (column.accessor === "actions") {
@@ -1448,6 +1431,15 @@ const Registrations = () => {
                         >
                           <MdDelete />
                         </button>
+                      </td>
+                    );
+                  }
+
+                  // ✅ Handle serial number
+                  if (column.accessor === "serial") {
+                    return (
+                      <td key={colIndex} style={styles.tableCell}>
+                        {index + 1}
                       </td>
                     );
                   }
@@ -1474,7 +1466,7 @@ const Registrations = () => {
   // ---- component return (kept same layout / classes) ----
   return (
     <>
-    <style>{ `* {
+      <style>{`* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -2305,99 +2297,111 @@ const Registrations = () => {
 }
 
 `}</style>
-    <div style={styles.registrationsContainer}>
-      <div style={styles.header}>
-        <h2 style={styles.headerTitle}>Registrations</h2>
-        <div style={styles.viewToggle}>
+      <div style={styles.registrationsContainer}>
+        <div style={styles.header}>
+          <h2 style={styles.headerTitle}>Registrations</h2>
+          <div style={styles.viewToggle}>
+            <button
+              style={{
+                ...styles.viewBtn,
+                ...(viewMode === "add" ? styles.viewBtnActive : {}),
+                ...(activeTab === "student"
+                  ? {
+                      backgroundColor: "#ccc",
+                      cursor: "not-allowed",
+                      color: "#666",
+                    }
+                  : {}),
+              }}
+              onClick={() => {
+                if (activeTab !== "student") {
+                  setViewMode("add");
+                  resetForm();
+                }
+              }}
+              disabled={activeTab === "student"} // 👈 disable when student is active
+            >
+              <MdAdd /> Add New
+            </button>
+
+            <button
+              style={{
+                ...styles.viewBtn,
+                ...(viewMode === "view" ? styles.viewBtnActive : {}),
+              }}
+              onClick={() => setViewMode("view")}
+            >
+              <MdPeople /> View All
+            </button>
+          </div>
+        </div>
+
+        <div style={styles.tabs}>
           <button
             style={{
-              ...styles.viewBtn,
-              ...(viewMode === "add" ? styles.viewBtnActive : {}),
+              ...styles.tabBtn,
+              ...(activeTab === "campus" ? styles.tabBtnActive : {}),
             }}
-            onClick={() => {
-              setViewMode("add");
-              resetForm();
-            }}
+            onClick={() => handleTabChange("campus")}
           >
-            <MdAdd /> Add New
+            <MdSchool /> Campuses
           </button>
           <button
             style={{
-              ...styles.viewBtn,
-              ...(viewMode === "view" ? styles.viewBtnActive : {}),
+              ...styles.tabBtn,
+              ...(activeTab === "principal" ? styles.tabBtnActive : {}),
             }}
-            onClick={() => setViewMode("view")}
+            onClick={() => handleTabChange("principal")}
           >
-            <MdPeople /> View All
+            <MdPerson /> Principals
+          </button>
+          <button
+            style={{
+              ...styles.tabBtn,
+              ...(activeTab === "teacher" ? styles.tabBtnActive : {}),
+            }}
+            onClick={() => handleTabChange("teacher")}
+          >
+            <MdPerson /> Teachers
+          </button>
+
+          {/* // For Student Registration Make Sur this is only Visible  based on requirement and time  */}
+          <button
+            style={{
+              ...styles.tabBtn,
+              ...(activeTab === "student" ? styles.tabBtnActive : {}),
+            }}
+            onClick={() => handleTabChange("student")}
+          >
+            <MdPeople /> Students
+          </button>
+          <button
+            style={{
+              ...styles.tabBtn,
+              ...(activeTab === "course" ? styles.tabBtnActive : {}),
+            }}
+            onClick={() => handleTabChange("course")}
+          >
+            <MdSchool /> Courses
           </button>
         </div>
-      </div>
 
-      <div style={styles.tabs}>
-        <button
-          style={{
-            ...styles.tabBtn,
-            ...(activeTab === "campus" ? styles.tabBtnActive : {}),
-          }}
-          onClick={() => handleTabChange("campus")}
-        >
-          <MdSchool /> Campuses
-        </button>
-        <button
-          style={{
-            ...styles.tabBtn,
-            ...(activeTab === "principal" ? styles.tabBtnActive : {}),
-          }}
-          onClick={() => handleTabChange("principal")}
-        >
-          <MdPerson /> Principals
-        </button>
-        <button
-          style={{
-            ...styles.tabBtn,
-            ...(activeTab === "teacher" ? styles.tabBtnActive : {}),
-          }}
-          onClick={() => handleTabChange("teacher")}
-        >
-          <MdPerson /> Teachers
-        </button>
-        <button
-          style={{
-            ...styles.tabBtn,
-            ...(activeTab === "student" ? styles.tabBtnActive : {}),
-          }}
-          onClick={() => handleTabChange("student")}
-        >
-          <MdPeople /> Students
-        </button>
-        <button
-          style={{
-            ...styles.tabBtn,
-            ...(activeTab === "course" ? styles.tabBtnActive : {}),
-          }}
-          onClick={() => handleTabChange("course")}
-        >
-          <MdSchool /> Courses
-        </button>
-      </div>
+        {successMessage && (
+          <div style={{ ...styles.alert, ...styles.successAlert }}>
+            {successMessage}
+          </div>
+        )}
+        {errorMessage && (
+          <div style={{ ...styles.alert, ...styles.errorAlert }}>
+            {errorMessage}
+          </div>
+        )}
 
-      {successMessage && (
-        <div style={{ ...styles.alert, ...styles.successAlert }}>
-          {successMessage}
+        <div style={styles.contentArea}>
+          {viewMode === "add" ? renderForm() : renderDataTable()}
         </div>
-      )}
-      {errorMessage && (
-        <div style={{ ...styles.alert, ...styles.errorAlert }}>
-          {errorMessage}
-        </div>
-      )}
-
-      <div style={styles.contentArea}>
-        {viewMode === "add" ? renderForm() : renderDataTable()}
       </div>
-    </div>
-</>
-
+    </>
   );
 };
 
