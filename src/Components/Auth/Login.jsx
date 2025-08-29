@@ -149,7 +149,7 @@ const Login = () => {
     },
     button: {
       width: "100%",
-      padding: 12,
+      padding: "15px",
       backgroundColor: "#0066cc",
       color: "#fff",
       border: "none",
@@ -229,6 +229,7 @@ const Login = () => {
                   ...styles.input,
                   paddingLeft: "6px",
                   fontSize: "20px",
+                  width: "95%",
                   ...(emailFocused ? styles.inputFocus : {}),
                 }}
               />
@@ -247,6 +248,7 @@ const Login = () => {
                     ...styles.input,
                     paddingLeft: "6px",
                     fontSize: "20px",
+                    width: "95%",
                     ...(passwordFocused ? styles.inputFocus : {}),
                   }}
                 />
@@ -270,6 +272,7 @@ const Login = () => {
                 className="hover-dim"
                 style={{
                   ...styles.button,
+
                   ...(loading ? styles.buttonDisabled : {}),
                 }}
               >
