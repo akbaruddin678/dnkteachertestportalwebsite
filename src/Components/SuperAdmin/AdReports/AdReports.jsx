@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import api from "../../../services/api"; // Assuming your API file is in lib folder
-import "./AdReports.css";
+
 
 const Reports = () => {
   // State management
@@ -337,6 +337,356 @@ const Reports = () => {
   };
 
   return (
+    <>
+    <style>{`/* Base Styles */
+.reports-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.reports-container h1 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #7f8c8d;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+/* Error Message */
+.error-message {
+  background-color: #ffecec;
+  color: #e74c3c;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  text-align: center;
+  border-left: 4px solid #e74c3c;
+}
+
+/* Loading State */
+.loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.1rem;
+  color: #7f8c8d;
+}
+
+/* Section Headers */
+.section-header {
+  display: flex;
+  align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.section-header h2 {
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* Back Button */
+.back-button {
+  background: none;
+  border: none;
+  color: #3498db;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-right: 1rem;
+    padding: 0.5rem 0;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+}
+
+/* Campuses Section */
+.campuses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.campus-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.campus-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.campus-card h3 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+}
+
+.campus-stats {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  }
+  
+  .campus-stats div {
+    flex: 1;
+  }
+  
+  .campus-stats span {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #3498db;
+  }
+  
+  .campus-stats small {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+  }
+  
+  /* Students Section */
+  .students-list {
+    margin-top: 1rem;
+  }
+  
+  .students-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  
+  .students-table th,
+  .students-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ecf0f1;
+  }
+  
+  .students-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  .students-table tr:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .view-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  
+  .view-button:hover {
+    background-color: #2980b9;
+  }
+  
+  .no-data {
+    text-align: center;
+    padding: 2rem;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+/* Student Report Section */
+.report-content {
+  margin-top: 1.5rem;
+}
+
+.student-info {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.student-info h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  border-bottom: 1px solid #ecf0f1;
+  padding-bottom: 0.5rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.info-grid div {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-grid label {
+  font-weight: 600;
+  color: #7f8c8d;
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.info-grid span {
+  font-size: 1rem;
+  color: #2c3e50;
+}
+
+/* Academic Performance */
+.academic-performance {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.academic-performance h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  border-bottom: 1px solid #ecf0f1;
+  padding-bottom: 0.5rem;
+}
+
+.marks-section,
+.attendance-section {
+  margin-bottom: 2rem;
+}
+
+.marks-section h4,
+.attendance-section h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.marks-table,
+.attendance-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.marks-table th,
+.marks-table td,
+.attendance-table th,
+.attendance-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.marks-table th,
+.attendance-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.marks-table tr:hover,
+.attendance-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Performance Summary */
+.performance-summary {
+  margin-top: 2rem;
+}
+
+.performance-summary h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.summary-card {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.card-title {
+  display: block;
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  margin-bottom: 0.5rem;
+}
+
+.card-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/* Report Actions */
+.report-actions {
+  text-align: right;
+  margin-top: 2rem;
+}
+
+.print-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+    border-radius: 4px;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  
+  .print-button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Print Styles */
+  @media print {
+  
+    .back-button,
+    .print-button {
+      display: none;
+    }
+  
+    .reports-container {
+      padding: 0;
+    
+
+                .student-report-section {
+                  break-inside: avoid;
+        
+                }
+
+                .academic-performance {
+                  break-inside: avoid;
+                }
+                }`}</style>
     <div className="reports-container">
       <h1>Student Reports</h1>
       <p className="subtitle">
@@ -372,6 +722,7 @@ const Reports = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 
