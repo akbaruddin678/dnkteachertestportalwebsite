@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import "./AdSettings.css"
+
 
 const Settings = () => {
   const [settings, setSettings] = useState({
