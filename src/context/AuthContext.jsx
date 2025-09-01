@@ -43,7 +43,10 @@ export function AuthProvider({ children }) {
       setLoading(true);
       console.log(email);
       console.log(password);
-      const response = await api.post("/auth/login", { email, password });
+      const response = await api.post("/api/v1/auth/login", {
+        email,
+        password,
+      });
       console.log(response);
       const { token, data } = response.data;
 
