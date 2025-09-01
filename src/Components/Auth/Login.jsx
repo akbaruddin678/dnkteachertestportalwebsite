@@ -22,6 +22,7 @@ const Login = () => {
       await login(email, password);
       // navigate("/dashboard");
     } catch (err) {
+      console.log(err);
       setError(
         err?.response?.data?.message || "Login failed. Please try again."
       );

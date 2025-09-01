@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://vigilant-moser.210-56-25-68.plesk.page/api/v1";
+const API_URL = "/api/v1";
 
 // Create axios instance
 const api = axios.create({

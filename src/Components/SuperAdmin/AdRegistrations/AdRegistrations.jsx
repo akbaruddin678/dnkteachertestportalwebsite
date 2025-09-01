@@ -367,6 +367,7 @@ const Registrations = () => {
     }
   };
 
+
   const resetForm = () => {
     setFormData({
       campus: { name: "", location: "", address: "", contactNumber: "" },

@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/api/(.*)",
+      "destination": "http://nclex.ap-northeast-3.elasticbeanstalk.com/api/$1"
+    },
+    {
       "source": "/(.*)",
       "destination": "/"
     }
