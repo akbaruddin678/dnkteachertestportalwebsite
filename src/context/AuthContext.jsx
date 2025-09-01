@@ -20,7 +20,6 @@ export function AuthProvider({ children }) {
           setUser(res.data.data.user);
         }
       } catch (err) {
-
         console.error("Error loading user", err);
         setError("Failed to load user session");
         localStorage.removeItem("token");
@@ -30,24 +29,21 @@ export function AuthProvider({ children }) {
       }
     };
 
-    // Add a small delay to ensure proper loading visualization
-    const timer = setTimeout(() => {
-      loadUser();
-    }, 1000);
-
+    const timer = setTimeout(loadUser, 300); // small delay is fine but optional
     return () => clearTimeout(timer);
   }, []);
 
   const login = async (email, password) => {
     try {
       setLoading(true);
+      setError(null);
+
       console.log(email);
       console.log(password);
-      const response = await api.post("/api/v1/auth/login", {
-        email,
-        password,
-      });
-      console.log(response);
+
+      const response = await api.post("/auth/login", { email, password });
+      console.log("LOGIN RESPONSE:", response);
+
       const { token, data } = response.data;
 
       localStorage.setItem("token", token);
@@ -58,10 +54,17 @@ export function AuthProvider({ children }) {
       navigate(`/${data.user.role}/dashboard`);
       return data;
     } catch (error) {
-        console.log("ERR status:", err.response?.status);
-        console.log("ERR data:", err.response?.data); // <— this is key
-        console.log("ERR headers:", err.response?.headers);
-      setError(error.response?.data?.message || "Login failed");
+      // 🔧 FIX: use `error`, not `err`
+      console.log("ERR status:", error.response?.status);
+      console.log("ERR data:", error.response?.data);
+      console.log("ERR headers:", error.response?.headers);
+
+      const msg =
+        error.response?.data?.message ||
+        error.response?.data?.error ||
+        error.message ||
+        "Login failed";
+      setError(msg);
       throw error;
     } finally {
       setLoading(false);
@@ -81,10 +84,7 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const clearError = () => {
-    setError(null);
-  };
-
+  const clearError = () => setError(null);
   const isAuthenticated = !!user;
 
   return (
