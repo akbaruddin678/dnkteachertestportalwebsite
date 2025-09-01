@@ -20,6 +20,7 @@ export function AuthProvider({ children }) {
           setUser(res.data.data.user);
         }
       } catch (err) {
+
         console.error("Error loading user", err);
         setError("Failed to load user session");
         localStorage.removeItem("token");
@@ -54,6 +55,9 @@ export function AuthProvider({ children }) {
       navigate(`/${data.user.role}/dashboard`);
       return data;
     } catch (error) {
+        console.log("ERR status:", err.response?.status);
+        console.log("ERR data:", err.response?.data); // <— this is key
+        console.log("ERR headers:", err.response?.headers);
       setError(error.response?.data?.message || "Login failed");
       throw error;
     } finally {
