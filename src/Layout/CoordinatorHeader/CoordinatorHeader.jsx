@@ -44,13 +44,13 @@ const CoordinatorHeader = ({ campus, onToggleSidebar }) => {
       </div>
 
       <div className="header-right">
-        <button
+        {/* <button
           className="icon-button notification-btn"
           aria-label="Notifications"
         >
           <FiBell size={20} />
           <span className="badge">3</span>
-        </button>
+        </button> */}
 
         <div className="profile-container">
           <button

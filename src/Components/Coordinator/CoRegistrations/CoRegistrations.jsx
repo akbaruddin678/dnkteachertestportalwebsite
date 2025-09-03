@@ -1017,7 +1017,9 @@ const Registrations = () => {
       )}
 
       {/* Tabs */}
-      <div className="coordinator-tabs">
+      <div style={{
+        justifyContent:"center"
+      }} className="coordinator-tabs">
         <button
           className={`coordinator-tab ${
             mainView === "courses" ? "active" : ""

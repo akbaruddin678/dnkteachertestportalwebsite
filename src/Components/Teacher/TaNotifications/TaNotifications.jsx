@@ -317,14 +317,39 @@ hr {
             </select>
           </div>
 
-          <div className="form-group">
-            <label>Schedule (optional)</label>
-            <input
-              type="datetime-local"
-              value={formData.schedule}
-              onChange={(e) => handleInputChange("schedule", e.target.value)}
-            />
-          </div>
+          <div
+              className="form-group"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                marginTop: "16px",
+              }}
+            >
+              <label
+                style={{
+                  marginBottom: "6px",
+                  // fontSize: "14px",
+                  fontWeight: "500",
+                  color: "#333",
+                }}
+              >
+                Schedule (optional)
+              </label>
+
+              <input
+                type="datetime-local"
+                value={formData.schedule}
+                onChange={(e) => handleInputChange("schedule", e.target.value)}
+                style={{
+                  padding: "12px 20px",
+                  borderRadius: "6px",
+                  border: "1px solid #ccc",
+                  fontSize: "14px",
+                  outline: "none",
+                  transition: "0.2s ease-in-out",
+                }}
+              />
+            </div>
         </div>
 
         <div className="form-group">

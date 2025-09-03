@@ -52,15 +52,11 @@ const Header = ({ onToggleSidebar }) => {
         </button>
 
         <div className="greeting">
-          <h1 className="greeting-title">
-            {getGreeting()}, Maietry{" "}
-            <span role="img" aria-label="wave">
-              👋
-            </span>
+          <h1 style={{
+            marginBottom:"0"
+          }} className="greeting-title">
+           Welcome Admin
           </h1>
-          <p className="greeting-subtitle">
-            Let's manage the platform efficiently.
-          </p>
         </div>
       </div>
 
@@ -77,7 +73,7 @@ const Header = ({ onToggleSidebar }) => {
             </Link>
           ))}
         </nav> */}
-
+{/* 
         <button
           className="icon-button notification-btn"
           aria-label="Notifications"
@@ -85,7 +81,7 @@ const Header = ({ onToggleSidebar }) => {
         >
           <FiBell size={20} />
           <span className="badge">3</span>
-        </button>
+        </button> */}
 
         {/* <button
           className="icon-button darkmode-btn"
@@ -108,7 +104,7 @@ const Header = ({ onToggleSidebar }) => {
           {showModal && (
             <div className="profile-modal" ref={modalRef}>
               <div className="user-info">
-                <strong>Maietry</strong>
+                {/* <strong>Maietry</strong> */}
                 <span>Super Admin</span>
               </div>
 

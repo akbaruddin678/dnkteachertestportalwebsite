@@ -347,11 +347,11 @@ const TeacherCampusDashboard = () => {
           </div>
         </header>
 
-        {err && (
+        {/* {err && (
           <div className="error-banner">
             <strong>Error:</strong> {err}
           </div>
-        )}
+        )} */}
 
         {/* Top stats */}
         <section className="tcd-stats">

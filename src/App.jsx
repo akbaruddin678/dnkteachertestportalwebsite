@@ -1,9 +1,11 @@
-import { useAuth } from "./context/AuthContext";
-import Loading from "./Components/Common/Loading";
-import { Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import "./App.css";
 
-// Import all your components
 import SuperAdminLayout from "./Layout/SuperAdminLayout";
 import SuperAdminCategory from "./Components/SuperAdmin/AdCategory/AdCategory.jsx";
 import SuperAdminDashboard from "./Components/SuperAdmin/AdDashbaord/AdDashboard";
@@ -40,22 +42,18 @@ import TeacherCourses from "./Components/Teacher/TaCourses/TaCourses.jsx";
 import TeacherAttendance from "./Components/Teacher/TaAttendance/TaAttendance.jsx";
 
 import Help from "./Components/Common/Help/Help";
+
 import Login from "./Components/Auth/Login";
+
 import ProtectedRoute from "./Components/Common/ProtectedRoute";
 
 function App() {
-  const { loading } = useAuth();
-
-  // Show loading screen while checking authentication
-  if (loading) {
-    return <Loading />;
-  }
-
   return (
     <Routes>
       <Route path="/" element={<Login />} />
 
       {/* Nest all superadmin routes under this layout */}
+
       <Route
         path="/admin"
         element={
@@ -64,7 +62,6 @@ function App() {
           </ProtectedRoute>
         }
       >
-        <Route index element={<Navigate to="dashboard" replace />} />
         <Route path="dashboard" element={<SuperAdminDashboard />} />
         <Route path="category" element={<SuperAdminCategory />} />
         <Route path="notifications" element={<SuperAdminNotifications />} />
@@ -80,15 +77,7 @@ function App() {
       </Route>
 
       {/* Nest all coordinator routes under this layout */}
-      <Route
-        path="/coordinator"
-        element={
-          <ProtectedRoute allowedRoles={["coordinator"]}>
-            <CoordinatorLayout />
-          </ProtectedRoute>
-        }
-      >
-        <Route index element={<Navigate to="dashboard" replace />} />
+      <Route path="/coordinator" element={<CoordinatorLayout />}>
         <Route path="dashboard" element={<CoordinatorDashboard />} />
         <Route path="attendance" element={<CoordinatorAttendance />} />
         <Route path="category" element={<CoordinatorCategory />} />
@@ -107,15 +96,7 @@ function App() {
       </Route>
 
       {/* Nest all teacher routes under this layout */}
-      <Route
-        path="/teacher"
-        element={
-          <ProtectedRoute allowedRoles={["teacher"]}>
-            <TeacherLayout />
-          </ProtectedRoute>
-        }
-      >
-        <Route index element={<Navigate to="dashboard" replace />} />
+      <Route path="/teacher" element={<TeacherLayout />}>
         <Route path="dashboard" element={<TeacherDashboard />} />
         <Route path="category" element={<TeacherCategory />} />
         <Route path="managestudents" element={<TeacherManageStudents />} />
@@ -131,9 +112,6 @@ function App() {
         <Route path="attendance" element={<TeacherAttendance />} />
         <Route path="help" element={<Help />} />
       </Route>
-
-      {/* Catch all route - redirect to login */}
-      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

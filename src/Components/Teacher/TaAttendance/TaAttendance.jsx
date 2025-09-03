@@ -589,11 +589,11 @@ const Attendance = () => {
         </div>
       </div>
 
-      {err && (
+      {/* {err && (
         <div className="error-banner">
           <strong>Error:</strong> {err}
         </div>
-      )}
+      )} */}
 
       {/* summary */}
       <div className="summary-row">

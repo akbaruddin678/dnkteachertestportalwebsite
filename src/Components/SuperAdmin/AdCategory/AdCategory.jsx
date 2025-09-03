@@ -48,6 +48,7 @@ const Category = () => {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [studentsLoading, setStudentsLoading] = useState(false);
 
   // Modal toggles
   const [showCoordinatorForm, setShowCoordinatorForm] = useState(false);
@@ -87,13 +88,36 @@ const Category = () => {
         api.getTeachers(),
       ]);
 
+      // Fetch students for each campus
+      const campusesWithStudents = await Promise.all(
+        (campusesRes.data || []).map(async (campus) => {
+          try {
+            const studentsRes = await api.getStudentsByCampus(campus._id);
+            return {
+              ...campus,
+              students: studentsRes.data || [],
+            };
+          } catch (err) {
+            console.error(
+              `Failed to fetch students for campus ${campus._id}:`,
+              err
+            );
+            return {
+              ...campus,
+              students: [],
+            };
+          }
+        })
+      );
+
       const nextData = {
-        campuses: campusesRes.data || [],
+        campuses: campusesWithStudents,
         coordinators: coordinatorsRes.data || [],
         students: studentsRes.data || [],
         courses: coursesRes.data || [],
         teachers: teachersRes.data || [],
       };
+
       setData(nextData);
       setLoading(false);
 
@@ -124,32 +148,14 @@ const Category = () => {
   }, [fetchData]);
 
   /** When user opens a campus */
-  const handleCampusSelect = async (campus) => {
+  const handleCampusSelect = (campus) => {
     setSelectedCampus(campus);
     setSelectedCourse(null);
     setActiveTab("campus");
     setError(null);
-
-    // Fetch students for this campus
-    const campusStudents = await fetchCampusStudents(campus._id);
-    setSelectedCampus((prev) => ({
-      ...prev,
-      students: campusStudents,
-    }));
-  };
-
-  const fetchCampusStudents = async (campusId) => {
-    try {
-      const response = await api.getStudentsByCampus(campusId);
-      return response.data || [];
-    } catch (err) {
-      console.error("Failed to fetch campus students:", err);
-      return [];
-    }
   };
 
   const handleCourseSelect = (course) => {
-    console.log("Selected Course:", course); // Debugging line to verify course object
     setSelectedCourse(course);
     setActiveTab("course");
   };
@@ -172,37 +178,35 @@ const Category = () => {
   const handleCityChange = async (e) => {
     const selectedCity = e.target.value;
     setCity(selectedCity);
+    setError(null);
 
     try {
-      if (selectedCity && TARGET_CITIES.includes(selectedCity)) {
-        const response = await api.getStudentsByCity(selectedCity);
-        const list = response.data || [];
-        setAvailableStudents(
-          list.filter(
-            (student) =>
-              !selectedCampus?.students?.some((x) => x._id === student._id)
+      // get ALL students (unpaginated endpoint) and filter client-side
+      const response = await api.getStudents();
+      const allStudents = response.data || [];
+
+      // if city selected, filter by city; else keep target cities only
+      const base = selectedCity
+        ? allStudents.filter(
+            (s) => s.city && s.city.toLowerCase() === selectedCity.toLowerCase()
           )
-        );
-      } else {
-        // Show all students from target cities when no specific city is selected
-        const response = await api.getStudents();
-        const allStudents = response.data || [];
-        const filteredStudents = allStudents.filter(
-          (student) =>
-            student.city &&
-            TARGET_CITIES.some(
-              (target) => target.toLowerCase() === student.city.toLowerCase()
-            )
-        );
-        setAvailableStudents(
-          filteredStudents.filter(
-            (student) =>
-              !selectedCampus?.students?.some((x) => x._id === student._id)
-          )
-        );
-      }
-    } catch {
-      setError("Failed to fetch students by city");
+        : allStudents.filter(
+            (s) =>
+              s.city &&
+              TARGET_CITIES.some(
+                (target) => target.toLowerCase() === s.city.toLowerCase()
+              )
+          );
+
+      // remove already-assigned
+      const filtered = base.filter(
+        (s) => !selectedCampus?.students?.some((x) => x._id === s._id)
+      );
+
+      setAvailableStudents(filtered);
+    } catch (err) {
+      setError("Failed to fetch students.");
+      console.error("City filter error:", err);
     }
   };
 
@@ -221,19 +225,33 @@ const Category = () => {
     setShowCoordinatorForm(true);
   };
 
-  const openStudentModal = () => {
+  const openStudentModal = async () => {
     if (!selectedCampus) return;
+
     setStudentForm({ studentIds: [] });
-    setAvailableStudents(
-      (data.students || []).filter(
-        (student) =>
-          !selectedCampus?.students?.some((x) => x._id === student._id)
-      )
-    );
     setCity("");
     setShowStudentForm(true);
-  };
 
+    try {
+      const response = await api.getStudents(); // unpaginated endpoint
+      const allStudents = response.data || [];
+
+      const filtered = allStudents
+        .filter(
+          (s) =>
+            s.city &&
+            TARGET_CITIES.some(
+              (target) => target.toLowerCase() === s.city.toLowerCase()
+            )
+        )
+        .filter((s) => !selectedCampus.students?.some((x) => x._id === s._id));
+
+      setAvailableStudents(filtered);
+    } catch (err) {
+      setError("Failed to load available students");
+      console.error("Open student modal error:", err);
+    }
+  };
   const openCourseModal = () => {
     if (!selectedCampus) return;
     setCourseForm({ courseId: "" });
@@ -273,9 +291,6 @@ const Category = () => {
   };
 
   const handleAssignTeacher = async () => {
-    console.log("Selected Teacher ID:", teacherForm.teacherId);
-    console.log("Selected Course:", selectedCourse); // Debugging line
-
     if (!teacherForm.teacherId || !selectedCourse) {
       setError("Please select a teacher and a course");
       return;
@@ -300,6 +315,8 @@ const Category = () => {
       setError("Please select at least one student");
       return;
     }
+
+    setStudentsLoading(true);
     try {
       await api.assignStudentsToCampus(
         studentForm.studentIds,
@@ -309,8 +326,11 @@ const Category = () => {
       setShowStudentForm(false);
       setStudentForm({ studentIds: [] });
       setError(null);
-    } catch {
+    } catch (err) {
       setError("Failed to assign students");
+      console.error("Assign students error:", err);
+    } finally {
+      setStudentsLoading(false);
     }
   };
 
@@ -752,13 +772,20 @@ const Category = () => {
       )}
 
       {showStudentForm && (
-        <div className="modal" onClick={() => setShowStudentForm(false)}>
+        <div
+          className="modal"
+          onClick={() => !studentsLoading && setShowStudentForm(false)}
+        >
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h3>Assign Students</h3>
 
             <div className="form-group">
               <label>Filter by City</label>
-              <select value={city} onChange={handleCityChange}>
+              <select
+                value={city}
+                onChange={handleCityChange}
+                disabled={studentsLoading}
+              >
                 <option value="">-- All Cities --</option>
                 {TARGET_CITIES.map((cityName) => (
                   <option key={cityName} value={cityName}>
@@ -768,29 +795,32 @@ const Category = () => {
               </select>
             </div>
 
-            {(availableStudents || []).length > 0 ? (
+            {studentsLoading ? (
+              <div className="loading">Loading students...</div>
+            ) : availableStudents.length > 0 ? (
               <div className="students-list">
                 <div className="select-all">
                   <input
                     type="checkbox"
                     checked={
-                      studentForm.studentIds.length ===
-                        availableStudents.length && availableStudents.length > 0
+                      availableStudents.length > 0 &&
+                      studentForm.studentIds.length === availableStudents.length
                     }
-                    onChange={() => {
-                      if (
-                        studentForm.studentIds.length ===
-                        availableStudents.length
-                      ) {
-                        setStudentForm({ studentIds: [] });
-                      } else {
+                    onChange={(e) => {
+                      if (e.target.checked) {
                         setStudentForm({
                           studentIds: availableStudents.map((s) => s._id),
                         });
+                      } else {
+                        setStudentForm({ studentIds: [] });
                       }
                     }}
+                    disabled={studentsLoading}
                   />
-                  <span>Select All</span>
+                  <span>
+                    Select All ({studentForm.studentIds.length}/
+                    {availableStudents.length} selected)
+                  </span>
                 </div>
                 {availableStudents.map((student) => (
                   <div key={student._id} className="student-item-modal">
@@ -804,6 +834,7 @@ const Category = () => {
                             : [...prev.studentIds, student._id],
                         }))
                       }
+                      disabled={studentsLoading}
                     />
                     <div className="student-info-modal">
                       <div className="student-name-modal">
@@ -830,22 +861,25 @@ const Category = () => {
                 ))}
               </div>
             ) : (
-              <p>No students available</p>
+              <p>No students available in {city || "these cities"}</p>
             )}
 
             <div className="form-actions">
               <button
                 className="cancel-btn"
                 onClick={() => setShowStudentForm(false)}
+                disabled={studentsLoading}
               >
                 Cancel
               </button>
               <button
                 className="confirm-btn"
                 onClick={handleAssignStudentsToCampus}
-                disabled={(studentForm.studentIds || []).length === 0}
+                disabled={
+                  studentForm.studentIds.length === 0 || studentsLoading
+                }
               >
-                Assign Selected Students
+                {studentsLoading ? "Assigning..." : "Assign Selected Students"}
               </button>
             </div>
             {error && <div className="error-message">{error}</div>}
@@ -861,7 +895,7 @@ const Category = () => {
 
   return (
     <>
-    <style>{`/* ---------- Modal overlay centered ---------- */
+      <style>{`/* ---------- Modal overlay centered ---------- */
 .modal {
   position: fixed;
   inset: 0;
@@ -1359,52 +1393,57 @@ const Category = () => {
     gap: 0.25rem;
   }
 }`}</style>
-    <div className="category-container">
-      <div className="header">
-        <h1>Campus Management</h1>
-        <p>Manage campuses, coordinators, students, courses, and teachers</p>
-      </div>
+      <div
+        style={{
+          gap: "2rem",
+          display: "flex",
+          flexDirection: "column",
+        }}
+        className="category-container"
+      >
+        <div className="header">
+          <h1>Campus Management</h1>
+        </div>
 
-      {error &&
-        !showCoordinatorForm &&
-        !showCourseForm &&
-        !showTeacherForm &&
-        !showStudentForm && <div className="error-message">{error}</div>}
+        {error &&
+          !showCoordinatorForm &&
+          !showCourseForm &&
+          !showTeacherForm &&
+          !showStudentForm && <div className="error-message">{error}</div>}
 
-      {loading ? (
-        <div className="loading">Loading data...</div>
-      ) : !selectedCampus ? (
-        <div className="campuses-grid">
-          {data.campuses.map((campus) => (
-            <div
-              key={campus._id}
-              className="campus-card"
-              onClick={() => handleCampusSelect(campus)}
-            >
-              <h3>{campus.name}</h3>
-              <div className="campus-stats">
-                <div>
-                  <span>{campus.coordinators?.length || 0}</span>
-                  <small>Coordinators</small>
-                </div>
-                <div>
-                  <span>{campus.students?.length || 0}</span>
-                  <small>Students</small>
-                </div>
-                <div>
-                  <span>{campus.courses?.length || 0}</span>
-                  <small>Courses</small>
+        {loading ? (
+          <div className="loading">Loading data...</div>
+        ) : !selectedCampus ? (
+          <div className="campuses-grid">
+            {data.campuses.map((campus) => (
+              <div
+                key={campus._id}
+                className="campus-card"
+                onClick={() => handleCampusSelect(campus)}
+              >
+                <h3>{campus.name}</h3>
+                <div className="campus-stats">
+                  <div>
+                    <span>{campus.coordinators?.length || 0}</span>
+                    <small>Coordinators</small>
+                  </div>
+                  <div>
+                    <span>{campus.students?.length || 0}</span>
+                    <small>Students</small>
+                  </div>
+                  <div>
+                    <span>{campus.courses?.length || 0}</span>
+                    <small>Courses</small>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <CampusDetail />
-      )}
-    </div>
-</>
-
+            ))}
+          </div>
+        ) : (
+          <CampusDetail />
+        )}
+      </div>
+    </>
   );
 };
 

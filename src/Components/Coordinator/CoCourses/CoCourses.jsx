@@ -276,27 +276,73 @@ const CoursesOffered = () => {
         </button>
       </div>
 
-      <div className="sub-header">
-        <a href="#" className="manage-link">
-          Manage course offering
-        </a>
-        {/* City Selection - Only show Islamabad */}
-        <select onChange={(e) => setSelectedCity(e.target.value)} value={selectedCity}>
-          <option value="Islamabad">Islamabad</option>
-        </select>
-        {/* Campus Selection - Only show Islamabad Campus 1 */}
-        <select onChange={(e) => setSelectedCampus(e.target.value)} value={selectedCampus}>
-          <option value="Islamabad Campus 1">Islamabad Campus 1</option>
-        </select>
-        {/* Program Selection */}
-        <select onChange={(e) => setSelectedProgram(e.target.value)} value={selectedProgram}>
-          {selectedCampusData?.programs.map((program, idx) => (
-            <option key={idx} value={program.name}>
-              {program.name}
-            </option>
-          ))}
-        </select>
-      </div>
+    <div style={{
+      display:"flex",
+      justifyContent:"start",
+      alignItems:"center",
+      gap:"1rem",
+      flexWrap:"wrap"
+    }} className="sub-header">
+  {/* <a href="#" className="manage-link">
+    Manage course offering
+  </a> */}
+
+  {/* City Selection - Only show Islamabad */}
+  <select
+    style={{
+      padding: "8px 12px",
+      marginLeft: "10px",
+      borderRadius: "6px",
+      border: "1px solid #ccc",
+      backgroundColor: "#f9f9f9",
+      fontSize: "14px",
+      cursor: "pointer"
+    }}
+    onChange={(e) => setSelectedCity(e.target.value)}
+    value={selectedCity}
+  >
+    <option value="Islamabad">Islamabad</option>
+  </select>
+
+  {/* Campus Selection - Only show Islamabad Campus 1 */}
+  <select
+    style={{
+      padding: "8px 12px",
+      marginLeft: "10px",
+      borderRadius: "6px",
+      border: "1px solid #ccc",
+      backgroundColor: "#f9f9f9",
+      fontSize: "14px",
+      cursor: "pointer"
+    }}
+    onChange={(e) => setSelectedCampus(e.target.value)}
+    value={selectedCampus}
+  >
+    <option value="Islamabad Campus 1">Islamabad Campus 1</option>
+  </select>
+
+  {/* Program Selection */}
+  <select
+    style={{
+      padding: "8px 12px",
+      marginLeft: "10px",
+      borderRadius: "6px",
+      border: "1px solid #ccc",
+      backgroundColor: "#f9f9f9",
+      fontSize: "14px",
+      cursor: "pointer"
+    }}
+    onChange={(e) => setSelectedProgram(e.target.value)}
+    value={selectedProgram}
+  >
+    {selectedCampusData?.programs.map((program, idx) => (
+      <option key={idx} value={program.name}>
+        {program.name}
+      </option>
+    ))}
+  </select>
+</div>
+
 
       <div className="courses-table">
         <table>
