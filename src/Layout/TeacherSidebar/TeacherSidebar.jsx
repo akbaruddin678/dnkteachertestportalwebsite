@@ -33,7 +33,7 @@ const TeacherSidebar= ({ isOpen, setIsOpen }) => {
       icon: <MdNotifications />,
     },
 
-    { id: "/teacher/settings", label: "Settings", icon: <MdSettings /> },
+    // { id: "/teacher/settings", label: "Settings", icon: <MdSettings /> },
   ];
 
   return (

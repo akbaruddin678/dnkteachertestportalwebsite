@@ -13,13 +13,28 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
   const menuItems = [
     { id: "/coordinator/dashboard", label: "Dashboard", icon: <MdHome /> },
-    { id: "/coordinator/category", label: "Category", icon: <MdCategory /> },
-    { id: "/coordinator/registrations", label: "Registrations", icon: <MdAssignment /> },
-    { id: "/coordinator/courses", label: "Courses", icon: <MdMenuBook  /> },
-    { id: "/coordinator/uploadlessonsplans", label: "Lesson Plans", icon: <MdLibraryBooks /> },
-    { id: "/coordinator/notifications", label: "Notifications", icon: <MdNotifications /> },
+    {
+      id: "/coordinator/registrations",
+      label: "Registrations",
+      icon: <MdAssignment />,
+    },
+    {
+      id: "/coordinator/uploadlessonsplans",
+      label: "Lesson Plans",
+      icon: <MdLibraryBooks />,
+    },
+    {
+      id: "/coordinator/attendance",
+      label: "Attendance",
+      icon: <MdHowToReg />,
+    },
+    {
+      id: "/coordinator/notifications",
+      label: "Notifications",
+      icon: <MdNotifications />,
+    },
     { id: "/coordinator/reports", label: "Reports", icon: <MdBarChart /> },
-    { id: "/coordinator/attendance", label: "Attendance", icon: <MdHowToReg  /> },
+
     { id: "/coordinator/settings", label: "Settings", icon: <MdSettings /> },
   ];
 

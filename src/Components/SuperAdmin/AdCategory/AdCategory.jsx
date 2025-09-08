@@ -440,7 +440,7 @@ const Category = () => {
               className="action-btn assign"
               onClick={openCoordinatorModal}
             >
-              Assign Coordinator
+              Assign Focal Person
             </button>
             <button className="action-btn assign" onClick={openStudentModal}>
               Assign Students
@@ -452,7 +452,7 @@ const Category = () => {
 
           {/* Assigned Coordinators */}
           <div className="detail-section">
-            <h3>Assigned Coordinators</h3>
+            <h3>Assigned Focal Person</h3>
             {selectedCampus?.coordinators?.length > 0 ? (
               <ul className="assigned-list">
                 {selectedCampus.coordinators.map((c) => {
@@ -492,7 +492,7 @@ const Category = () => {
                 })}
               </ul>
             ) : (
-              <p>No coordinators assigned</p>
+              <p>No Focal Person assigned</p>
             )}
           </div>
 
@@ -613,9 +613,9 @@ const Category = () => {
                       </div>
 
                       <h5>Assigned Teachers</h5>
-                      {course.teachers?.length > 0 ? (
+                      {selectedCampus.teacher?.length > 0 ? (
                         <ul className="assigned-list">
-                          {course.teachers.map((teacher) => (
+                          {selectedCampus.teacher.map((teacher) => (
                             <li key={teacher._id} className="assigned-item">
                               <span>{getPersonName(teacher)}</span>
                               <button
@@ -1425,7 +1425,7 @@ const Category = () => {
                 <div className="campus-stats">
                   <div>
                     <span>{campus.coordinators?.length || 0}</span>
-                    <small>Coordinators</small>
+                    <small>Focal Person</small>
                   </div>
                   <div>
                     <span>{campus.students?.length || 0}</span>

@@ -279,8 +279,9 @@ export default function UploadLessonsPlans() {
     loadSavedWeeks(1, false);
   }, []);
 
-  return (<>
-  <style>{`:root {
+  return (
+    <>
+      <style>{`:root {
   --bg: #f7f8fb;
   --card: #fff;
   --ink: #101418;
@@ -668,8 +669,8 @@ export default function UploadLessonsPlans() {
     --slot-w: 200px;
   }
 }`}</style>
-    <section className="lp-only">
-      <header className="lp-header">
+      <section className="lp-only">
+        {/* <header className="lp-header">
         <div className="lp-header-inner">
           <div className="lp-header-text">
             <h1 className="lp-title">Lesson Plans</h1>
@@ -692,90 +693,91 @@ export default function UploadLessonsPlans() {
             </button>
           </div>
         </div>
-      </header>
+      </header> */}
 
-      {err && <div className="error-message">{err}</div>}
+        {err && <div className="error-message">{err}</div>}
 
-      {/* Saved previews */}
-      <section className="lp-saved-panel card">
-        <div className="lp-saved-panel-head">
-          <h3 className="lp-saved-title">Saved Weeks</h3>
-          <span className="lp-saved-count">
-            {filteredPlans.length} plan{filteredPlans.length !== 1 ? "s" : ""}
-          </span>
-        </div>
-
-        {loading && savedWeeks.length === 0 && (
-          <div className="loading">Loading lesson plans...</div>
-        )}
-
-        {!loading && savedWeeks.length === 0 && (
-          <div className="empty-state">
-            <div className="empty-icon">📚</div>
-            <h3>No lesson plans yet</h3>
-            <p>Create your first lesson plan to get started</p>
+        {/* Saved previews */}
+        <section className="lp-saved-panel card">
+          <div className="lp-saved-panel-head">
+            <h3 className="lp-saved-title">Saved Weeks</h3>
+            <span className="lp-saved-count">
+              {filteredPlans.length} plan{filteredPlans.length !== 1 ? "s" : ""}
+            </span>
           </div>
-        )}
 
-        {savedWeeks.length > 0 && filteredPlans.length === 0 && (
-          <div className="empty-state">
-            <div className="empty-icon">🔍</div>
-            <h3>No matching plans</h3>
-            <p>Try adjusting your search terms</p>
-          </div>
-        )}
+          {loading && savedWeeks.length === 0 && (
+            <div className="loading">Loading lesson plans...</div>
+          )}
 
-        {filteredPlans.length > 0 && (
-          <div className="lp-saved-scroll">
-            <div className="lp-saved-grid">
-              {filteredPlans.map((snap, i) => (
-                <div className="lp-saved-item card" key={snap._id || i}>
-                  <div className="lp-saved-head">
-                    <div className="lp-saved-name">
-                      {snap?.head?.weekLabel || "Week"} —{" "}
-                      {snap?.head?.programName || "Program"}
-                    </div>
-                    <div className="lp-saved-sub">
-                      {humanDate(snap.head.startDateISO)} –{" "}
-                      {humanDate(snap.head.endDateISO)} • {snap.head.institute}
-                    </div>
-                    {snap.savedAt && (
-                      <div className="lp-saved-date">
-                        Saved: {new Date(snap.savedAt).toLocaleDateString()}
-                      </div>
-                    )}
-                  </div>
-
-                  <SavedWeekTable snap={snap} onWheelX={onWheelX} />
-
-                  <div className="lp-saved-actions">
-                    <button
-                      className="btn btn-primary"
-                      onClick={() => downloadPlanAsPDF(snap)}
-                    >
-                      Download PDF
-                    </button>
-                    <button className="btn">Share</button>
-                  </div>
-                </div>
-              ))}
+          {!loading && savedWeeks.length === 0 && (
+            <div className="empty-state">
+              <div className="empty-icon">📚</div>
+              <h3>No lesson plans yet</h3>
+              <p>Create your first lesson plan to get started</p>
             </div>
+          )}
 
-            {hasMore && (
-              <div className="load-more-container">
-                <button
-                  className="btn btn-outline"
-                  onClick={() => loadSavedWeeks(page + 1, true)}
-                  disabled={loading}
-                >
-                  {loading ? "Loading..." : "Load More"}
-                </button>
+          {savedWeeks.length > 0 && filteredPlans.length === 0 && (
+            <div className="empty-state">
+              <div className="empty-icon">🔍</div>
+              <h3>No matching plans</h3>
+              <p>Try adjusting your search terms</p>
+            </div>
+          )}
+
+          {filteredPlans.length > 0 && (
+            <div className="lp-saved-scroll">
+              <div className="lp-saved-grid">
+                {filteredPlans.map((snap, i) => (
+                  <div className="lp-saved-item card" key={snap._id || i}>
+                    <div className="lp-saved-head">
+                      <div className="lp-saved-name">
+                        {snap?.head?.weekLabel || "Week"} —{" "}
+                        {snap?.head?.programName || "Program"}
+                      </div>
+                      <div className="lp-saved-sub">
+                        {humanDate(snap.head.startDateISO)} –{" "}
+                        {humanDate(snap.head.endDateISO)} •{" "}
+                        {snap.head.institute}
+                      </div>
+                      {snap.savedAt && (
+                        <div className="lp-saved-date">
+                          Saved: {new Date(snap.savedAt).toLocaleDateString()}
+                        </div>
+                      )}
+                    </div>
+
+                    <SavedWeekTable snap={snap} onWheelX={onWheelX} />
+
+                    <div className="lp-saved-actions">
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => downloadPlanAsPDF(snap)}
+                      >
+                        Download PDF
+                      </button>
+                      <button className="btn">Share</button>
+                    </div>
+                  </div>
+                ))}
               </div>
-            )}
-          </div>
-        )}
+
+              {hasMore && (
+                <div className="load-more-container">
+                  <button
+                    className="btn btn-outline"
+                    onClick={() => loadSavedWeeks(page + 1, true)}
+                    disabled={loading}
+                  >
+                    {loading ? "Loading..." : "Load More"}
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+        </section>
       </section>
-    </section>
     </>
   );
 }

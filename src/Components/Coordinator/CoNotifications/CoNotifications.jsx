@@ -197,7 +197,7 @@ const Notifications = ({ role = "principals" }) => {
 
   return (
     <>
-      <style>{`
+    <style>{`
     /* Notifications.css */
 .notifications {
   max-width: 900px;
@@ -297,178 +297,149 @@ hr {
 }
 
     `}</style>
+   
+    <div className="notifications">
+      <h1 className="title">Application</h1>
 
-      <div className="notifications">
-        <h1 className="title">Application</h1>
-
-        {/* Composer */}
-        <form className="notif-form" onSubmit={handleSubmit}>
-          <div className="form-row">
-            <div className="form-group">
-              <label>Recipient</label>
-              <select
-                value={formData.recipientType}
-                onChange={(e) =>
-                  handleInputChange("recipientType", e.target.value)
-                }
-                required
-              >
-                <option value="">Select recipient</option>
-                {recipientOptions.map((opt) => (
-                  <option key={opt.value} value={opt.value}>
-                    {opt.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div
-              className="form-group"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                marginTop: "16px",
-              }}
+      {/* Composer */}
+      <form className="notif-form" onSubmit={handleSubmit}>
+        <div className="form-row">
+          <div className="form-group">
+            <label>Recipient</label>
+            <select
+              value={formData.recipientType}
+              onChange={(e) =>
+                handleInputChange("recipientType", e.target.value)
+              }
+              required
             >
-              <label
-                style={{
-                  marginBottom: "6px",
-                  // fontSize: "14px",
-                  fontWeight: "500",
-                  color: "#333",
-                }}
-              >
-                Schedule (optional)
-              </label>
-
-              <input
-                type="datetime-local"
-                value={formData.schedule}
-                onChange={(e) => handleInputChange("schedule", e.target.value)}
-                style={{
-                  padding: "12px 20px",
-                  borderRadius: "6px",
-                  border: "1px solid #ccc",
-                  fontSize: "14px",
-                  outline: "none",
-                  transition: "0.2s ease-in-out",
-                }}
-              />
-            </div>
+              <option value="">Select recipient</option>
+              {recipientOptions.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="form-group">
-            <label>Subject</label>
+            <label>Schedule (optional)</label>
             <input
-              type="text"
-              placeholder="Subject"
-              value={formData.subject}
-              onChange={(e) => handleInputChange("subject", e.target.value)}
-              required
+              type="datetime-local"
+              value={formData.schedule}
+              onChange={(e) => handleInputChange("schedule", e.target.value)}
             />
           </div>
-
-          <div className="form-group">
-            <label>Message</label>
-            <textarea
-              placeholder="Enter your message..."
-              value={formData.message}
-              onChange={(e) => handleInputChange("message", e.target.value)}
-              rows={4}
-              required
-            />
-          </div>
-
-          {error && <div className="error">{error}</div>}
-
-          <button type="submit" disabled={submitting}>
-            {submitting ? "Sending..." : "Send Application"}
-          </button>
-        </form>
-
-        {/* Lists */}
-        <div className="notif-sections">
-          <section>
-            <h2 className="subtitle">Received Notification</h2>
-            {loading ? (
-              <p>Loading...</p>
-            ) : received.length === 0 ? (
-              <p>No received notifications.</p>
-            ) : (
-              <div className="notif-list">
-                {received.map((n) => (
-                  <article key={n._id} className="notif-card">
-                    <header className="notif-card__head">
-                      <strong className="notif-card__subject">
-                        {n.subject}
-                      </strong>
-                      <span className="notif-card__time">
-                        {n.createdAt
-                          ? new Date(n.createdAt).toLocaleString()
-                          : ""}
-                      </span>
-                    </header>
-                    <p className="notif-card__msg">{n.message}</p>
-                    <footer className="notif-card__foot">
-                      <small>
-                        To: <em>{n.recipientType}</em>
-                        {n.schedule && (
-                          <>
-                            {" "}
-                            • Scheduled: {new Date(n.schedule).toLocaleString()}
-                          </>
-                        )}
-                        {" • "}From: {n.createdBy?.name || "Unknown"} (
-                        {n.createdBy?.role})
-                      </small>
-                    </footer>
-                  </article>
-                ))}
-              </div>
-            )}
-          </section>
-
-          <section>
-            <h2 className="subtitle">Application Sent</h2>
-            {loading ? (
-              <p>Loading...</p>
-            ) : sent.length === 0 ? (
-              <p>You haven’t sent any notifications yet.</p>
-            ) : (
-              <div className="notif-list">
-                {sent.map((n) => (
-                  <article key={n._id} className="notif-card">
-                    <header className="notif-card__head">
-                      <strong className="notif-card__subject">
-                        {n.subject}
-                      </strong>
-                      <span className="notif-card__time">
-                        {n.createdAt
-                          ? new Date(n.createdAt).toLocaleString()
-                          : ""}
-                      </span>
-                    </header>
-                    <p className="notif-card__msg">{n.message}</p>
-                    <footer className="notif-card__foot">
-                      <small>
-                        To: <em>{n.recipientType}</em>
-                        {n.schedule && (
-                          <>
-                            {" "}
-                            • Scheduled: {new Date(n.schedule).toLocaleString()}
-                          </>
-                        )}
-                        {" • "}From: Me
-                      </small>
-                    </footer>
-                  </article>
-                ))}
-              </div>
-            )}
-          </section>
         </div>
+
+        <div className="form-group">
+          <label>Subject</label>
+          <input
+            type="text"
+            placeholder="Subject"
+            value={formData.subject}
+            onChange={(e) => handleInputChange("subject", e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Message</label>
+          <textarea
+            placeholder="Enter your message..."
+            value={formData.message}
+            onChange={(e) => handleInputChange("message", e.target.value)}
+            rows={4}
+            required
+          />
+        </div>
+
+        {error && <div className="error">{error}</div>}
+
+        <button type="submit" disabled={submitting}>
+          {submitting ? "Sending..." : "Send Application"}
+        </button>
+      </form>
+
+      {/* Lists */}
+      <div className="notif-sections">
+        <section>
+          <h2 className="subtitle">Received Notification</h2>
+          {loading ? (
+            <p>Loading...</p>
+          ) : received.length === 0 ? (
+            <p>No received notifications.</p>
+          ) : (
+            <div className="notif-list">
+              {received.map((n) => (
+                <article key={n._id} className="notif-card">
+                  <header className="notif-card__head">
+                    <strong className="notif-card__subject">{n.subject}</strong>
+                    <span className="notif-card__time">
+                      {n.createdAt
+                        ? new Date(n.createdAt).toLocaleString()
+                        : ""}
+                    </span>
+                  </header>
+                  <p className="notif-card__msg">{n.message}</p>
+                  <footer className="notif-card__foot">
+                    <small>
+                      To: <em>{n.recipientType}</em>
+                      {n.schedule && (
+                        <>
+                          {" "}
+                          • Scheduled: {new Date(n.schedule).toLocaleString()}
+                        </>
+                      )}
+                      {" • "}From: {n.createdBy?.name || "Unknown"} (
+                      {n.createdBy?.role})
+                    </small>
+                  </footer>
+                </article>
+              ))}
+            </div>
+          )}
+        </section>
+
+        <section>
+          <h2 className="subtitle">Application Sent</h2>
+          {loading ? (
+            <p>Loading...</p>
+          ) : sent.length === 0 ? (
+            <p>You haven’t sent any notifications yet.</p>
+          ) : (
+            <div className="notif-list">
+              {sent.map((n) => (
+                <article key={n._id} className="notif-card">
+                  <header className="notif-card__head">
+                    <strong className="notif-card__subject">{n.subject}</strong>
+                    <span className="notif-card__time">
+                      {n.createdAt
+                        ? new Date(n.createdAt).toLocaleString()
+                        : ""}
+                    </span>
+                  </header>
+                  <p className="notif-card__msg">{n.message}</p>
+                  <footer className="notif-card__foot">
+                    <small>
+                      To: <em>{n.recipientType}</em>
+                      {n.schedule && (
+                        <>
+                          {" "}
+                          • Scheduled: {new Date(n.schedule).toLocaleString()}
+                        </>
+                      )}
+                      {" • "}From: Me
+                    </small>
+                  </footer>
+                </article>
+              ))}
+            </div>
+          )}
+        </section>
       </div>
-    </>
+    </div>
+     </>
   );
 };
 

@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const API_URL =
-  import.meta.env?.VITE_API_BASE || "/api/v1";
+// const API_URL =
+//   import.meta.env?.VITE_API_BASE || "/api/v1";
 
-// const API_URL = "http://localhost:5000/api/v1";
+const API_URL = "/api/v1";
 
 const api = axios.create({
   baseURL: API_URL,
@@ -296,5 +296,26 @@ export const lessonPlanService = {
     );
     return response.data;
   },
+};
+
+// Coordinator Dashboard API
+export const getCampusDashboard = async () => {
+  const response = await api.get("/coordinator/dashboard");
+  return response.data;
+};
+
+export const getCampusStudents = async () => {
+  const response = await api.get("/coordinator/students");
+  return response.data;
+};
+
+export const getCampusCoursescor = async () => {
+  const response = await api.get("/coordinator/courses");
+  return response.data;
+};
+
+export const getCampusTeachers = async () => {
+  const response = await api.get("/coordinator/teachers");
+  return response.data;
 };
 export default api;
