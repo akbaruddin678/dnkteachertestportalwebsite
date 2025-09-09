@@ -2,9 +2,9 @@
 
 import { useState, useEffect, useMemo } from "react";
 import axios from "axios";
-const API_BASE =
-  import.meta?.env?.VITE_API_BASE?.replace(/\/$/, "") ||
-  "https://vigilant-moser.210-56-25-68.plesk.page/api/v1"; // Adjust as needed
+
+// const API_BASE ="http://localhost:5000/api/v1";
+const API_BASE = import.meta.env?.VITE_API_BASE || "/api/v1";
 const NOTIF_URL = `${API_BASE}/notifications`;
 
 /** axios with Bearer token */

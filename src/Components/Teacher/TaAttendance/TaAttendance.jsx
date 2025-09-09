@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { FaSync, FaSave, FaUsers, FaCalendarAlt } from "react-icons/fa";
 
-const API_BASE = "/api/v1";
-
+// const API_BASE = "http://localhost:5000/api/v1";
+const API_BASE = import.meta.env?.VITE_API_BASE || "/api/v1";
 const UI_STATUSES = ["Present", "Absent", "Half Day", "Leave", "Other"];
 
 const uiToDb = (s) =>
