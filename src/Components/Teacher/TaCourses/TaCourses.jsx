@@ -12,7 +12,9 @@ import {
   MdSave,
 } from "react-icons/md";
 // const API_BASE ="http://localhost:5000/api/v1";
-const API_BASE = import.meta.env?.VITE_API_BASE || "/api/v1";
+const API_BASE = "/api/v1";
+
+
 const token = () => localStorage.getItem("token");
 
 const TYPE_OPTIONS = [
